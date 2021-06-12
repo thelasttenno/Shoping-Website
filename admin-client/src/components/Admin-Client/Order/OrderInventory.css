@@ -1,0 +1,192 @@
+.inventory {
+  background: white;
+  position: relative;
+  bottom: 3.75rem;
+  margin: 0 1rem;
+  box-shadow: 0px 2px 5px rgba(19, 24, 44, 0.1);
+  border-radius: 3px;
+}
+@media screen and (min-width: 768px) {
+  .inventory {
+    margin: 0 2rem;
+  }
+}
+.inventory__header {
+  display: none;
+}
+@media screen and (min-width: 768px) {
+  .inventory__header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 1rem 2rem;
+    background-color: #F7F8F9;
+  }
+}
+.inventory__header-single {
+  display: flex;
+  flex-direction: row;
+}
+.inventory__header-single--width {
+  width: 10rem;
+}
+.inventory__header-type {
+  font-size: 11px;
+  line-height: 16px;
+  color: #5C667E;
+  padding-right: 0.25rem;
+}
+@media screen and (min-width: 768px) {
+  .inventory__header-type {
+    font-size: 12px;
+    line-height: 18px;
+  }
+}
+.inventory__card {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  border-bottom: 1px solid #BDC5D5;
+}
+@media screen and (min-width: 768px) {
+  .inventory__card {
+    justify-content: space-between;
+    flex-wrap: nowrap;
+    padding: 1.125rem 2rem;
+  }
+}
+.inventory__data {
+  width: 29%;
+  margin-right: 3.75rem;
+  margin-bottom: 1rem;
+}
+@media screen and (min-width: 768px) {
+  .inventory__data {
+    width: 7rem;
+    margin: 0rem;
+  }
+}
+.inventory__data-header {
+  font-size: 11px;
+  line-height: 16px;
+  color: #5C667E;
+}
+@media screen and (min-width: 768px) {
+  .inventory__data-header {
+    font-size: 12px;
+    line-height: 18px;
+  }
+}
+@media screen and (min-width: 768px) {
+  .inventory__data-header {
+    display: none;
+  }
+}
+.inventory__data-item {
+  display: flex;
+  flex-direction: row;
+  font-size: 13px;
+  line-height: 20px;
+  text-decoration: none;
+  font-weight: 700;
+  color: #2E66E5;
+}
+@media screen and (min-width: 768px) {
+  .inventory__data-item {
+    font-size: 14px;
+    line-height: 22px;
+  }
+}
+.inventory__data-item-icon {
+  color: #2E66E5;
+  transition: 0.3s ease-in;
+}
+.inventory__data-item-icon:hover {
+  transform: translateX(30%);
+}
+.inventory__data-status {
+  text-align: center;
+  font-size: 13px;
+  line-height: 20px;
+  font-weight: 700;
+  border-radius: 20px;
+}
+@media screen and (min-width: 768px) {
+  .inventory__data-status {
+    font-size: 14px;
+    line-height: 22px;
+  }
+}
+.inventory__data-status[data-status="In Stock"] {
+  width: 4.063rem;
+  color: #158463;
+  background: rgba(21, 132, 99, 0.07);
+}
+.inventory__data-status[data-status="Out of Stock"] {
+  width: 5.75rem;
+  color: #C94515;
+  background: rgba(201, 69, 21, 0.07);
+}
+.inventory__data-category {
+  font-size: 13px;
+  line-height: 20px;
+}
+@media screen and (min-width: 768px) {
+  .inventory__data-category {
+    font-size: 14px;
+    line-height: 22px;
+  }
+}
+.inventory__data-qty {
+  font-size: 13px;
+  line-height: 20px;
+}
+@media screen and (min-width: 768px) {
+  .inventory__data-qty {
+    font-size: 14px;
+    line-height: 22px;
+  }
+}
+.inventory-icon {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+@media screen and (min-width: 768px) {
+  .inventory-icon {
+    width: auto;
+    justify-content: flex-end;
+  }
+}
+.inventory-icon-delete {
+  height: 1.125rem;
+}
+@media screen and (min-width: 768px) {
+  .inventory-icon-delete {
+    margin-right: 1rem;
+  }
+}
+.inventory-icon-edit {
+  height: 1.125rem;
+}
+@media screen and (min-width: 768px) {
+  .inventory--order-item {
+    order: 0;
+    margin-right: 2.75rem;
+  }
+  .inventory--order-status {
+    order: 2;
+    margin-right: 5.5rem;
+  }
+  .inventory--order-category {
+    order: 1;
+  }
+  .inventory--order-qty {
+    order: 3;
+  }
+  .inventory--order-icon {
+    order: 4;
+  }
+}/*# sourceMappingURL=OrderInventory.css.map */

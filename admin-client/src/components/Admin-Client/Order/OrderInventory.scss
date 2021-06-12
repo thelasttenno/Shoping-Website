@@ -1,0 +1,154 @@
+@use '../../../assets/partials/variables' as *;
+@use '../../../assets/partials/mixins' as *;
+
+.inventory {
+    background: $white;
+    position: relative;
+    bottom: 3.75rem;
+    margin: 0 1rem;
+    box-shadow: 0px 2px 5px rgba(19, 24, 44, 0.1);
+    border-radius: 3px;
+    @include tablet {
+        margin: 0 2rem;
+    }
+
+    &__header {
+        display: none;
+        @include tablet {
+            @include flex-row;
+            justify-content: space-between;
+            padding: 1rem 2rem;
+            background-color: $light-grey;
+        }
+        &-single {
+            @include flex-row;
+            &--width {
+                width: 10rem;
+            }
+        }
+        &-type {
+            @include h4-table-header;
+            color: $slate;
+            padding-right: 0.25rem;
+        }
+    }
+
+    &__card {
+        padding: 1.5rem;
+        @include flex-row;
+        flex-wrap: wrap;
+        @include divider;
+        @include tablet {
+            justify-content: space-between;
+            flex-wrap: nowrap;
+            padding: 1.125rem 2rem;
+        }
+    }
+
+    &__data {
+        width: 29%;
+        margin-right: 3.75rem;
+        margin-bottom: 1rem;
+        @include tablet {
+            width: 7rem;
+            margin: 0rem;
+        }
+
+        &-header {
+            @include h4-table-header;
+            color: $slate;
+            @include tablet {
+                display: none;
+            }
+        }
+
+        &-item {
+            @include flex-row;
+            @include body-med;
+            text-decoration: none;
+            font-weight: 700;
+            color: $indigo;
+
+            &-icon {
+                color: $indigo;
+                transition: 0.3s ease-in;
+                &:hover{
+                transform: translateX(30%);
+                }
+            }
+        }
+
+        &-status {
+            text-align: center;
+            @include body-med;
+            font-weight: 700;
+            border-radius: 20px;
+
+            &[data-status="In Stock"] {
+                width: 4.063rem;
+                color: $green;
+                background: rgba(21, 132, 99, 0.07);
+            }
+
+            &[data-status="Out of Stock"] {
+                width: 5.75rem;
+                color: $red;
+                background: rgba(201, 69, 21, 0.07);
+            }
+        }
+
+        &-category {
+            @include body-med;
+        }
+
+        &-qty {
+            @include body-med;
+        }
+    }
+
+    &-icon {
+        width: 100%;
+        @include flex-row;
+        justify-content: space-between;
+        @include tablet {
+            width: auto;
+            justify-content: flex-end;
+        }
+        &-delete {
+            height: 1.125rem;
+            @include tablet {
+                margin-right: 1rem;
+            }
+        }
+
+        &-edit {
+            height: 1.125rem;
+        }
+    }
+
+    &--order {
+        @include tablet {
+            &-item {
+                order: 0;
+                margin-right: 2.75rem;
+            }
+
+            &-status {
+                order: 2;
+                margin-right: 5.5rem;
+            }
+
+            &-category {
+                order: 1;
+            }
+
+            &-qty {
+                order: 3;
+            }
+
+            &-icon {
+                order: 4;
+            }
+        }
+    }
+}

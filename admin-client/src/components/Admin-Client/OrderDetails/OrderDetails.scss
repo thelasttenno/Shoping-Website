@@ -1,0 +1,76 @@
+@import '../../../assets/partials/mixins';
+@import '../../../assets/partials/fonts';
+@import '../../../assets/partials/variables';
+
+.details{
+    padding-top: 2rem;
+
+    &__namearrow{
+        display: flex;
+        justify-content: space-between;
+    }
+
+    &__box {
+        display: flex;
+        flex-wrap: nowrap;
+    }
+    &__link{
+        text-decoration: none;
+    }
+
+    &__name{
+        font-family: "Titillium Web";
+        font-size: 1.5rem;
+        color: $black;
+        margin-left: 15px;
+        margin-top: 2px;
+
+        @include tablet {
+            font-size: 2.25rem;
+            margin-top: 5px;
+        }
+
+        @include desktop {
+            margin-top: 6px;
+        }
+    }
+    &__button{
+    width: 2.25rem;
+    height: 2.25rem;
+    border-radius: 20px;
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: $indigo;
+    color: white;
+    text-decoration: none;
+    @include tablet {
+        width: 5rem;
+        height: 2.375rem;
+    }
+    &-name{
+        display:none;
+        @include tablet{
+            display: flex;
+            justify-content: center;
+            align-items: center;   
+        }
+    }
+    }
+    &__namearrow {
+        padding: 0 1rem;
+        display: flex;
+        align-items: center;
+
+        @include tablet {
+            padding: 0 1.5rem;
+            justify-content: space-between;
+        }
+
+        @include desktop {
+            padding: 0 6rem;
+
+        }
+    }
+}

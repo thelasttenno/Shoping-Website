@@ -1,0 +1,19 @@
+@use "../../assets/partials/variables" as *;
+@import '../../assets/partials/mixins';
+.select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background-image: url("../Icons/arrow_drop_down-24px.svg");
+    background-repeat: no-repeat;
+    $a: 100%;
+    $b: 1rem;
+    background-position-x: calc(#{$a} - #{$b});
+    background-position-y: center;
+    &:active {
+        border-radius: 10px;
+    }
+    &::-ms-expand {
+        display: none;
+    }
+}

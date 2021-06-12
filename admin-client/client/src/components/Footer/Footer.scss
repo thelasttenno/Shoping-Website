@@ -1,0 +1,9 @@
+@import '../../assets/partials/mixins';
+@import '../../assets/partials/variables';
+.footer {
+    padding-bottom: 2.5rem;
+    color: $slate;
+    width: 100%;
+    text-align: center;
+    @include body-small;
+}

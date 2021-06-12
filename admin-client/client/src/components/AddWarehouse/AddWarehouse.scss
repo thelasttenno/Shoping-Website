@@ -1,0 +1,140 @@
+@use "../../assets/partials/variables" as *;
+@use "../../assets/partials/mixins" as *;
+
+.add-warehouse {
+  
+    margin-left: 1rem;
+    margin-right: 1rem;
+    box-shadow: 0px 2px 5px 0px rgba(19, 24, 44, 0.1);
+    $a: 100%;
+    $b: 2rem;
+    width: calc(#{$a} - #{$b});
+    margin-bottom: 2rem;
+    position: relative;
+    top: -4rem;
+    z-index: 999;
+    background-color: $white;
+    @include tablet {
+        margin-left: 2rem;
+        margin-right: 2rem;
+        $b: 4rem;
+        width: calc(#{$a} - #{$b});
+        top: -6rem;
+    }
+    @include desktop {
+        margin-left: 8.125rem;
+        margin-right: 8.125rem;
+        $b: 16.25rem;
+        width: calc(#{$a} - #{$b});
+        top: -5.6rem;
+    }
+    &__subheading {
+        display: flex;
+        align-items: center;
+        height: 1.75rem;
+    }
+    &__heading-arrow-container {
+        border-bottom: 1px solid $cloud;
+        display: flex;
+        align-items: center;
+        padding-left: 1.3rem;
+        padding-top: 1.5rem;
+        padding-bottom: 1.5rem;
+        @include desktop {
+            justify-content: flex-start;
+        }
+    }
+    &__arrow {
+        display: flex;
+        @include desktop {
+            padding-left: 2.5rem;
+        }
+    }
+    &__subheading {
+        margin-bottom: 25px;
+        margin-top: 20px;
+        @include tablet {
+            margin-top: 5px;
+        }
+    }
+    &__warehouse-details {
+        padding-bottom: 1.5rem;
+        border-bottom: 1px solid $cloud;
+        @include tablet {
+            width: 50%;
+            border-bottom: none;
+            border-right: 1px solid $cloud;
+            @include desktop {
+                padding-top: 1rem;
+                width: 56%;
+            }
+        }
+    }
+    &__contact-details {
+        @include tablet {
+            padding-left: 30px;
+            width: 55%;
+        }
+        @include desktop {
+            padding-top: 1rem;
+        }
+    }
+    &__details-contact-container {
+        padding: 0 1.5rem;
+        @include tablet {
+            display: flex;
+            flex-direction: row;
+        }
+        @include desktop {
+            padding: 2.5rem;
+        }
+    }
+    &__name,
+    &__address,
+    &__city,
+    &__country,
+    &__contact,
+    &__position,
+    &__number,
+    &__email {
+        display: flex;
+        border: 1px solid $cloud;
+        box-sizing: border-box;
+        border-radius: 1.25rem;
+        height: 2.25rem;
+        width: 18.4375rem;
+        padding-left: 1rem;
+        @include desktop {
+            width: 429px;
+            height: 38px;
+        }
+    }
+
+    &__btn-container {
+      
+        height: 4.25rem;
+        background-color: rgba(247, 248, 249, 0.7);
+        @include flex-row;
+        align-items: center;
+        justify-content: center;
+        padding-right: 2rem;
+        padding-left: 2rem;
+        @include tablet {
+            justify-content: flex-end;
+            padding-right: 3rem;
+        }
+    }
+    &__save-btn {
+        width: 8rem;
+    }
+    
+
+ 
+    &__error-validation {
+        display: flex;
+        font-size: 12px;
+        margin-top: -1.5px;
+        color: $red;
+    }
+}
+

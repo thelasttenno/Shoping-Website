@@ -1,0 +1,303 @@
+.inventory2 {
+  background: white;
+  position: relative;
+  bottom: 3.75rem;
+  margin: 0 1rem;
+  box-shadow: 0px 2px 5px rgba(19, 24, 44, 0.1);
+  border-radius: 3px;
+}
+@media screen and (min-width: 768px) {
+  .inventory2 {
+    top: -5.8rem;
+    margin: 0 2rem;
+  }
+}
+.inventory2__header {
+  border-bottom: 1px solid #BDC5D5;
+  padding: 2rem 1.5rem;
+}
+@media screen and (min-width: 768px) {
+  .inventory2__header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    border: none;
+  }
+}
+.inventory2__title {
+  font-size: 28px;
+  line-height: 36px;
+}
+@media screen and (min-width: 768px) {
+  .inventory2__title {
+    font-size: 32px;
+    line-height: 40px;
+  }
+}
+.inventory2__head {
+  display: flex;
+  flex-direction: column;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+  padding-top: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #BDC5D5;
+}
+@media screen and (min-width: 768px) {
+  .inventory2__head {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: none;
+    padding-bottom: 1.3rem;
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+}
+@media screen and (min-width: 1280px) {
+  .inventory2__head {
+    padding-left: 2.5rem;
+    padding-right: 2.5rem;
+  }
+}
+.inventory2__head-cta {
+  display: flex;
+  flex-direction: column;
+}
+@media screen and (min-width: 768px) {
+  .inventory2__head-cta {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    width: 70%;
+  }
+}
+.inventory2__head-cta--search {
+  width: 94%;
+  height: 2.25rem;
+  margin: 1rem 0;
+  padding-left: 1rem;
+  background: white;
+  border: 1px solid #BDC5D5;
+  border-radius: 20px;
+  background: url("../../assets/images/search.svg") no-repeat 95% 0.625rem;
+}
+@media screen and (min-width: 768px) {
+  .inventory2__head-cta--search {
+    width: 37.5%;
+    max-width: 17.125rem;
+    margin: 0rem 1rem;
+  }
+}
+.inventory2__head-cta--button {
+  text-decoration: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 2.375rem;
+  border-radius: 20px;
+  border: none;
+  background: #2E66E5;
+  color: white;
+}
+@media screen and (min-width: 768px) {
+  .inventory2__head-cta--button {
+    width: 10.5rem;
+  }
+}
+.inventory2__header {
+  display: none;
+}
+@media screen and (min-width: 768px) {
+  .inventory2__header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 1rem 2rem;
+    background-color: #F7F8F9;
+  }
+}
+.inventory2__header-single {
+  display: flex;
+  flex-direction: row;
+}
+.inventory2__header-single--width {
+  width: 4rem;
+}
+.inventory2__header-type {
+  font-size: 11px;
+  line-height: 16px;
+  color: #5C667E;
+  padding-right: 0.25rem;
+}
+@media screen and (min-width: 768px) {
+  .inventory2__header-type {
+    font-size: 12px;
+    line-height: 18px;
+  }
+}
+.inventory2__card {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  border-bottom: 1px solid #BDC5D5;
+}
+@media screen and (min-width: 768px) {
+  .inventory2__card {
+    justify-content: space-between;
+    flex-wrap: nowrap;
+    padding: 1.125rem 2rem;
+  }
+}
+.inventory2__data {
+  width: 50%;
+  margin-bottom: 1rem;
+}
+@media screen and (min-width: 768px) {
+  .inventory2__data {
+    width: 7rem;
+    margin: 0rem;
+  }
+}
+.inventory2__data-header {
+  font-size: 11px;
+  line-height: 16px;
+  color: #5C667E;
+}
+@media screen and (min-width: 768px) {
+  .inventory2__data-header {
+    font-size: 12px;
+    line-height: 18px;
+  }
+}
+@media screen and (min-width: 768px) {
+  .inventory2__data-header {
+    display: none;
+  }
+}
+.inventory2__data-item {
+  display: flex;
+  flex-direction: row;
+  font-size: 13px;
+  line-height: 20px;
+  text-decoration: none;
+  font-weight: 700;
+  color: #2E66E5;
+}
+@media screen and (min-width: 768px) {
+  .inventory2__data-item {
+    font-size: 14px;
+    line-height: 22px;
+  }
+}
+.inventory2__data-item-icon {
+  color: #2E66E5;
+  transition: 0.3s ease-in;
+}
+.inventory2__data-item-icon:hover {
+  transform: translateX(30%);
+}
+.inventory2__data-status {
+  text-align: center;
+  font-size: 13px;
+  line-height: 20px;
+  font-weight: 700;
+  border-radius: 20px;
+}
+@media screen and (min-width: 768px) {
+  .inventory2__data-status {
+    font-size: 14px;
+    line-height: 22px;
+  }
+}
+.inventory2__data-status[data-status="In Stock"] {
+  width: 4.063rem;
+  color: #158463;
+  background: rgba(21, 132, 99, 0.07);
+}
+.inventory2__data-status[data-status="Out of Stock"] {
+  width: 5.75rem;
+  color: #C94515;
+  background: rgba(201, 69, 21, 0.07);
+}
+.inventory2__data-address {
+  font-size: 13px;
+  line-height: 20px;
+  font-weight: 300;
+  border-radius: 20px;
+}
+@media screen and (min-width: 768px) {
+  .inventory2__data-address {
+    font-size: 14px;
+    line-height: 22px;
+  }
+}
+.inventory2__data-category {
+  font-size: 13px;
+  line-height: 20px;
+}
+@media screen and (min-width: 768px) {
+  .inventory2__data-category {
+    font-size: 14px;
+    line-height: 22px;
+  }
+}
+.inventory2__data-qty {
+  font-size: 13px;
+  line-height: 20px;
+}
+@media screen and (min-width: 768px) {
+  .inventory2__data-qty {
+    font-size: 14px;
+    line-height: 22px;
+  }
+}
+.inventory2-icon {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+@media screen and (min-width: 768px) {
+  .inventory2-icon {
+    width: auto;
+    justify-content: flex-end;
+  }
+}
+.inventory2-icon-delete {
+  height: 1.125rem;
+}
+@media screen and (min-width: 768px) {
+  .inventory2-icon-delete {
+    margin-right: 1rem;
+  }
+}
+.inventory2-icon-edit {
+  height: 1.125rem;
+}
+.inventory2--order-order {
+  margin-left: 50%;
+}
+@media screen and (min-width: 768px) {
+  .inventory2--order-item {
+    order: 0;
+  }
+  .inventory2--order-category {
+    order: 1;
+  }
+  .inventory2--order-status {
+    order: 2;
+  }
+  .inventory2--order-qty {
+    order: 4;
+  }
+  .inventory2--order-order {
+    order: 5;
+    margin-left: 0;
+  }
+  .inventory2--order-icon {
+    order: 5;
+  }
+}/*# sourceMappingURL=inventory.css.map */

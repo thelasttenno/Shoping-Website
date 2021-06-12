@@ -1,0 +1,207 @@
+.add-inventory {
+  margin-left: 1rem;
+  margin-right: 1rem;
+  box-shadow: 0px 2px 5px 0px rgba(19, 24, 44, 0.1);
+  width: calc(100% - 2rem);
+  margin-bottom: 2rem;
+  position: relative;
+  top: -4rem;
+  z-index: 999;
+  background-color: white;
+}
+@media screen and (min-width: 768px) {
+  .add-inventory {
+    margin-left: 2rem;
+    margin-right: 2rem;
+    width: calc(100% - 4rem);
+    top: -6rem;
+  }
+}
+@media screen and (min-width: 1280px) {
+  .add-inventory {
+    margin-left: 8.125rem;
+    margin-right: 8.125rem;
+    width: calc(100% - 16.25rem);
+    top: -5.6rem;
+  }
+}
+.add-inventory__header-container {
+  border-bottom: 1px solid #BDC5D5;
+  display: flex;
+  padding: 2rem 1.5rem 1.5rem 1.5rem;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+@media screen and (min-width: 768px) {
+  .add-inventory__header-container {
+    justify-content: start;
+  }
+}
+@media screen and (min-width: 1280px) {
+  .add-inventory__header-container {
+    padding: 1.5rem;
+    padding-left: 2.75rem;
+    padding-right: 2.75rem;
+  }
+}
+.add-inventory__icon {
+  padding-top: 0.5rem;
+}
+.add-inventory__heading {
+  font-size: 26px;
+}
+@media screen and (min-width: 768px) {
+  .add-inventory__heading {
+    font-size: 28px;
+    line-height: 36px;
+  }
+}
+@media screen and (min-width: 768px) and (min-width: 768px) {
+  .add-inventory__heading {
+    font-size: 32px;
+    line-height: 40px;
+  }
+}
+@media screen and (min-width: 768px) {
+  .add-inventory__details-form-wrapper {
+    display: flex;
+  }
+}
+.add-inventory__details-container, .add-inventory__availability-container {
+  padding: 1rem 1.5rem;
+}
+@media screen and (min-width: 768px) {
+  .add-inventory {
+    min-width: 351px;
+  }
+}
+.add-inventory__details-container {
+  border-bottom: 1px solid #BDC5D5;
+}
+@media screen and (min-width: 768px) {
+  .add-inventory__details-container {
+    width: 50%;
+    border-bottom: none;
+    border-right: 1px solid #BDC5D5;
+  }
+}
+@media screen and (min-width: 768px) {
+  .add-inventory__availability-container {
+    width: 50%;
+  }
+}
+.add-inventory__subheading {
+  margin-bottom: 1.5rem;
+}
+.add-inventory__name {
+  width: 100%;
+  background: white;
+  border: 1px solid #BDC5D5;
+  box-sizing: border-box;
+  border-radius: 20px;
+  padding: 0.5rem 1rem;
+  margin-bottom: 1rem;
+}
+.add-inventory__description {
+  width: 100%;
+  height: 7.5rem;
+  background: #ffffff;
+  border: 1px solid #bdc5d5;
+  box-sizing: border-box;
+  border-radius: 20px;
+  margin-bottom: 1rem;
+  font-family: "Titillium Web";
+  font-style: normal;
+  font-weight: normal;
+  font-size: 13px;
+  padding: 0.5rem;
+  line-height: 20px;
+  resize: none;
+}
+.add-inventory__category, .add-inventory__quantity {
+  width: 100%;
+  height: 2.25rem;
+  background: white;
+  border: 1px solid #BDC5D5;
+  box-sizing: border-box;
+  border-radius: 20px;
+  padding: 0.5rem;
+}
+@media screen and (min-width: 1280px) {
+  .add-inventory__quantity {
+    width: 25%;
+    padding-right: 0.1rem;
+  }
+}
+.add-inventory__radio-btn-container {
+  margin-top: 0.5rem;
+  display: flex;
+  justify-content: flex-start;
+}
+.add-inventory__status-radio-in, .add-inventory__status-radio-out {
+  margin-right: 0.5rem;
+}
+.add-inventory__status-label {
+  font-size: 0.8125rem;
+}
+.add-inventory__status-outstock-radio {
+  margin-right: 2rem;
+  display: flex;
+  align-items: center;
+}
+.add-inventory__status-instock-radio {
+  display: flex;
+  align-items: center;
+  padding-right: 2rem;
+}
+@media screen and (min-width: 768px) {
+  .add-inventory__status-instock-radio {
+    padding-right: 2.75rem;
+  }
+}
+.add-inventory__status-container {
+  margin-bottom: 1rem;
+}
+.add-inventory__order-header {
+  margin-bottom: 4px;
+}
+.add-inventory__btn-container {
+  background: rgba(247, 248, 249, 0.7);
+  padding: 1rem 1.5rem;
+  display: flex;
+  justify-content: space-around;
+}
+@media screen and (min-width: 768px) {
+  .add-inventory__btn-container {
+    justify-content: flex-end;
+  }
+}
+.add-inventory__cancel-btn, .add-inventory__save-btn {
+  width: 139px;
+  height: 36px;
+  background: white;
+  border: 1px solid #BDC5D5;
+  box-sizing: border-box;
+  border-radius: 20px;
+}
+.add-inventory__save-btn {
+  background: #2E66E5;
+  color: white;
+}
+@media screen and (min-width: 1280px) {
+  .add-inventory__save-btn {
+    width: 98px;
+  }
+}
+@media screen and (min-width: 768px) {
+  .add-inventory__cancel-btn {
+    width: 72px;
+    margin-right: 1rem;
+  }
+}
+.add-inventory__error-validation {
+  display: flex;
+  font-size: 12px;
+  margin-top: -1.5px;
+  color: #C94515;
+}/*# sourceMappingURL=AddInventory.css.map */
