@@ -1,0 +1,192 @@
+@use "../../../assets/partials/variables" as *;
+@use "../../../assets/partials/mixins" as *;
+.add-inventory {
+    margin-left: 1rem;
+    margin-right: 1rem;
+    box-shadow: 0px 2px 5px 0px rgba(19, 24, 44, 0.1);
+    $a: 100%;
+    $b: 2rem;
+    width: calc(#{$a} - #{$b});
+    margin-bottom: 2rem;
+    position: relative;
+    top: -4rem;
+    z-index: 999;
+    background-color: $white;
+    @include tablet {
+        margin-left: 2rem;
+        margin-right: 2rem;
+        $b: 4rem;
+        width: calc(#{$a} - #{$b});
+        top: -6rem;
+        
+    }
+    @include desktop {
+        margin-left: 8.125rem;
+        margin-right: 8.125rem;
+        $b: 16.25rem;
+        width: calc(#{$a} - #{$b});
+        top: -5.6rem;
+    }
+    &__header-container {
+        border-bottom: 1px solid $cloud;
+        display: flex;
+        padding: 2rem 1.5rem 1.5rem 1.5rem;
+        justify-content: space-between;
+        align-items: flex-start;
+        @include tablet {
+            justify-content: start;
+        }
+        @include desktop {
+            padding: 1.5rem;
+            padding-left: 2.75rem;
+            padding-right: 2.75rem;
+        }
+    }
+    &__icon {
+        padding-top: 0.5rem;
+    }
+    &__heading {
+        font-size: 26px;
+        @include tablet {
+            @include h1-page-header;
+        }
+    }
+    &__details-form-wrapper {
+        @include tablet {
+            display: flex;
+        }
+    }
+    &__details-container,
+    &__availability-container {
+        padding: 1rem 1.5rem;
+    }
+    @include tablet {
+        min-width: 351px;
+    }
+    &__details-container {
+        border-bottom: 1px solid $cloud;
+        @include tablet {
+            width: 50%;
+            border-bottom: none;
+            border-right: 1px solid $cloud;
+        }
+    }
+    &__availability-container {
+        @include tablet {
+            width: 50%;
+        }
+    }
+    &__subheading {
+        margin-bottom: 1.5rem;
+    }
+    &__name {
+        width: 100%;
+        background: $white;
+        border: 1px solid $cloud;
+        box-sizing: border-box;
+        border-radius: 20px;
+        padding: 0.5rem 1rem;
+        margin-bottom: 1rem;
+    }
+    &__description {
+        // width: 18.4375rem;
+        width: 100%;
+        height: 7.5rem;
+        background: #ffffff;
+        border: 1px solid #bdc5d5;
+        box-sizing: border-box;
+        border-radius: 20px;
+        margin-bottom: 1rem;
+        font-family: "Titillium Web";
+        font-style: normal;
+        font-weight: normal;
+        font-size: 13px;
+        padding: 0.5rem;
+        line-height: 20px;
+        resize: none;
+    }
+    &__category,
+    &__quantity {
+        width: 100%;
+        height: 2.25rem;
+        background: $white;
+        border: 1px solid $cloud;
+        box-sizing: border-box;
+        border-radius: 20px;
+        padding: 0.5rem;
+    }
+    &__quantity {
+        @include desktop {
+            width: 25%;
+            padding-right: 0.1rem;
+        }
+    }
+    &__radio-btn-container {
+        margin-top: 0.5rem;
+        display: flex;
+        justify-content: flex-start;
+    }
+    &__status-radio-in,
+    &__status-radio-out {
+        margin-right: 0.5rem;
+    }
+    &__status-label {
+        font-size: 0.8125rem;
+    }
+    &__status-outstock-radio {
+        margin-right: 2rem;
+        display: flex;
+        align-items: center;
+    }
+    &__status-instock-radio {
+        display: flex;
+        align-items: center;
+        padding-right: 2rem;
+        @include tablet {
+            padding-right: 2.75rem;
+        }
+    }
+    &__status-container {
+        margin-bottom: 1rem;
+    }
+    &__order-header {
+        margin-bottom: 4px;
+    }
+    &__btn-container {
+        background: rgba(247, 248, 249, 0.7);
+        padding: 1rem 1.5rem;
+        display: flex;
+        justify-content: space-around;
+        @include tablet {
+            justify-content: flex-end;
+        }
+    }
+    &__cancel-btn,
+    &__save-btn {
+        width: 139px;
+        height: 36px;
+        background: $white;
+        border: 1px solid $cloud;
+        box-sizing: border-box;
+        border-radius: 20px;
+    }
+    &__save-btn {
+        background: $indigo;
+        color: $white;
+        @include desktop {
+            width: 98px;
+        }
+    }
+    &__cancel-btn {
+        @include tablet {
+            width: 72px;
+            margin-right: 1rem;
+        }
+    }
+    &__error-validation {
+        display: flex;
+        font-size: 12px;
+        margin-top: -1.5px;
+        color: $red;
+    }
+}

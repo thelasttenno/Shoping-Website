@@ -1,0 +1,74 @@
+@import '../../../assets/partials/mixins';
+@import '../../../assets/partials/fonts';
+@import '../../../assets/partials/variables';
+
+.address {
+    width: 100%;
+    margin-top: 2rem;
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    border-bottom: 1.5px solid $cloud;
+    border-top: 1.5px solid $cloud;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+
+    @include tablet {
+        flex-direction: row;
+        padding-top: 2rem;
+        padding-bottom: 0.5rem;
+        border-bottom: none;
+    }
+
+    &__box {
+        width: 200px;
+        display: inline-block;
+        margin-bottom: 1.5rem;
+        &--contact{
+            display: flex;
+            flex-direction: row;
+        }
+        &--indent {
+            @extend .address__box;
+            @include tablet {
+                margin-right: 190px;
+            }
+            @include desktop {
+                margin-right: 300px;
+            }
+        }
+    }
+    &__contact{
+        margin-left: 3rem;
+        &--border{
+            @include tablet{
+             border-left: 1.5px solid $cloud;
+             padding-left: 3rem;
+            }
+        }
+    }
+
+    &__title {
+        color: $slate;
+        font-family: "Titillium Web";
+        font-size: 0.85rem;
+        margin-bottom: 1rem;
+    }
+
+    &__info {
+        font-size: 0.85rem;
+        color: $black;
+
+        @include tablet {
+            font-size: 0.9rem;
+        }
+
+        @include desktop {
+            font-size: 1rem;
+        }
+
+        &--slant {
+            font-family: "Titillium Web";
+        }
+    }
+}

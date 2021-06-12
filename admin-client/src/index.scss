@@ -1,0 +1,24 @@
+@use './assets/partials/fonts' as *;
+@use './assets/partials/mixins' as *;
+@use './assets/partials/variables' as *;
+@use './assets/partials/link' as *;
+@use './assets/partials/input' as *;
+@use './assets/partials/select' as *;
+@use './assets/partials/radio' as *;
+@use './assets/partials/button' as *;
+// mobile size: 375px
+// tablet size: 768px
+// desktop sze: 1280px
+html {
+    box-sizing: border-box;
+    background-color: $light-grey;
+}
+
+*,
+*:before,
+*:after {
+    margin: 0;
+    font-family: 'Titillium Web', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}

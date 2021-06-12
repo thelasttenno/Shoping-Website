@@ -1,0 +1,111 @@
+.nav {
+  display: block;
+  color: aliceblue;
+  width: 100%;
+  background: #232940;
+  height: 12.5rem;
+}
+@media screen and (min-width: 768px) {
+  .nav {
+    height: 11.625rem;
+  }
+}
+.nav--content {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+@media screen and (min-width: 768px) {
+  .nav--content {
+    height: 5.75rem;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 0px;
+  }
+}
+.nav-logo {
+  padding-top: 1.5rem;
+}
+@media screen and (min-width: 768px) {
+  .nav-logo {
+    padding-top: 0px;
+    padding-left: 2rem;
+  }
+}
+@media screen and (min-width: 1280px) {
+  .nav-logo {
+    padding-left: 8.125rem;
+  }
+}
+.nav-menu {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-top: 1.25rem;
+  font-size: 13px;
+  line-height: 20px;
+}
+@media screen and (min-width: 768px) {
+  .nav-menu {
+    font-size: 14px;
+    line-height: 22px;
+  }
+}
+@media screen and (min-width: 768px) {
+  .nav-menu {
+    margin-top: 0px;
+    align-items: center;
+    margin-bottom: 0px;
+    padding-right: 1rem;
+  }
+}
+@media screen and (min-width: 1280px) {
+  .nav-menu {
+    padding-right: 8.125rem;
+  }
+}
+.nav-link {
+  color: #BDC5D5;
+  height: 2.25rem;
+  text-align: center;
+  line-height: 2.25rem;
+}
+.nav-link--active {
+  color: white;
+}
+.nav-button {
+  background-color: #13182C;
+  width: 9.7rem;
+  border-radius: 20px;
+  margin-left: 1rem;
+  color: white;
+}
+@media screen and (min-width: 768px) {
+  .nav-button {
+    width: 6.7rem;
+    margin-right: 1.5rem;
+  }
+}
+@media screen and (min-width: 1280px) {
+  .nav-button {
+    margin-right: 2.5rem;
+  }
+}
+.nav-button--right {
+  margin-left: -0.5rem;
+}
+@media screen and (min-width: 768px) {
+  .nav-button--right {
+    margin-left: 1rem;
+  }
+}
+@media screen and (min-width: 768px) {
+  .nav-button--left {
+    margin-left: 1rem;
+  }
+}/*# sourceMappingURL=Header.css.map */

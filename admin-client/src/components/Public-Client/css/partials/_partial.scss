@@ -1,0 +1,148 @@
+// @use 'variables' as *;
+// @use 'Fontfaces' as *;
+@mixin desktop {
+    @media (min-width: 1280px) {
+        @content;
+    }
+}
+@mixin tablet {
+    @media (min-width: 768px) {
+        @content;
+    }
+}
+///////////////////////////////////////////////////////////////////////////////////////
+@mixin desktop-padding{
+    @include desktop{
+        padding-right: 6.25rem;
+        padding-left: 6.25rem;
+    }
+}
+@mixin tablet-padding{
+    @include tablet{
+        padding-right: 1.5rem;
+        padding-left: 1.5rem;
+    }
+}
+@mixin header{
+    .header{
+        background-color: black;
+        
+        width: 100%;
+        justify-content: space-between;
+        padding-bottom: 1rem;
+        padding-left: 1rem;
+        padding-right: 1rem;
+        @include tablet-padding;
+        @include desktop-padding;
+        @include tablet{
+            display: flex;
+        }
+        &__title{
+                color: #2d3982;
+                padding-top: 1rem;
+                padding-bottom: 1rem;
+                @include tablet{
+                    padding-bottom: 0rem;
+                }
+                @include desktop{
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    flex-grow: 1;
+                }
+                
+                & img{
+                    width: 18rem;
+                    @include tablet{
+                        // width: auto;
+                        // height: 8.1875rem;
+                    }
+                    
+                }
+        }
+    }
+    .nav{
+        width: 288px;
+        @include tablet{
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+        }
+        &__list{
+            display: flex;
+            list-style: none;
+            justify-content: space-between;
+            margin: 0rem;
+            padding: 0rem;
+            
+        }
+        &__link{ 
+            color: white;
+            text-decoration: none;
+            font-size: .9rem;
+            padding: .5rem 0;
+            font-weight: 500;
+            &--active{
+                border-bottom: 3.5px solid orangered;
+            }
+            &--hover:hover{
+                border-bottom: 3.5px solid orangered;
+            }
+        }
+    }
+}
+@mixin cards {
+    .cards-container{
+        max-width: 100%;
+        padding: 0 1rem 0 1rem;
+        &__title{
+            color: #101d42;
+            padding: 2rem 0rem 0rem 0rem;
+            font-weight: 700;
+            
+        }
+        & .cards{
+            display: flex;
+            flex-wrap: wrap;
+            padding: 0rem 0rem 4.3rem 0rem;
+            justify-content: space-around;
+            & .card{
+                width: max-content;
+                height: 100%;
+                margin: 1rem;
+                padding: 1rem;
+                border-radius: 5px;
+                border: 1px solid rgb(0, 0, 0, 0.2);
+                box-shadow: 0px 4px 4px rgb(0, 0, 0, 0.2);
+                border: 1px solid rgba(0, 0, 0, 0.2);
+                box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.2);
+                text-decoration: none;
+                display: flex;
+                flex-direction: column;
+                justify-content: flex-end;
+                background-position:center;
+                background-repeat: no-repeat;
+                background-size: cover;
+                background-color: rgb(50,50,50,0.5);
+                background-blend-mode: overlay;
+                &__title{
+                   color: #ffffff;
+                   margin-bottom: 0;
+                }
+                &__price{
+                    margin-bottom: 0;
+                }
+                &__desc{
+                    height: 2.375rem;
+                    margin-bottom: 0;
+                }
+                &__img{
+                    z-index: -1;
+                    height:100%;
+                    width: 100%;
+                    color: #ffffff; 
+                }
+            } 
+        }
+    }
+}

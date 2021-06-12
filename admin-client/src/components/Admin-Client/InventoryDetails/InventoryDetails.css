@@ -1,0 +1,195 @@
+@font-face {
+  font-family: "Titillium Web";
+  src: url("../fonts/TitilliumWeb-Regular.woff2") format("woff2"), url("../fonts/TitilliumWeb-Regular.woff") format("woff");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Titillium Web";
+  src: url("../fonts/TitilliumWeb-SemiBold.woff2") format("woff2"), url("../fonts/TitilliumWeb-SemiBold.woff") format("woff");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+.details2 {
+  background: white;
+  position: relative;
+  bottom: 3.75rem;
+  margin: 0 1rem;
+  padding-top: 1rem;
+  box-shadow: 0px 2px 5px rgba(19, 24, 44, 0.1);
+  border-radius: 3px;
+}
+@media screen and (min-width: 768px) {
+  .details2 {
+    max-height: 350px;
+    margin: 0 2rem;
+  }
+}
+@media screen and (min-width: 1280px) {
+  .details2 {
+    max-height: 274;
+  }
+}
+.details2__namearrow {
+  display: flex;
+  justify-content: space-between;
+}
+.details2__box {
+  display: flex;
+  flex-wrap: nowrap;
+}
+.details2__link {
+  text-decoration: none;
+}
+.details2__name {
+  font-family: "Titillium Web";
+  font-size: 1.5rem;
+  color: #13182C;
+  margin-left: 15px;
+}
+@media screen and (min-width: 768px) {
+  .details2__name {
+    font-size: 2.25rem;
+    margin-top: 5px;
+  }
+}
+@media screen and (min-width: 1280px) {
+  .details2__name {
+    margin-top: 6px;
+  }
+}
+.details2__button {
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 20px;
+  border: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #2E66E5;
+  color: white;
+  text-decoration: none;
+}
+@media screen and (min-width: 768px) {
+  .details2__button {
+    width: 5rem;
+    height: 2.375rem;
+  }
+}
+.details2__button-name {
+  display: none;
+}
+@media screen and (min-width: 768px) {
+  .details2__button-name {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
+.details2__namearrow {
+  margin-bottom: 1rem;
+  padding: 0 1rem;
+  display: flex;
+  align-items: center;
+}
+@media screen and (min-width: 768px) {
+  .details2__namearrow {
+    padding: 0 1.5rem;
+    justify-content: space-between;
+  }
+}
+@media screen and (min-width: 1280px) {
+  .details2__namearrow {
+    padding: 0 6rem;
+  }
+}
+.details2-product {
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  padding-top: 2rem;
+  border-top: 1.5px solid #BDC5D5;
+}
+@media screen and (min-width: 768px) {
+  .details2-product {
+    flex-direction: row;
+    padding-bottom: 0.5rem;
+  }
+}
+.details2-product__in {
+  text-align: center;
+  font-size: 13px;
+  line-height: 20px;
+  font-weight: 700;
+  border-radius: 20px;
+  width: 4.063rem;
+  color: #158463;
+  background: rgba(21, 132, 99, 0.07);
+}
+@media screen and (min-width: 768px) {
+  .details2-product__in {
+    font-size: 14px;
+    line-height: 22px;
+  }
+}
+.details2-product__out {
+  text-align: center;
+  font-size: 13px;
+  line-height: 20px;
+  font-weight: 700;
+  border-radius: 20px;
+  width: 5.75rem;
+  color: #C94515;
+  background: rgba(201, 69, 21, 0.07);
+}
+@media screen and (min-width: 768px) {
+  .details2-product__out {
+    font-size: 14px;
+    line-height: 22px;
+  }
+}
+.details2-product__body-qnt {
+  margin-left: 4rem;
+}
+@media screen and (min-width: 768px) {
+  .details2-product__body-qnt {
+    margin-left: 0;
+  }
+}
+@media screen and (min-width: 768px) {
+  .details2-product__body {
+    display: flex;
+    flex-direction: column;
+    margin-right: 15vw;
+    padding-bottom: 0.5rem;
+  }
+}
+.details2-product__subtitle {
+  font-family: "Titillium Web";
+  font-size: 0.85rem;
+  margin-bottom: 0.5rem;
+  color: #5C667E;
+}
+.details2-product__info, .details2-product__instock {
+  margin-bottom: 1rem;
+  font-size: 1rem;
+}
+.details2-product__container2 {
+  display: flex;
+  flex-direction: row;
+}
+@media screen and (min-width: 768px) {
+  .details2-product__container2 {
+    width: 55%;
+    padding-left: 2rem;
+    border-left: 1.5px solid #BDC5D5;
+  }
+}
+@media screen and (min-width: 768px) {
+  .details2-product__container1 {
+    width: 45%;
+  }
+}/*# sourceMappingURL=InventoryDetails.css.map */

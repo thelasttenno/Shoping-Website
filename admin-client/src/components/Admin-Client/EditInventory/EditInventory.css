@@ -1,0 +1,176 @@
+.editInventory {
+  margin-left: 1rem;
+  margin-right: 1rem;
+  box-shadow: 0px 2px 5px 0px rgba(19, 24, 44, 0.1);
+  width: calc(100% - 2rem);
+  position: relative;
+  top: -4rem;
+  z-index: 999;
+  background-color: white;
+}
+@media screen and (min-width: 768px) {
+  .editInventory {
+    margin-left: 2rem;
+    margin-right: 2rem;
+    width: calc(100% - 4rem);
+    top: -5.8rem;
+  }
+}
+@media screen and (min-width: 1280px) {
+  .editInventory {
+    margin-left: 8.125rem;
+    margin-right: 8.125rem;
+    width: calc(100% - 16.25rem);
+  }
+}
+.editInventory__header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  border-bottom: 1px solid #BDC5D5;
+  padding-left: 1rem;
+  height: 5.75rem;
+}
+@media screen and (min-width: 768px) {
+  .editInventory__header {
+    padding-left: 2.25rem;
+  }
+}
+@media screen and (min-width: 1280px) {
+  .editInventory__header {
+    padding-left: 2.5rem;
+  }
+}
+.editInventory__heading {
+  font-size: 28px;
+  line-height: 36px;
+}
+@media screen and (min-width: 768px) {
+  .editInventory__heading {
+    font-size: 32px;
+    line-height: 40px;
+  }
+}
+.editInventory__formSubmitted {
+  height: 20rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 2rem;
+  font-size: 20px;
+  line-height: 28px;
+}
+@media screen and (min-width: 768px) {
+  .editInventory__formSubmitted {
+    font-size: 24px;
+    line-height: 32px;
+  }
+}
+.editInventory__form {
+  display: flex;
+  flex-direction: column;
+}
+.editInventory__subheading {
+  font-size: 20px;
+  line-height: 28px;
+  padding-top: 1rem;
+  padding-bottom: 1.5rem;
+}
+@media screen and (min-width: 768px) {
+  .editInventory__subheading {
+    font-size: 24px;
+    line-height: 32px;
+  }
+}
+@media screen and (min-width: 768px) {
+  .editInventory__item-itemAvailablity-details {
+    display: flex;
+    flex-direction: row;
+  }
+}
+.editInventory__item-details {
+  display: flex;
+  flex-direction: column;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid #BDC5D5;
+  margin-top: 1rem;
+}
+@media screen and (min-width: 768px) {
+  .editInventory__item-details {
+    width: 50%;
+    margin-top: 1.5rem;
+    border-right: 1px solid #BDC5D5;
+    border-bottom: none;
+    margin-bottom: 1.5rem;
+    padding-bottom: 0;
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+}
+@media screen and (min-width: 1280px) {
+  .editInventory__item-details {
+    padding-left: 2.5rem;
+    padding-right: 2.5rem;
+  }
+}
+.editInventory__item-availability {
+  display: flex;
+  flex-direction: column;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+  padding-bottom: 1.5rem;
+  margin-top: 1rem;
+}
+@media screen and (min-width: 768px) {
+  .editInventory__item-availability {
+    width: 50%;
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
+    padding-bottom: 0;
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+}
+@media screen and (min-width: 1280px) {
+  .editInventory__item-availability {
+    padding-left: 2.5rem;
+    padding-right: 2.5rem;
+  }
+}
+.editInventory__radioGroup {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  margin-bottom: 1.25rem;
+}
+.editInventory__radioButton {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding-right: 2rem;
+}
+@media screen and (min-width: 768px) {
+  .editInventory__radioButton {
+    padding-right: 2.75rem;
+  }
+}
+.editInventory__btn-container {
+  height: 4.25rem;
+  background-color: rgba(247, 248, 249, 0.7);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  padding-right: 2rem;
+  padding-left: 2rem;
+}
+@media screen and (min-width: 768px) {
+  .editInventory__btn-container {
+    justify-content: flex-end;
+    padding-right: 2rem;
+  }
+}/*# sourceMappingURL=EditInventory.css.map */

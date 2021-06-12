@@ -1,0 +1,159 @@
+@import "../../../assets/partials/mixins";
+@import "../../../assets/partials/fonts";
+@import "../../../assets/partials/variables";
+
+.details2 {
+    background: $white;
+    position: relative;
+    bottom: 3.75rem;
+    margin: 0 1rem;
+    padding-top: 1rem;
+    box-shadow: 0px 2px 5px rgba(19, 24, 44, 0.1);
+    border-radius: 3px;
+  
+    @include tablet {
+        max-height: 350px;
+        margin:0 2rem;
+    }
+    @include desktop {
+        max-height: 274;
+    }
+
+    &__namearrow {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    &__box {
+        display: flex;
+        flex-wrap: nowrap;
+    }
+    &__link {
+        text-decoration: none;
+    }
+
+    &__name {
+        font-family: "Titillium Web";
+        font-size: 1.5rem;
+        color: $black;
+        margin-left: 15px;
+
+        @include tablet {
+            font-size: 2.25rem;
+            margin-top: 5px;
+        }
+
+        @include desktop {
+            margin-top: 6px;
+        }
+    }
+    &__button {
+        width: 2.25rem;
+        height: 2.25rem;
+        border-radius: 20px;
+        border: none;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: $indigo;
+        color: white;
+        text-decoration: none;
+        @include tablet {
+            width: 5rem;
+            height: 2.375rem;
+        }
+        &-name {
+            display: none;
+            @include tablet {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+        }
+    }
+    &__namearrow {
+        margin-bottom: 1rem;
+        padding:0 1rem;
+        display: flex;
+        align-items: center;
+
+        @include tablet {
+            padding: 0 1.5rem;
+            justify-content: space-between;
+        }
+
+        @include desktop {
+            padding: 0 6rem;
+        }
+    }
+    &-product {
+        width: 100%;
+        display: flex;
+        align-items: flex-start;
+        flex-direction: column;
+        padding-top: 2rem;
+        border-top: 1.5px solid $cloud;
+        @include tablet {
+            flex-direction: row;
+            padding-bottom: 0.5rem;
+        }
+        &__in {
+            text-align: center;
+            @include body-med;
+            font-weight: 700;
+            border-radius: 20px;
+            width: 4.063rem;
+            color: $green;
+            background: rgba(21, 132, 99, 0.07);
+        }
+        &__out {
+            text-align: center;
+            @include body-med;
+            font-weight: 700;
+            border-radius: 20px;
+            width: 5.75rem;
+            color: $red;
+            background: rgba(201, 69, 21, 0.07);
+        }
+
+        &__body {
+            &-qnt{
+                margin-left: 4rem;
+                @include tablet{
+                    margin-left: 0;
+                }
+            }
+            @include tablet {
+                display: flex;
+                flex-direction: column;
+                margin-right: 15vw;
+                padding-bottom: 0.5rem;
+            }
+        }
+        &__subtitle {
+            font-family: "Titillium Web";
+            font-size: 0.85rem;
+            margin-bottom: 0.5rem;
+            color: $slate;
+        }
+        &__info,
+        &__instock {
+            margin-bottom: 1rem;
+            font-size: 1rem;
+        }
+        &__container2 {
+            display: flex;
+            flex-direction: row;
+            @include tablet {
+                width: 55%;
+                padding-left: 2rem;
+                border-left: 1.5px solid $cloud;
+            }
+        }
+        &__container1 {
+            @include tablet {
+                width: 45%;
+            }
+        }
+    }
+}
