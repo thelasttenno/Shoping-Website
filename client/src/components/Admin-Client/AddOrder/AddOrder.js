@@ -83,9 +83,8 @@ export default class AddInventory extends Component {
           email: email,
           country: country,
           city: city,
-          itemId: itemId,
-          quantityName: quantityName,
-          item2: item2,
+          items: [itemId, quantityName]
+          
         })
         .then((res) => {
           console.log(res);

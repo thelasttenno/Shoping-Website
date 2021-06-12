@@ -47,7 +47,6 @@ exports.sessionEventHandler = (req, res) => {
     //     eventName: "link",
     //     eventTriggerAriaLabel: "shop-page-tab-button",
     //     eventTime: Date.now(),
-    //      eventR
     //     referer: "/",
     // },
 
