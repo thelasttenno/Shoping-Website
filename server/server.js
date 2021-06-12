@@ -27,14 +27,23 @@ const upload = multer({
 });
 
 app.post(
-  "/upload",
-  upload.single("file" /* name attribute of <file> element in your form */),
+  "/upload/:id",
+  upload.any(/* name attribute of <file> element in your form */),
   (req, res) => {
-    console.log(req.params);
-    const tempPath = req.file.path;
-    const targetPath = path.join(__dirname, `./uploads/${req.body.name}.png`);
+    console.log(req.files[0]);
 
-    if (path.extname(req.file.originalname).toLowerCase() === ".png") {
+    const obj = JSON.parse(JSON.stringify(req.body)); // req.body = [Object: null prototype] { title: 'product' }
+
+    console.log(obj);
+
+    const tempPath = req.files[0].path;
+    const targetPath = path.join(
+      __dirname,
+      //NEED TO MAKE IT SAVE IN PROPER FOLDER
+      `./uploads/${obj.name2}.png`
+    );
+
+    if (path.extname(req.files[0].originalname).toLowerCase() === ".png") {
       fs.rename(tempPath, targetPath, (err) => {
         if (err) return handleError(err, res);
 
@@ -78,14 +87,14 @@ app.delete(
 
 //////////////////////SessionRoutes endpoints////////////////////////////////////////
 
-app.get('/session/event', SessionRoutes.sessionEventHandler) 
-//  Tracks the users activity and appends it to the navigation-graph for data science later <3, 
-//  call on every click, link, tab, or anything functional for maximum data farming capabilites >:) 
+app.get("/session/event", SessionRoutes.sessionEventHandler);
+//  Tracks the users activity and appends it to the navigation-graph for data science later <3,
+//  call on every click, link, tab, or anything functional for maximum data farming capabilites >:)
 
-app.post('/session/new', SessionRoutes.createSessionHandler)
-app.post('/session/validate/:sessionId', SessionRoutes.validateSessionHandler)
-app.post('/session/refresh', SessionRoutes.refreshSessionHandler)
-app.delete('/session/end', SessionRoutes.endSessionHandler)
+app.post("/session/new", SessionRoutes.createSessionHandler);
+app.post("/session/validate/:sessionId", SessionRoutes.validateSessionHandler);
+app.post("/session/refresh", SessionRoutes.refreshSessionHandler);
+app.delete("/session/end", SessionRoutes.endSessionHandler);
 
 app.listen(port, () => {
   console.log(`Server running on ${port}`);

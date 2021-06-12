@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
 import { v4 as uuidv4 } from "uuid";
+const fs = require("fs");
 class Singleorder extends Component {
   constructor(props) {
     super(props);
@@ -13,22 +14,24 @@ class Singleorder extends Component {
   };
   submitHandler = (e) => {
     e.preventDefault();
-
     const id = uuidv4();
-    const name = e.target.name.value;
-    const data = e.target.file.value;
-    console.log(name);
+    const name2 = e.target.name2.value;
+    console.log(name2);
     console.log(id);
-    console.log(data);
     //VALIDATE THE DATA FIRST
-    if (id && name && data) {
+    if (id && name2) {
       //POST THE NEW Inventory INFO TO OUR BACKEND
-      console.log(name);
-      axios
-        .post(`http://localhost:8080/upload/${id}`, {
-          id: id,
-          data: data,
-          name: name,
+      var bodyFormData = new FormData()
+      var imagefile= document.querySelector('#file');
+      bodyFormData.append('image', imagefile.files[0]);
+      bodyFormData.append('id', id);
+      bodyFormData.append('name2', name2);
+
+      axios({
+          method: "post",
+          url: `http://localhost:8080/upload/${id}`,
+          data: bodyFormData,
+          headers: {"Content-Type": `multipart/form-data; boundary=${bodyFormData._boundary}`},
         })
         .then((res) => {
           console.log(res);
@@ -44,23 +47,16 @@ class Singleorder extends Component {
     return (
       <div className="">
 
-        {/* <form
+        <form
           ref={this.form}
           onSubmit={this.submitHandler}
           className="add-inventory"
         >
-          <input type="file" name="file" />
-          <input type="text" name="name" id="name" />
+          <input type="file" name="file" id="file"/>
+          <input type="text" name="name2" id="name" />
           <input type="submit" value="Submit" />
-        </form> */}
+        </form>
 
-        <div>
-          <form method="post" enctype="multipart/form-data" action="http://localhost:8080/upload">
-            <input type="file" name="file" />
-            <input type="text" name="name" id="name" />
-            <input type="submit" value="Submit" />
-          </form>
-        </div>
       </div>
     );
   }
