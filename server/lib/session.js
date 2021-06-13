@@ -15,14 +15,18 @@ exports.verifySessionToken = async (token, cache, callback) => {
     return;
   }
   //Get ID
-  sessionId = decoded.sessionId;
+  
+  if(decoded.sessionId){
+      sessionId = decoded.sessionId;
+  }else{
+        callback(Error("invalid_token"), null);
+    return;
+  }
 
   //Use sessionId to get sessionObj -> signingKey from session cache
   cache.get(sessionId, function (err, value) {
     if (err) {
-      // handle anything other than a 'NotFoundError' here
       console.log(err);
-
       callback(err, null);
       return;
     }
@@ -44,7 +48,8 @@ exports.verifySessionToken = async (token, cache, callback) => {
     jwt.verify(token, sessionObj.signingKey, callback);
   });
 };
-//
+
+//Not implemented
 exports.destroySession = (token, cache) => {};
 
 //Callback(err: Error, token: string)
@@ -87,6 +92,7 @@ exports.createSession = async (newSessionId, cache, callback) => {
   });
 };
 
+//This function is a background worker that records session data to disk, this allows sciency shit later for maximum user exploitation :)
 exports.sessionRecorder = async (cache) => {
   //Loop through all entities in the cache and if the saved field is not true, save it to file and mark it as true.
 
