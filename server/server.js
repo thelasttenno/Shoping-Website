@@ -3,9 +3,13 @@ const app = express();
 const port = process.env.PORT || 8080;
 const cors = require("cors");
 const path = require("path");
-const ordersRoutes = require("./routes/orders");
+const ordersRoutes = require("./routes/Orders");
 const InventoryRoutes = require("./routes/Inventory");
 const SessionRoutes = require("./routes/Session");
+// const QuickLRU = require("quick-lru");
+const session = require("./lib/session");
+var levelup = require("levelup");
+var leveldown = require("leveldown");
 
 const fs = require("fs");
 require("dotenv").config();
@@ -78,14 +82,34 @@ app.delete(
 
 //////////////////////SessionRoutes endpoints////////////////////////////////////////
 
-app.get('/session/event', SessionRoutes.sessionEventHandler) 
-//  Tracks the users activity and appends it to the navigation-graph for data science later <3, 
-//  call on every click, link, tab, or anything functional for maximum data farming capabilites >:) 
+// Cache injection
 
-app.post('/session/new', SessionRoutes.createSessionHandler)
-app.post('/session/validate/:sessionId', SessionRoutes.validateSessionHandler)
-app.post('/session/refresh', SessionRoutes.refreshSessionHandler)
-app.delete('/session/end', SessionRoutes.endSessionHandler)
+//cache needs to be initialized top-level here in server.js to ensure it stays persistent as the server runs
+// Create store
+var cache = levelup(leveldown("./sessionDb"));
+//Analytics worker
+// setInterval(session.sessionRecorder, 1000 * 60 * 30); //Runs once every 30 mins
+
+// To pass it to the route handlers, I'll need to wrap them to accept three parameters including cache.
+const sessionEventWrapper = (req, res) => {
+  // sessionEventHandler(req, res, cache);
+};
+const createSessionWrapper = (req, res) => {
+  SessionRoutes.createSessionHandler(req, res, cache);
+};
+const validateSessionWrapper = (req, res) => {
+  SessionRoutes.validateSessionHandler(req, res, cache);
+};
+
+// Endpoints
+
+app.put("/session/event", sessionEventWrapper);
+//  Tracks the users activity and appends it to the navigation-graph for data science later <3,
+//  call on every click, link, tab, or anything functional for maximum data farming capabilites >:)
+app.post("/session/new", createSessionWrapper);
+app.post("/session/validate", validateSessionWrapper);
+
+// Server
 
 app.listen(port, () => {
   console.log(`Server running on ${port}`);
