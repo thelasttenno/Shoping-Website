@@ -15,14 +15,18 @@ const verifySessionToken = async (token, cache, callback) => {
     return;
   }
   //Get ID
-  sessionId = decoded.sessionId;
+
+  if (decoded.sessionId) {
+    sessionId = decoded.sessionId;
+  } else {
+    callback(Error("invalid_token"), null);
+    return;
+  }
 
   //Use sessionId to get sessionObj -> signingKey from session cache
   cache.get(sessionId, function (err, value) {
     if (err) {
-      // handle anything other than a 'NotFoundError' here
       console.log(err);
-
       callback(err, null);
       return;
     }
