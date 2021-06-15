@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import "./App.css";
-import { getNewSession, verifySession } from "./lib/session";
+import { getNewSession, sessionEvent, verifySession } from "./lib/session";
 import { Home, Header, About, Shop, Collabs } from "./components/Public-Client";
 import {
   BrowserRouter as Router,
@@ -14,9 +14,6 @@ import AdminClient from "./components/Admin-Client/AdminClient";
 function App() {
   //Setup session
 
-  /** these allow the session to track page transitions and build out navigation datasets. this is useful for calculating the effectiveness of click-through conversions */
-  let [currentPage, setCurrentPage] = useState("");
-  let [lastPageVisited, setLastPageVisited] = useState("");
   //session state
   let [sessionState, setSessionState] = useState(null);
 
@@ -51,6 +48,7 @@ function App() {
               path="/"
               exact
               render={(props) => {
+                //
                 return (
                   <page>
                     <Header />
@@ -62,6 +60,7 @@ function App() {
             <Route
               path="/about"
               render={(props) => {
+                //
                 return (
                   <page>
                     <Header />

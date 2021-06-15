@@ -97,11 +97,11 @@ app.delete(
 // Create store
 var cache = levelup(leveldown("./sessionDb"));
 //Analytics worker
-// setInterval(session.sessionRecorder, 1000 * 60 * 30); //Runs once every 30 mins
+setInterval(() => session.analyticsWorker(cache), 5000); //Runs once every 30 mins
 
 // To pass it to the route handlers, I'll need to wrap them to accept three parameters including cache.
 const sessionEventWrapper = (req, res) => {
-  // sessionEventHandler(req, res, cache);
+  SessionRoutes.sessionEventHandler(req, res, cache);
 };
 const createSessionWrapper = (req, res) => {
   SessionRoutes.createSessionHandler(req, res, cache);
@@ -112,7 +112,7 @@ const validateSessionWrapper = (req, res) => {
 
 // Endpoints
 
-app.put("/session/event", sessionEventWrapper);
+app.post("/session/event", sessionEventWrapper);
 //  Tracks the users activity and appends it to the navigation-graph for data science later <3,
 //  call on every click, link, tab, or anything functional for maximum data farming capabilites >:)
 app.post("/session/new", createSessionWrapper);

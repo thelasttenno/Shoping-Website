@@ -87,57 +87,29 @@ exports.validateSessionHandler = (req, res, cache) => {
 
 exports.sessionEventHandler = async (req, res, cache) => {
   /* req
-   * req.params.sessionToken,          //This validates the user and provides the correct sessionToken for tracking.
-   * req.params.eventName,             //Was this a: navigation, add-to-cart, remove-from-cart,
-   * req.params.eventTriggerAriaLabel, // The HTML Aria label of the UI object that triggered the event, this helps us understand exactly what users click on first and when.
-   * req.params.referrer,              // The url when the event occured.
-   * req.params.location               // In the case of a navigation event, this field tells us the new URL the user navigated to. for any other case it must remain the same as the referrer field (this is important, do not leave it blank)
+   * req.body.sessionToken,          //This validates the user and provides the correct sessionToken for tracking.
+   * req.body.eventName,             //navigation, add-to-cart, remove-from-cart,
+   * req.body.eventTime              // obvs
+   * req.body.eventTriggerAriaLabel, // The HTML Aria label of the UI object that triggered the event, this helps us understand exactly what users click on first and when.
+   * req.body.referrer,              // The url when the event occured.
+   * req.body.location               // In the case of a navigation event, this field tells us the new URL the user navigated to. for any other case it must remain the same as the referrer field (this is important, do not leave it blank)
    */
-  //
-  //Appends, to the sessionObj in cache, an analytical event defined as detailed above
-  // sessionObj["navigation-graph"].append(...
-  // examples...
-  // {
-  //     eventName: "navigation",
-  //     eventTriggerAriaLabel: "shop-page-menu-navbutton",
-  //     eventTime: Date.now(),
-  //     referer: "/",
-  //     location: "/shop"
-  // },
-  // {
-  //     eventName: "favorite-item",
-  //     eventTriggerAriaLabel: "backpack22309-favorite-button",
-  //     eventTime: Date.now(),
-  //     referer: "/items/backpack22309",
-  //     location: "/items/backpack22309"
-  // },
-  // OR
-  // {
-  //     eventName: "add-to-cart",
-  //     eventTriggerAriaLabel: "backpack22309-add-to-cart-button",
-  //     eventTime: Date.now(),
-  //     referer: "/items/backpack22309",
-  //     location: "/items/backpack22309"
-  // },
-
-  let sessionId = ""; // To be set by valid JWT claim
-
-  //Retrieve sessionId before checking if valid
-  let decoded = jwt.decode(token);
-  sessionId = decoded.sessionId;
-
-  //Use sessionId to get sessionObj -> signingKey from session cache
-  let sessionObj = JSON.parse(await cache.get(sessionId));
-
-  //check if token valid with retrieved key
-  jwt.verify(token, sessionObj.signingKey, function (err, decoded) {
+  let sessionToken = req.body.sessionToken;
+  let eventObj = {
+    eventName: req.body.eventName,
+    eventTime: req.body.eventTime,
+    eventTriggerAriaLabel: req.body.eventTriggerAriaLabel,
+    referer: req.body.referer,
+    location: req.body.location,
+  };
+  session.sessionEvent(sessionToken, eventObj, cache, (err) => {
     if (err) {
       res
-        .status(500)
+        .status(401)
         .send(`{"code":"unauthorized", "message":"invalid_token"}`);
-
       return;
     }
-    //Token is valid
+    res.status(200).send(`{"code":"OK", "message":"event_appended"}`);
+    return;
   });
 };

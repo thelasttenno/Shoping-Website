@@ -87,3 +87,51 @@ export const verifySession = (callback) => {
     return;
   });
 };
+
+//callback = (err: Error): void => {};
+//This function will log an analytics event on the server :]
+export const sessionEvent = (
+  {
+    eventName,
+    eventTriggerAriaLabel,
+    referer,
+    location,
+    eventTime = Date.now(),
+  },
+  callback
+) => {
+  // { Requires:
+  //     eventName: "add-to-cart",
+  //     eventTriggerAriaLabel: "backpack22309-add-to-cart-button",
+  //     eventTime: Date.now(),
+  //     referer: "/items/backpack22309",
+  //     location: "/items/backpack22309"
+  // },
+  // callback(err)
+  //
+  console.log(eventName, eventTriggerAriaLabel, eventTime, referer, location);
+  axios({
+    method: "post",
+    url: "http://localhost:8080/session/event",
+    data: {
+      sessionToken: window.localStorage.getItem("sessionToken"),
+      eventName: eventName,
+      eventTime: eventTime,
+      eventTriggerAriaLabel: eventTriggerAriaLabel,
+      location: location,
+      referer: referer,
+    },
+  })
+    .then((resp) => {
+      //
+      console.log("event:", resp);
+      if (resp) {
+        //
+        if (resp.data.code === "success") {
+        }
+      }
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
