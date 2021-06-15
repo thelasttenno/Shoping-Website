@@ -60,6 +60,11 @@ function Header() {
               <p>COLLABS</p>
             </Link>
           </li>
+          <li>
+            <Link to={"/cart"} className="nav__link">
+              <p>CART</p>
+            </Link>
+          </li>
         </ul>
       </nav>
     </header>

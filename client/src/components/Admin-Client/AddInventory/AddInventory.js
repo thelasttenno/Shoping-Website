@@ -3,6 +3,7 @@ import axios from "axios";
 import { v4 as uuidv4 } from "uuid";
 import arrow from "../../../assets/Icons/arrow_back-24px.svg";
 import errorIcon from "../../../assets/Icons/error-24px.svg";
+import PhotoUpload from "../PhotoUpload/PhotoUpload"
 
 import { Link } from "react-router-dom";
 import "./AddInventory.scss";
@@ -224,6 +225,7 @@ export default class AddInventory extends Component {
 
           {/* AVAILABILITY */}
           <div className="add-inventory__availability-container">
+            <PhotoUpload/>
             <h3 className="add-inventory__subheading">Item Availability</h3>
             <div className="add-inventory__status-container">
               <label htmlFor="status" className="input-label">

@@ -3,7 +3,7 @@ import "./css/main.scss";
 import KaiPic from "../../assets/photos/Photoshoot/Kai_looking_Good.JPG"
 
 
-function name() {
+function About() {
   return (
     <div>
       <section class="hero">
@@ -37,4 +37,4 @@ function name() {
     </div>
   );
 }
-export default name;
+export default About;
