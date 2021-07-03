@@ -1,12 +1,11 @@
 import React from "react";
-import "./css/main.scss";
-import KaiPic from "../../assets/photos/Photoshoot/Kai_looking_Good.JPG"
-
+import KaiPic from "../../../assets/photos/Photoshoot/Kai_looking_Good.JPG"
+import "./About.scss"
 
 function About() {
   return (
-    <div>
-      <section class="hero">
+    <section class="About">
+      <div class="About__head">
         <div class="hero-content">
           {/* <!-- <h1 class="hero-content__title">50% off all Tee shirts with a purches of any item!</h1> --> */}
           {/* <!-- <h1 class="hero-content__title">WELCOME TO $KRILLA-GANG'S WORK IN PROGRESS WEBSITE!</h1>
@@ -19,13 +18,14 @@ function About() {
     </p> --> */}
           {/* <!-- <a class="hero-content__button button" href="/shop/">Shop Now</a> --> */}
         </div>
-      </section>
-      <section class="bio">
+      </div>
+      <div class="About__header">
+        <h2 class="About__title">About</h2>
         <div class="bio__img">
           <img src={KaiPic} alt="" />
         </div>
         <div class="bio__content">
-          <h3>Welcome To Skrilla Gang Clothing</h3>
+          <h3 >Welcome To Skrilla Gang Clothing</h3>
           <p>
             We are a small startup company based in Kelowna, British Columbia.
             We’ve been working really hard on our merchandise, and are stoked to
@@ -33,8 +33,8 @@ function About() {
             talented people, eager to meet your needs and answer any questions.
           </p>
         </div>
-      </section>
-    </div>
+      </div>
+    </section>
   );
 }
 export default About;

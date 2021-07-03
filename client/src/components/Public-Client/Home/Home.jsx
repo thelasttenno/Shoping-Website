@@ -1,10 +1,12 @@
 import React from "react";
-import "./css/main.scss";
-
-function name() {
+import pic from "../../../assets/photos/Mockups/b_roll/ManWearingFuckitShirt.png";
+import "./Home.scss";
+import SingleItem from "../SingleItem/SingleItem";
+import SingleCollabItem from "../SingleCollabItem/SingleCollabItem";
+function Home() {
   return (
-    <div>
-      <section class="hero">
+    <section class="Home">
+      <div class="Home__head">
         <div class="hero-content">
           {/* <!-- <h1 class="hero-content__title">50% off all Tee shirts with a purches of any item!</h1> --> */}
           {/* <!-- <p class="hero-content__blurb">OFFICAL LAUNCH OF WEBSITE AND FIRST CLOTHING DROP IS FEB. 20TH.</p>
@@ -16,24 +18,24 @@ function name() {
       </p> --> */}
           {/* <!-- <a class="hero-content__button button" href="/shop/">Shop Now</a> --> */}
         </div>
-      </section>
-      <section class="cards-container">
-        <h2 class="cards-container__title">New Products</h2>
+      </div>
+      <div class="Home__header">
+        <h2 class="Home__title">New Products</h2>
 
         <div class="cards">
-          <div class="card">
-            <div id="product-component-1613869788481"></div>
-          </div>
-          <div class="card">
-            <div id="product-component-1613869938152"></div>
-          </div>
-          <div class="card">
-            <div id="product-component-1613869961817"></div>
-          </div>
-          {/* <!-- <div class="card"></div> --> */}
+          <SingleItem />
+          <SingleItem />
+          <SingleItem />
+          <SingleItem />
         </div>
-      </section>
-    </div>
+        <div class="cards">
+          <SingleCollabItem />
+          <SingleCollabItem />
+          <SingleCollabItem />
+          <SingleCollabItem />
+        </div>
+      </div>
+    </section>
   );
 }
-export default name;
+export default Home;

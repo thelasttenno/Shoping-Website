@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { useLocation } from 'react-router-dom'
-import Logo from '../../../assets/photos/logos/SkrillaGangWordmarkLogo.png';
+import Logo from "../../../assets/photos/logos/KL-Logos/$krilla-GangLogo3Website.png";
 import './Header.scss';
 
 const Navbar= () => {
@@ -14,7 +14,7 @@ const Navbar= () => {
                     <a className='link' href='/'>
                         <img className='nav-logo' src={Logo} alt='InStock logo'/>
                     </a>
-                    <div className='nav-menu'>
+                    <div className='nav-menu--admin'>
                         <a href = '/admin/orders' className=
                                 {`link nav-link ${!location.pathname.toLowerCase().includes('inventory')? 'nav-button nav-link--active nav-button--left': ''}`}>
                             Orders

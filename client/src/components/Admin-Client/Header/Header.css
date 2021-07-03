@@ -38,7 +38,36 @@
 }
 @media screen and (min-width: 1280px) {
   .nav-logo {
+    height: 4rem;
     padding-left: 8.125rem;
+  }
+}
+.nav-menu--admin {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-top: 1.25rem;
+  font-size: 13px;
+  line-height: 20px;
+}
+@media screen and (min-width: 768px) {
+  .nav-menu--admin {
+    font-size: 14px;
+    line-height: 22px;
+  }
+}
+@media screen and (min-width: 768px) {
+  .nav-menu--admin {
+    margin-top: 0px;
+    align-items: center;
+    margin-bottom: 0px;
+    padding-right: 1rem;
+  }
+}
+@media screen and (min-width: 1280px) {
+  .nav-menu--admin {
+    padding-right: 8.125rem;
   }
 }
 .nav-menu {
@@ -66,6 +95,7 @@
 }
 @media screen and (min-width: 1280px) {
   .nav-menu {
+    width: 40rem;
     padding-right: 8.125rem;
   }
 }

@@ -29,7 +29,24 @@
             padding-left: 2rem;
         }
         @include desktop {
+            height: 4rem;
             padding-left: 8.125rem;
+        }
+    }
+    &-menu--admin {
+        @include flex-row;
+        justify-content: space-between;
+        align-items: flex-end;
+        margin-top: 1.25rem;
+        @include h3-labels-links-buttons;
+        @include tablet {
+            margin-top: 0px;
+            align-items: center;
+            margin-bottom: 0px;
+            padding-right: 1rem;
+        }
+        @include desktop {
+            padding-right: 8.125rem;
         }
     }
     &-menu {
@@ -45,6 +62,7 @@
             padding-right: 1rem;
         }
         @include desktop {
+            width: 40rem;
             padding-right: 8.125rem;
         }
     }

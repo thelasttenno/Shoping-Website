@@ -2,7 +2,25 @@ import React, { Component } from "react";
 import axios from "axios";
 import { v4 as uuidv4 } from "uuid";
 const fs = require("fs");
-class Singleorder extends Component {
+// class Singleorder extends Component {
+//   constructor(props) {
+//     super(props);
+//     this.form = React.createRef();
+//   }
+//   state = {
+//     name: null,
+//     data: null,
+//   };
+//   render() {
+//     return (
+//       <div className="">
+//       </div>
+//     );
+//   }
+// }
+
+// export default Singleorder;
+class PhotoUpload extends Component {
   constructor(props) {
     super(props);
     this.submitHandler.bind(this);
@@ -23,6 +41,7 @@ class Singleorder extends Component {
       //POST THE NEW Inventory INFO TO OUR BACKEND
       var bodyFormData = new FormData()
       var imagefile= document.querySelector('#file');
+      console.log(imagefile);
       bodyFormData.append('image', imagefile.files[0]);
       bodyFormData.append('id', id);
       bodyFormData.append('name2', name2);
@@ -62,4 +81,4 @@ class Singleorder extends Component {
   }
 }
 
-export default Singleorder;
+export default PhotoUpload;

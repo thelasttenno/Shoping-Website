@@ -3,7 +3,7 @@ import axios from "axios";
 import { v4 as uuidv4 } from "uuid";
 import arrow from "../../../assets/Icons/arrow_back-24px.svg";
 import errorIcon from "../../../assets/Icons/error-24px.svg";
-import PhotoUpload from "../PhotoUpload/PhotoUpload"
+import PhotoUpload from "../PhotoUpload/PhotoUpload";
 
 import { Link } from "react-router-dom";
 import "./AddInventory.scss";
@@ -22,6 +22,8 @@ export default class AddInventory extends Component {
     statusError: false,
     quantityNameError: false,
     orderError: false,
+    name: null,
+    data: null,
   };
 
   handleChange = (e) => {
@@ -41,7 +43,7 @@ export default class AddInventory extends Component {
 
     //HAVE THE VALUE FROM THE FORM
 
-    const id = uuidv4();
+    const ItemId = uuidv4();
     const name = e.target.name.value;
     const description = e.target.description.value;
     const category = e.target.category.value;
@@ -49,37 +51,117 @@ export default class AddInventory extends Component {
     const status = e.target.status.value;
     const quantity = e.target.quantity.value;
     const price = e.target.price.value;
+    const collab = e.target.collab.value;
+    const ImgName = {
+      1: e.target.name.value,
+      2: e.target.name2.value,
+      3: e.target.name3.value,
+    };
 
     //VALIDATE THE DATA FIRST
     if (
-      id &&
+      ItemId &&
       name &&
       description &&
       category &&
       size &&
       status &&
       quantity &&
-      price 
+      price &&
+      collab &&
+      ImgName
     ) {
       //POST THE NEW Inventory INFO TO OUR BACKEND
-      console.log(name);
-      axios
-        .post("http://localhost:8080/orders/inventory", {
-          id: id,
-          name: name,
-          description: description,
-          category: category,
-          size: size,
-          status: status,
-          quantity: quantity,
-          price: price,
-        })
+      console.log(ImgName);
+      console.log(ItemId);
+      //VALIDATE THE DATA FIRST
+      //POST THE NEW Inventory INFO TO OUR BACKEND
+      // axios
+      //   .post("http://localhost:8080/orders/inventory", {
+      //     id: ItemId,
+      //     name: name,
+      //     description: description,
+      //     category: category,
+      //     size: size,
+      //     status: status,
+      //     quantity: quantity,
+      //     price: price,
+      //     collab: collab,
+      //   })
+      //   .then((res) => {
+      //     console.log(res);
+      //   })
+      //   .then(() => {
+
+      //POST THE NEW Inventory INFO TO OUR BACKEND
+      let id = uuidv4();
+      var bodyFormData = new FormData();
+      var imagefile = document.querySelector("#file");
+      console.log(imagefile);
+      bodyFormData.append("image", imagefile.files[0]);
+      bodyFormData.append("id", id);
+      bodyFormData.append("name2", ImgName);
+      var bodyFormData2 = new FormData();
+      var imagefile2 = document.querySelector("#file2");
+      bodyFormData.append("image2", imagefile2.files[0]);
+      bodyFormData.append("id2", id);
+      bodyFormData.append("name2", ImgName);
+      var bodyFormData3 = new FormData();
+      var imagefile3 = document.querySelector("#file3");
+      bodyFormData.append("image3", imagefile3.files[0]);
+      bodyFormData.append("id3", id);
+      bodyFormData.append("name3", ImgName);
+
+      axios({
+        method: "post",
+        url: `http://localhost:8080/upload/pics`,
+        data: bodyFormData,
+        headers: {
+          "Content-Type": `multipart/form-data; boundary=${bodyFormData._boundary}`,
+        },
+      })
         .then((res) => {
           console.log(res);
+        })
+        .then(() => {
+          axios({
+            method: "post",
+            url: `http://localhost:8080/upload/pics`,
+            data: bodyFormData2,
+            headers: {
+              "Content-Type": `multipart/form-data; boundary=${bodyFormData2._boundary}`,
+            },
+          })
+            .then((res) => {
+              console.log(res);
+            })
+            .then(() => {
+              axios({
+                method: "post",
+                url: `http://localhost:8080/upload/pics`,
+                data: bodyFormData3,
+                headers: {
+                  "Content-Type": `multipart/form-data; boundary=${bodyFormData3._boundary}`,
+                },
+              })
+                .then((res) => {
+                  console.log(res);
+                })
+                .catch((err) => {
+                  console.log("There is something wrong..", err);
+                });
+            })
+            .catch((err) => {
+              console.log("There is something wrong..", err);
+            });
         })
         .catch((err) => {
           console.log("There is something wrong..", err);
         });
+      // })
+      // .catch((err) => {
+      //   console.log("There is something FUCKED..", err);
+      // });
 
       this.setState({ nameError: false });
       this.setState({ descriptionError: false });
@@ -94,6 +176,8 @@ export default class AddInventory extends Component {
       //RESET THE FORM
       e.target.reset();
     } else {
+      console.log("There is something really FUCKED..");
+
       if (!name) this.setState({ nameError: true });
       if (!description) this.setState({ descriptionError: true });
       if (!category) this.setState({ categoryError: true });
@@ -221,11 +305,31 @@ export default class AddInventory extends Component {
               <option value="Apparel">L</option>
               <option value="Accessories">XL</option>
             </select>
+            <label
+              htmlFor="collab"
+              className="input-label"
+              // style={{ display: this.state.categoryError ? "flex" : "none" }}
+            >
+              Is Collab
+            </label>
+            <select
+              type="text"
+              name="collab"
+              className="input select"
+              placeholder="Please select"
+              onChange={this.handleChange}
+            >
+              <option>Please Select</option>
+              <option value="yes">yes</option>
+              <option value="no">no</option>
+            </select>
           </div>
 
           {/* AVAILABILITY */}
           <div className="add-inventory__availability-container">
-            <PhotoUpload/>
+            <div>
+              <PhotoUpload />
+            </div>
             <h3 className="add-inventory__subheading">Item Availability</h3>
             <div className="add-inventory__status-container">
               <label htmlFor="status" className="input-label">
@@ -277,7 +381,7 @@ export default class AddInventory extends Component {
             <div
               style={{
                 display: this.state.status === "In Stock" ? "flex" : "none",
-                flexDirection:"column",
+                flexDirection: "column",
               }}
             >
               <label htmlFor="quantity" className="input-label">

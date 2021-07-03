@@ -5,9 +5,11 @@ const cors = require("cors");
 const path = require("path");
 const ordersRoutes = require("./routes/Orders");
 const InventoryRoutes = require("./routes/Inventory");
+const PaymentsRoutes = require("./routes/Payments")
 const SessionRoutes = require("./routes/Session");
-// const QuickLRU = require("quick-lru");
 const session = require("./lib/session");
+
+//cache
 var levelup = require("levelup");
 var leveldown = require("leveldown");
 
@@ -20,6 +22,7 @@ app.use(express.json());
 app.use(cors());
 //////////////////////////////////////////////////////////////////////////////////
 const multer = require("multer");
+const { randomInt } = require("crypto");
 
 const handleError = (err, res) => {
   res.status(500).contentType("text/plain").end("Oops! Something went wrong!");
@@ -31,7 +34,7 @@ const upload = multer({
 });
 
 app.post(
-  "/upload/:id",
+  "/upload/pics",
   upload.any(/* name attribute of <file> element in your form */),
   (req, res) => {
     console.log(req.files[0]);
@@ -39,31 +42,30 @@ app.post(
     const obj = JSON.parse(JSON.stringify(req.body)); // req.body = [Object: null prototype] { title: 'product' }
 
     console.log(obj);
-
-    const tempPath = req.files[0].path;
-    const targetPath = path.join(
-      __dirname,
-      //NEED TO MAKE IT SAVE IN PROPER FOLDER
-      `./uploads/${obj.name2}.png`
-    );
-
-    if (path.extname(req.files[0].originalname).toLowerCase() === ".png") {
-      fs.rename(tempPath, targetPath, (err) => {
-        if (err) return handleError(err, res);
-
-        res.status(200).contentType("text/plain").end("File uploaded!");
-      });
-    } else {
-      fs.unlink(tempPath, (err) => {
-        if (err) return handleError(err, res);
-
-        res
-          .status(403)
-          .contentType("text/plain")
-          .end("Only .png files are allowed!");
-      });
+      const tempPath = req.files[0].path;
+      const targetPath = path.join(
+        __dirname,
+        //NEED TO MAKE IT SAVE IN PROPER FOLDER
+        `./upload/${req.files[0].originalname}.png`
+      );
+  
+      if (path.extname(req.files[0].originalname).toLowerCase() === ".png") {
+        fs.rename(tempPath, targetPath, (err) => {
+          if (err) return handleError(err, res);
+  
+          res.status(200).contentType("text/plain").end("File uploaded!");
+        });
+      } else {
+        fs.unlink(tempPath, (err) => {
+          if (err) return handleError(err, res);
+  
+          res
+            .status(403)
+            .contentType("text/plain")
+            .end("Only .png files are allowed!");
+        });
+      }
     }
-  }
 );
 app.get("/image.png", (req, res) => {
   res.sendFile(path.join(__dirname, "./uploads/image.png"));
@@ -88,6 +90,11 @@ app.delete(
   "/:orderId/inventory/:inventoryId",
   InventoryRoutes.deleteInventoryHandeler
 );
+
+// ##### PaymentRoutes
+
+app.post("/payments/createSession", PaymentsRoutes.stripeSesssionCreate)
+// app.post("/payments/process", PaymentsR)
 
 //////////////////////SessionRoutes endpoints////////////////////////////////////////
 
