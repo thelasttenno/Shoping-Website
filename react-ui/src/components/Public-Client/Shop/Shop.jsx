@@ -4,8 +4,8 @@ import SingleItem from "../SingleItem/SingleItem";
 import SingleCollabItem from "../SingleCollabItem/SingleCollabItem";
 class Shop extends Component {
   state = {
-    status: null
-  }
+    status: null,
+  };
   updateStatus = (e) => {
     const { value } = e.target;
     this.setState({
@@ -14,8 +14,7 @@ class Shop extends Component {
     console.log(e.target.value);
   };
   render() {
-
-
+    console.log(this.props);
     return (
       <section className="Shop">
         <div className="Shop__head">
@@ -42,15 +41,15 @@ class Shop extends Component {
         </div>
         <div className="Shop__header">
           <h2 className="Shop__title">All Products</h2>
-          
           <div
             style={{
-              display: this.state.status === "collab" || "all" ? "flex" : "none",
+              display:
+                this.state.status === "collab" || "all" ? "flex" : "none",
               flexDirection: "column",
             }}
             className="cards Collabitems"
           >
-            {this.props.Collabitems}
+            {this.props.megaState.Collabitems}
           </div>
           <div
             style={{
@@ -59,7 +58,7 @@ class Shop extends Component {
             }}
             className="cards NotCollabitems"
           >
-            {this.props.NotCollabitems}
+            {this.props.megaState.NotCollabitems}
           </div>
           <div
             style={{

@@ -52,108 +52,98 @@ function App() {
   let [megaState, setMegaState] = useState(null);
   const [message, setMessage] = useState(null);
   const [isFetching, setIsFetching] = useState(false);
+  const [isLoading, setIsLoading] = useState(true)
   const [url, setUrl] = useState("http://localhost:5000/inventory");
-
-  function axiosRequest() {
-    return new Promise((resolve) => {
-      axios
-        .get(url)
-        .then((response) => {
-          // handle success
-          return (
-            setInventory(response),
-            resolve("resolved")
-          );
-        })
-        .catch(function (error) {
-          // handle error
-          console.log(error);
-          return (setIsFetching(false));
-        });
-    });
-  }
-
-  useEffect(() => {
-    //run if not null, this effect will run on load 
-    if (Inventory) {
-      console.log("Hey inv changed", Inventory);
-      SortInventory("")
-    }
-  }, [Inventory]);
-
 
   function SortInventory(result) {
     return new Promise((resolve) => {
       console.log(Inventory);
+      let newCollab = []
+      let newNotCollab = []
       Inventory.data.forEach((Item) => {
+        console.log(Item);
         if (Item.collab === true) {
-          let joined = Collabitems.concat(<SingleCollabItem Item={Item} />);
-          return(setCollabitems(joined))          
+          console.log("I FOUND A FUCKING ITEM HAHA")
+          newCollab.push(<SingleCollabItem Item={Item} />);
         } else {
-          let joined = NotCollabitems.concat(<SingleItem Item={Item} />);
-          return(setNotCollabitems(joined));
+          console.log("I FOUND A FUCKING not collab ITEM HAHA")
+          newNotCollab.push(<SingleItem Item={Item} />);
         }
       });
-      Inventory.data.forEach((Item) => {
-        if (Item.category === "hoodie") {
-          if (Item.collab === true) {
-            let joined = CollabitemsHoodies.concat(
-              <SingleCollabItem Item={Item} />
-            );
-            return(setCollabitemsHoodies(joined));
-          } else {
-            let joined = NotCollabitemsHoodies.concat(
-              <SingleItem Item={Item} />
-            );
-            return(setNotCollabitemsHoodies(joined));
-          }
-        } else if (Item.category === "T-Shirt") {
-          if (Item.collab === true) {
-            let joined = CollabitemsTShirt.concat(
-              <SingleCollabItem Item={Item} />
-            );
-            return(setCollabitemsTShirt(joined));
-          } else {
-            let joined = NotCollabitemsTShirt.concat(
-              <SingleItem Item={Item} />
-            );
-            return(setNotCollabitemsTShirt(joined));
-          }
-        } else if (Item.category === "Long-T") {
-          if (Item.collab === true) {
-            let joined = CollabitemsLongT.concat(
-              <SingleCollabItem Item={Item} />
-            );
-            return(setCollabitemsLongT(joined));
-          } else {
-            let joined = NotCollabitemsLongT.concat(<SingleItem Item={Item} />);
-            return(setNotCollabitemsLongT(joined));
-          }
-        } else if (Item.category === "Crop-Top") {
-          if (Item.collab === true) {
-            let joined = CollabitemsCropTop.concat(
-              <SingleCollabItem Item={Item} />
-            );
-            return(setCollabitemsCropTop(joined));
-          } else {
-            let joined = NotCollabitemsCropTop.concat(
-              <SingleItem Item={Item} />
-            );
-            return(setNotCollabitemsCropTop(joined));
-          }
-        } else if (Item.category === "Pants") {
-          if (Item.collab === true) {
-            let joined = CollabitemsPants.concat(
-              <SingleCollabItem Item={Item} />
-            );
-            return(setCollabitemsPants(joined));
-          } else {
-            let joined = NotCollabitemsPants.concat(<SingleItem Item={Item} />);
-            return(setNotCollabitemsPants(joined));
-          }
-        }
-      });
-      console.log("running");
+      setNotCollabitems(newNotCollab)
+      setCollabitems(newCollab)
+      setTimeout(function(){ setIsLoading(false) }, 10000);
+      // Inventory.data.forEach((Item) => {
+      //   if (Item.category === "hoodie") {
+      //     if (Item.collab === true) {
+      //       let joined = CollabitemsHoodies.concat(
+      //         <SingleCollabItem Item={Item} />
+      //       );
+      //       return(setCollabitemsHoodies(joined));
+      //     } else {
+      //       let joined = NotCollabitemsHoodies.concat(
+      //         <SingleItem Item={Item} />
+      //       );
+      //       return(setNotCollabitemsHoodies(joined));
+      //     }
+      //   } else if (Item.category === "T-Shirt") {
+      //     if (Item.collab === true) {
+      //       let joined = CollabitemsTShirt.concat(
+      //         <SingleCollabItem Item={Item} />
+      //       );
+      //       return(setCollabitemsTShirt(joined));
+      //     } else {
+      //       let joined = NotCollabitemsTShirt.concat(
+      //         <SingleItem Item={Item} />
+      //       );
+      //       return(setNotCollabitemsTShirt(joined));
+      //     }
+      //   } else if (Item.category === "Long-T") {
+      //     if (Item.collab === true) {
+      //       let joined = CollabitemsLongT.concat(
+      //         <SingleCollabItem Item={Item} />
+      //       );
+      //       return(setCollabitemsLongT(joined));
+      //     } else {
+      //       let joined = NotCollabitemsLongT.concat(<SingleItem Item={Item} />);
+      //       return(setNotCollabitemsLongT(joined));
+      //     }
+      //   } else if (Item.category === "Crop-Top") {
+      //     if (Item.collab === true) {
+      //       let joined = CollabitemsCropTop.concat(
+      //         <SingleCollabItem Item={Item} />
+      //       );
+      //       return(setCollabitemsCropTop(joined));
+      //     } else {
+      //       let joined = NotCollabitemsCropTop.concat(
+      //         <SingleItem Item={Item} />
+      //       );
+      //       return(setNotCollabitemsCropTop(joined));
+      //     }
+      //   } else if (Item.category === "Pants") {
+      //     if (Item.collab === true) {
+      //       let joined = CollabitemsPants.concat(
+      //         <SingleCollabItem Item={Item} />
+      //       );
+      //       return(setCollabitemsPants(joined));
+      //     } else {
+      //       let joined = NotCollabitemsPants.concat(<SingleItem Item={Item} />);
+      //       return(setNotCollabitemsPants(joined));
+      //     }
+      //   }
+      // });
+      resolve("resolved " + result);
+    });
+  }
+
+ 
+
+  useEffect(()=>{
+    // if (NotCollabitems > 0 && Collabitems > 0) {
+    console.log("did it change", isLoading, Collabitems)
+    console.log("running");
+      console.log(Collabitems);
+      setTimeout(function(){ console.log(Collabitems); }, 10000);
       setMegaState({
         ...megaState,
         Inventory,
@@ -170,25 +160,10 @@ function App() {
         CollabitemsPants,
         NotCollabitemsPants,
       });
+      setTimeout(function(){ console.log(megaState); }, 10000);
       setIsFetching(false);
-      resolve("resolved " + result);
-    });
-  }
-
-  //useEffect that runs once on render and never again after.
-  useWillMount(() => {
-    setIsFetching(true);
-    async function asyncCall() {
-      console.log("calling");
-      const result = await axiosRequest();
-      console.log(result);
-
-      // const result2 = await SortInventory(result);
-      // console.log(result2);
-      // expected output: "resolved"
-    }
-    asyncCall();
-  });
+    // }
+  }, [isLoading])
 
   useEffect(() => {
     //Check if sessionId from previous session is stored in the localStorage
@@ -208,7 +183,34 @@ function App() {
       //
       //
     });
+   
   }, []);
+
+  useEffect(() => {
+    axios
+    .get(url)
+    .then((response) => {
+      // handle success
+      setInventory(response)
+    })
+    // .then(()=>{
+    //   return(resolve(Inventory === !null));
+    // })
+    .catch(function (error) {
+      // handle error
+      console.log(error);
+      return (setIsFetching(false));
+    });
+  }, [url])
+
+  useEffect(() => {
+    //run if not null, this effect will run on load 
+    if (Inventory) {
+      console.log("Hey inv changed", Inventory);
+      const result2 = SortInventory()
+      console.log(result2);
+    }
+  }, [Inventory]);
 
   //ShoppingCart
   const addToCart = (itemId) => {
@@ -235,11 +237,11 @@ function App() {
   const numCartItems = () => {
     return shoppingCart.length;
   };
-  console.log(megaState);
 
   if (Inventory && megaState !== null) {
-    if (isFetching === false) {
-      console.log(megaState);
+
+    if (!isFetching) {
+      // console.log(megaState);
       // let props={,NotCollabitemsPants,CollabitemsPants}
       return (
         <div className="App">
@@ -258,7 +260,8 @@ function App() {
                         <Home
                           {...props}
                           orders={"orders"}
-                          megaState={megaState}
+                          Inventory={Inventory}
+                          // megaState={megaState}
                           removeFromCart={removeFromCart}
                           addToCart={addToCart}
                         />
@@ -286,6 +289,7 @@ function App() {
                       <Shop
                         {...props}
                         orders={"orders"}
+                        Inventory={Inventory}
                         removeFromCart={removeFromCart}
                         megaState={megaState}
                         addToCart={addToCart}
@@ -304,7 +308,7 @@ function App() {
                         Inventory={Inventory}
                         removeFromCart={removeFromCart}
                         addToCart={addToCart}
-                        Collabitems={Collabitems}
+                        // Collabitems={Collabitems}
                       />
                     </section>
                   )}

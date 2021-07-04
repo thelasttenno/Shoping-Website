@@ -1,0 +1,8 @@
+inc
+ tablet{
+     
+     @incl
+     24 des
+     padd
+     24px
+     
