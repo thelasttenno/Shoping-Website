@@ -21,7 +21,7 @@ exports.createSessionHandler = (req, res, cache) => {
   //
   //check if token is provided by request, if not, generate a new one.
   let newSessionId = "";
-  if (typeof req.body.savedSessionId !== "undefined") {
+  if (req.body.savedSessionId) {
     if (req.body.savedSessionId !== null && req.body.savedSessionId !== "") {
       //Is set by request
       newSessionId = req.body.savedSessionId;
