@@ -13,6 +13,7 @@ class SingleCollabItem extends Component {
           <h1>{this.props.Item.itemName}</h1>
           <p>{this.props.Item.description}</p>
           <p>{this.props.Item.price}</p>
+          <p>{this.props.Item.category}</p>
           <button>Buy ME</button>
           <Link to={"/Collabs"}>
             <p>Collab</p>

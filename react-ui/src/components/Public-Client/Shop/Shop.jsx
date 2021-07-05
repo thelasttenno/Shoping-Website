@@ -15,6 +15,9 @@ class Shop extends Component {
   };
   render() {
     console.log(this.props);
+    if (
+      this.props.isFetching !== true
+    ) {
     return (
       <section className="Shop">
         <div className="Shop__head">
@@ -67,7 +70,7 @@ class Shop extends Component {
             }}
             className="cards CollabitemsTShirt"
           >
-            {this.props.CollabitemsTShirt}
+            {this.props.megaState.CollabitemsTShirt}
           </div>
           <div
             style={{
@@ -76,7 +79,7 @@ class Shop extends Component {
             }}
             className="cards NotCollabitemsTShirt"
           >
-            {this.props.NotCollabitemsTShirt}
+            {this.props.megaState.NotCollabitemsTShirt}
           </div>
           <div
             style={{
@@ -85,7 +88,7 @@ class Shop extends Component {
             }}
             className="cards CollabitemsLongT"
           >
-            {this.props.CollabitemsLongT}
+            {this.props.megaState.CollabitemsLongT}
           </div>
           <div
             style={{
@@ -94,7 +97,7 @@ class Shop extends Component {
             }}
             className="cards NotCollabitemsLongT"
           >
-            {this.props.NotCollabitemsLongT}
+            {this.props.megaState.NotCollabitemsLongT}
           </div>
           <div
             style={{
@@ -103,7 +106,7 @@ class Shop extends Component {
             }}
             className="cards CollabitemsCropTop"
           >
-            {this.props.CollabitemsCropTop}
+            {this.props.megaState.CollabitemsCropTop}
           </div>
           <div
             style={{
@@ -112,7 +115,7 @@ class Shop extends Component {
             }}
             className="cards NotCollabitemsCropTop"
           >
-            {this.props.NotCollabitemsCropTop}
+            {this.props.megaState.NotCollabitemsCropTop}
           </div>
           <div
             style={{
@@ -121,7 +124,7 @@ class Shop extends Component {
             }}
             className="cards CollabitemsPants"
           >
-            {this.props.CollabitemsPants}
+            {this.props.megaState.CollabitemsPants}
           </div>
           <div
             style={{
@@ -130,7 +133,7 @@ class Shop extends Component {
             }}
             className="cards NotCollabitemsPants"
           >
-            {this.props.NotCollabitemsPants}
+            {this.props.megaState.NotCollabitemsPants}
           </div>
           <div
             style={{
@@ -139,7 +142,7 @@ class Shop extends Component {
             }}
             className="cards CollabitemsHoodies"
           >
-            {this.props.CollabitemsHoodies}
+            {this.props.megaState.CollabitemsHoodies}
           </div>
           <div
             style={{
@@ -148,11 +151,16 @@ class Shop extends Component {
             }}
             className="cards NotCollabitemsHoodies"
           >
-            {this.props.NotCollabitemsHoodies}
+            {this.props.megaState.NotCollabitemsHoodies}
           </div>
         </div>
       </section>
-    );
+    );}
+    else {
+      return (
+        <div>Loading</div>
+      );
+    }
   }
 }
 export default Shop;

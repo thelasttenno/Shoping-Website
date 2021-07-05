@@ -60,6 +60,18 @@ function App() {
       console.log(Inventory);
       let newCollab = []
       let newNotCollab = []
+      let newCollabitemsHoodies = []
+      let newNotCollabitemsHoodies = []
+      let newCollabitemsTShirt = []
+      let newNotCollabitemsTShirt = []
+      // let newCollab = []
+      // let newNotCollab = []
+      // let newCollab = []
+      // let newNotCollab = []
+      // let newCollab = []
+      // let newNotCollab = []
+      // let newCollab = []
+      // let newNotCollab = []
       Inventory.data.forEach((Item) => {
         console.log(Item);
         if (Item.collab === true) {
@@ -72,66 +84,66 @@ function App() {
       });
       setNotCollabitems(newNotCollab)
       setCollabitems(newCollab)
-      setTimeout(function(){ setIsLoading(false) }, 10000);
-      // Inventory.data.forEach((Item) => {
-      //   if (Item.category === "hoodie") {
-      //     if (Item.collab === true) {
-      //       let joined = CollabitemsHoodies.concat(
-      //         <SingleCollabItem Item={Item} />
-      //       );
-      //       return(setCollabitemsHoodies(joined));
-      //     } else {
-      //       let joined = NotCollabitemsHoodies.concat(
-      //         <SingleItem Item={Item} />
-      //       );
-      //       return(setNotCollabitemsHoodies(joined));
-      //     }
-      //   } else if (Item.category === "T-Shirt") {
-      //     if (Item.collab === true) {
-      //       let joined = CollabitemsTShirt.concat(
-      //         <SingleCollabItem Item={Item} />
-      //       );
-      //       return(setCollabitemsTShirt(joined));
-      //     } else {
-      //       let joined = NotCollabitemsTShirt.concat(
-      //         <SingleItem Item={Item} />
-      //       );
-      //       return(setNotCollabitemsTShirt(joined));
-      //     }
-      //   } else if (Item.category === "Long-T") {
-      //     if (Item.collab === true) {
-      //       let joined = CollabitemsLongT.concat(
-      //         <SingleCollabItem Item={Item} />
-      //       );
-      //       return(setCollabitemsLongT(joined));
-      //     } else {
-      //       let joined = NotCollabitemsLongT.concat(<SingleItem Item={Item} />);
-      //       return(setNotCollabitemsLongT(joined));
-      //     }
-      //   } else if (Item.category === "Crop-Top") {
-      //     if (Item.collab === true) {
-      //       let joined = CollabitemsCropTop.concat(
-      //         <SingleCollabItem Item={Item} />
-      //       );
-      //       return(setCollabitemsCropTop(joined));
-      //     } else {
-      //       let joined = NotCollabitemsCropTop.concat(
-      //         <SingleItem Item={Item} />
-      //       );
-      //       return(setNotCollabitemsCropTop(joined));
-      //     }
-      //   } else if (Item.category === "Pants") {
-      //     if (Item.collab === true) {
-      //       let joined = CollabitemsPants.concat(
-      //         <SingleCollabItem Item={Item} />
-      //       );
-      //       return(setCollabitemsPants(joined));
-      //     } else {
-      //       let joined = NotCollabitemsPants.concat(<SingleItem Item={Item} />);
-      //       return(setNotCollabitemsPants(joined));
-      //     }
-      //   }
-      // });
+      setIsLoading(false)
+      Inventory.data.forEach((Item) => {
+        if (Item.category === "hoodie") {
+          if (Item.collab === true) {
+            let joined = CollabitemsHoodies.concat(
+              <SingleCollabItem Item={Item} />
+            );
+            return(setCollabitemsHoodies(joined));
+          } else {
+            let joined = NotCollabitemsHoodies.concat(
+              <SingleItem Item={Item} />
+            );
+            return(setNotCollabitemsHoodies(joined));
+          }
+        } else if (Item.category === "T-Shirt") {
+          if (Item.collab === true) {
+            let joined = CollabitemsTShirt.concat(
+              <SingleCollabItem Item={Item} />
+            );
+            return(setCollabitemsTShirt(joined));
+          } else {
+            let joined = NotCollabitemsTShirt.concat(
+              <SingleItem Item={Item} />
+            );
+            return(setNotCollabitemsTShirt(joined));
+          }
+        } else if (Item.category === "Long-T") {
+          if (Item.collab === true) {
+            let joined = CollabitemsLongT.concat(
+              <SingleCollabItem Item={Item} />
+            );
+            return(setCollabitemsLongT(joined));
+          } else {
+            let joined = NotCollabitemsLongT.concat(<SingleItem Item={Item} />);
+            return(setNotCollabitemsLongT(joined));
+          }
+        } else if (Item.category === "Crop-Top") {
+          if (Item.collab === true) {
+            let joined = CollabitemsCropTop.concat(
+              <SingleCollabItem Item={Item} />
+            );
+            return(setCollabitemsCropTop(joined));
+          } else {
+            let joined = NotCollabitemsCropTop.concat(
+              <SingleItem Item={Item} />
+            );
+            return(setNotCollabitemsCropTop(joined));
+          }
+        } else if (Item.category === "Pants") {
+          if (Item.collab === true) {
+            let joined = CollabitemsPants.concat(
+              <SingleCollabItem Item={Item} />
+            );
+            return(setCollabitemsPants(joined));
+          } else {
+            let joined = NotCollabitemsPants.concat(<SingleItem Item={Item} />);
+            return(setNotCollabitemsPants(joined));
+          }
+        }
+      });
       resolve("resolved " + result);
     });
   }
@@ -143,7 +155,7 @@ function App() {
     console.log("did it change", isLoading, Collabitems)
     console.log("running");
       console.log(Collabitems);
-      setTimeout(function(){ console.log(Collabitems); }, 10000);
+      console.log(Collabitems)
       setMegaState({
         ...megaState,
         Inventory,
@@ -160,7 +172,7 @@ function App() {
         CollabitemsPants,
         NotCollabitemsPants,
       });
-      setTimeout(function(){ console.log(megaState); }, 10000);
+      console.log(megaState);
       setIsFetching(false);
     // }
   }, [isLoading])
@@ -293,6 +305,7 @@ function App() {
                         removeFromCart={removeFromCart}
                         megaState={megaState}
                         addToCart={addToCart}
+                        isFetching={isFetching}
                       />
                     </section>
                   )}
