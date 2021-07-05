@@ -17,7 +17,7 @@
         "status": "In Stock",
         "quantity": "1",
         "price": "a",
-        "collab": false
+        "collab": true
     },
     {
         "id": "f0b6844a-cbc8-4229-b306-428fd35b4b98",
@@ -27,7 +27,7 @@
         "status": "In Stock",
         "quantity": "34123132",
         "price": "12312",
-        "collab": false
+        "collab": true
     },
     {
         "id": "0ea3db85-c402-47dd-930f-5742d0a001a5",
@@ -37,7 +37,7 @@
         "status": "In Stock",
         "quantity": "1",
         "price": "a",
-        "collab": false
+        "collab": true
     },
     {
         "id": "84d5a60e-f678-4eff-8e40-f78b0690941e",
@@ -47,7 +47,7 @@
         "status": "In Stock",
         "quantity": "34123132",
         "price": "55.99",
-        "collab": false
+        "collab": true
     },
     {
         "id": "c45fc9d0-677b-4fec-af9e-ff59a1f0dd57",
@@ -57,7 +57,7 @@
         "status": "In Stock",
         "quantity": "123123",
         "price": "55.99",
-        "collab": false
+        "collab": true
     },
     {
         "id": "8430fe45-18a3-48b0-abba-349f59aefa70",
@@ -67,7 +67,7 @@
         "status": "In Stock",
         "quantity": "34123132",
         "price": "55.99",
-        "collab": false
+        "collab": true
     },
     {
         "id": "2053f63b-d025-4ded-bfd0-929ad88e6e3e",
@@ -77,7 +77,7 @@
         "status": "In Stock",
         "quantity": "34123132",
         "price": "55.99",
-        "collab": false
+        "collab": true
     },
     {
         "id": "082244fe-7525-4977-afbb-ab7ab2dbcfda",
@@ -87,7 +87,7 @@
         "status": "In Stock",
         "quantity": "1122312",
         "price": "55.99",
-        "collab": false
+        "collab": true
     },
     {
         "id": "a6b0ad42-e18b-47b0-8cdc-8fe0be8d2736",
@@ -97,7 +97,7 @@
         "status": "In Stock",
         "quantity": "34123132",
         "price": "55.99",
-        "collab": false
+        "collab": true
     },
     {
         "id": "87ae4836-b86d-40df-a96d-f3b2709ef652",
@@ -107,7 +107,7 @@
         "status": "In Stock",
         "quantity": "111111",
         "price": "55.99",
-        "collab": false
+        "collab": true
     },
     {
         "id": "af45a1fe-e388-472e-a69b-087fa82b318d",
@@ -117,7 +117,7 @@
         "status": "In Stock",
         "quantity": "12312312",
         "price": "55.99",
-        "collab": false
+        "collab": true
     },
     {
         "id": "5035801a-cc6e-4cc0-8ab3-554499cc668d",
@@ -127,7 +127,7 @@
         "status": "In Stock",
         "quantity": "34123132",
         "price": "55.99",
-        "collab": false
+        "collab": true
     },
     {
         "id": "940ee812-9f1c-4015-a696-602b71fef036",
@@ -137,7 +137,7 @@
         "status": "In Stock",
         "quantity": "34123132",
         "price": "55.99",
-        "collab": false
+        "collab": true
     },
     {
         "id": "8b3c9b70-a968-4929-a916-94a8cdf9d842",
@@ -147,7 +147,7 @@
         "status": "In Stock",
         "quantity": "34123132",
         "price": "55.99",
-        "collab": false
+        "collab": true
     },
     {
         "id": "e966542d-7808-421f-b8b5-b05c0cd8b5f4",
@@ -157,7 +157,7 @@
         "status": "In Stock",
         "quantity": "12313",
         "price": "55.99",
-        "collab": false
+        "collab": true
     },
     {
         "id": "f6d3cebd-4a61-439a-9065-a0af97e9a988",
@@ -167,7 +167,7 @@
         "status": "In Stock",
         "quantity": "12313",
         "price": "55.99",
-        "collab": false
+        "collab": true
     },
     {
         "id": "48ffba52-0aa4-4dd3-b414-a527287652f8",
@@ -177,7 +177,7 @@
         "status": "In Stock",
         "quantity": "111111",
         "price": "55.99",
-        "collab": false
+        "collab": true
     },
     {
         "id": "32ceac0c-f0fb-44ed-9926-e9a6f13178c5",
@@ -187,7 +187,7 @@
         "status": "In Stock",
         "quantity": "34123132",
         "price": "55.99",
-        "collab": false
+        "collab": true
     },
     {
         "id": "3c70a08c-e4d7-4ecf-8506-2ad6d2812333",
