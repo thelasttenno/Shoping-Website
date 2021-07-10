@@ -1,6 +1,6 @@
 const express = require("express");
 const app = express();
-const cors = require("cors");
+// const cors = require("cors");
 const path = require("path");
 const ordersRoutes = require("./routes/Orders");
 const InventoryRoutes = require("./routes/Inventory");
@@ -24,7 +24,7 @@ require("dotenv").config();
 app.use(express.static("files"));
 app.use(express.static(path.join(__dirname, "public")));
 app.use(express.json());
-app.use(cors());
+// app.use(cors());
 //////////////////////////////////////////////////////////////////////////////////
 const multer = require("multer");
 const { randomInt } = require("crypto");
