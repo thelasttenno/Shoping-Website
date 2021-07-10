@@ -4,7 +4,7 @@ const { v4: uuidv4 } = require("uuid");
 require("dotenv").config();
 
 function LoadInventory() {
-  const fileContent = fs.readFileSync(__dirname, "inventories.json");
+  const fileContent = fs.readFileSync("server/Data/inventories.json");
   console.log("inventory loaded to memory!")
   return JSON.parse(fileContent);
 }
@@ -13,7 +13,7 @@ function LoadInventory() {
 let loadedInventory = LoadInventory()
 
 function WriteInventory(inventory) {
-  fs.writeFileSync(__dirname, "inventories.json", JSON.stringify(inventory));
+  fs.writeFileSync("./Data/inventories.json", JSON.stringify(inventory));
   //also update loaded inventory
   loadedInventory = LoadInventory()
 }
