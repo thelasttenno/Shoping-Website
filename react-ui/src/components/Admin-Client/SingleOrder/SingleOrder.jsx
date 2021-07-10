@@ -27,7 +27,7 @@ class Singleorder extends Component {
         display: false,
     })
 
-    axios.delete('http://localhost:5000/orders/'+ this.props.order.id).then(
+    axios.delete('/orders/'+ this.props.order.id).then(
         window.location.reload()
     );
 }

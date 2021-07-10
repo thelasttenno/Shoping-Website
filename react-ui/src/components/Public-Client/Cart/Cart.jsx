@@ -96,7 +96,7 @@ class Cart extends Component {
     console.log(line_items);
 
     axios
-      .post("http://localhost:5000/payments/createSession", {
+      .post("/payments/createSession", {
         line_items: line_items,
       })
       .then((response) => {

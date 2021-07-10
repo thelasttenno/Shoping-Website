@@ -13,7 +13,7 @@ class orderDetails extends React.Component {
   componentDidMount() {
     axios
       .get(
-        `http://localhost:5000/orders/${this.props.parentProps.match.params.orderId}`
+        `/orders/${this.props.parentProps.match.params.orderId}`
       )
       .then((response) => {
         this.setState({

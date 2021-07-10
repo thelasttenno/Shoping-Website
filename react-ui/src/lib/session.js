@@ -11,7 +11,7 @@ export const getNewSession = (prevSessionId, callback) => {
   //Axios request to API
   axios({
     method: "post",
-    url: "http://localhost:5000/session/new",
+    url: "/session/new",
     data: {
       savedSessionId: prevSessionId, //Pass a saved sessionId to server, will be ignored if value blank or null
     },
@@ -63,7 +63,7 @@ export const verifySession = (callback) => {
   //Axios request to API
   axios({
     method: "post",
-    url: "http://localhost:5000/session/validate",
+    url: "/session/validate",
     data: {
       sessionToken: sessionToken,
     },
@@ -112,7 +112,7 @@ export const sessionEvent = (
   console.log(eventName, eventTriggerAriaLabel, eventTime, referer, location);
   axios({
     method: "post",
-    url: "http://localhost:5000/session/event",
+    url: "/session/event",
     data: {
       sessionToken: window.localStorage.getItem("sessionToken"),
       eventName: eventName,

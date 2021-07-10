@@ -59,7 +59,7 @@ export default Home;
 
 //       axios({
 //           method: "post",
-//           url: `http://localhost:5000/upload/${id}`,
+//           url: `/upload/${id}`,
 //           data: bodyFormData,
 //           headers: {"Content-Type": `multipart/form-data; boundary=${bodyFormData._boundary}`},
 //         })

@@ -28,7 +28,7 @@ class SingleorderInventoryItem extends Component {
             display: false,
         })
         
-        axios.delete(`http://localhost:5000/${this.props.inventory.orderID}/inventory/${this.props.inventory.id}`).then(
+        axios.delete(`/${this.props.inventory.orderID}/inventory/${this.props.inventory.id}`).then(
             window.location.reload()
             );
     }

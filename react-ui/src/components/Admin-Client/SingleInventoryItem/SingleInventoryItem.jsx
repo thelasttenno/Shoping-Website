@@ -25,7 +25,7 @@ class SingleInventoryItem extends Component {
     this.setState({
       display: false,
     });
-    axios.delete('http://localhost:5000/inventory/'+ this.props.inventory.id).then(
+    axios.delete('/inventory/'+ this.props.inventory.id).then(
       window.location.reload()
       );
       

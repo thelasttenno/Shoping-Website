@@ -13,7 +13,7 @@ class InventoryDetails extends Component {
   componentDidMount() {
     axios
       .get(
-        `http://localhost:5000/${this.props.match.params.orderId}/inventory/${this.props.match.params.inventoryId}`
+        `/${this.props.match.params.orderId}/inventory/${this.props.match.params.inventoryId}`
       )
       .then((response) => {
         this.setState({

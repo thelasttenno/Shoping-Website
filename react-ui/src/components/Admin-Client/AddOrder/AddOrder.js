@@ -73,7 +73,7 @@ export default class AddInventory extends Component {
       //POST THE NEW Inventory INFO TO OUR BACKEND
       console.log(name);
       axios
-        .post("http://localhost:5000/orders", {
+        .post("/orders", {
           id: id,
           date: date,
           name: name,

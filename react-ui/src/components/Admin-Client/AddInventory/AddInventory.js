@@ -77,7 +77,7 @@ export default class AddInventory extends Component {
       //VALIDATE THE DATA FIRST
       //POST THE NEW Inventory INFO TO OUR BACKEND
       // axios
-      //   .post("http://localhost:5000/orders/inventory", {
+      //   .post("/orders/inventory", {
       //     id: ItemId,
       //     name: name,
       //     description: description,
@@ -114,7 +114,7 @@ export default class AddInventory extends Component {
 
       axios({
         method: "post",
-        url: `http://localhost:5000/upload/pics`,
+        url: `/upload/pics`,
         data: bodyFormData,
         headers: {
           "Content-Type": `multipart/form-data; boundary=${bodyFormData._boundary}`,
@@ -126,7 +126,7 @@ export default class AddInventory extends Component {
         .then(() => {
           axios({
             method: "post",
-            url: `http://localhost:5000/upload/pics`,
+            url: `/upload/pics`,
             data: bodyFormData2,
             headers: {
               "Content-Type": `multipart/form-data; boundary=${bodyFormData2._boundary}`,
@@ -138,7 +138,7 @@ export default class AddInventory extends Component {
             .then(() => {
               axios({
                 method: "post",
-                url: `http://localhost:5000/upload/pics`,
+                url: `/upload/pics`,
                 data: bodyFormData3,
                 headers: {
                   "Content-Type": `multipart/form-data; boundary=${bodyFormData3._boundary}`,
