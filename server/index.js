@@ -1,6 +1,5 @@
 const express = require("express");
 const app = express();
-const port = process.env.PORT || 5000;
 const cors = require("cors");
 const path = require("path");
 const ordersRoutes = require("./routes/Orders");
@@ -12,6 +11,7 @@ const cluster = require("cluster");
 const numCPUs = require("os").cpus().length;
 
 const isDev = process.env.NODE_ENV !== "production";
+
 const PORT = process.env.PORT || 5000;
 
 //cache
