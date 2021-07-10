@@ -13,7 +13,7 @@ function LoadInventory() {
 let loadedInventory = LoadInventory()
 
 function WriteInventory(inventory) {
-  fs.writeFileSync("./Data/inventories.json", JSON.stringify(inventory));
+  fs.writeFileSync("server/Data/inventories.json", JSON.stringify(inventory));
   //also update loaded inventory
   loadedInventory = LoadInventory()
 }
@@ -57,7 +57,7 @@ exports.postInventoryHandeler = (req, res) => {
 
     }
     loadedInventory.unshift(newPost);
-    fs.writeFileSync("./Data/inventories.json", JSON.stringify(inventories))
+    fs.writeFileSync("server/Data/inventories.json", JSON.stringify(inventories))
     res.send(inventories)
 };
 
@@ -80,7 +80,7 @@ exports.putInventoryHandeler = (req, res) => {
     inventory.id === inventoryId ? updatedInventory : inventory
   );
   fs.writeFileSync(
-    "./Data/inventories.json",
+    "server/Data/inventories.json",
     JSON.stringify(updatedInventoriesData)
   );
   res.send(updatedInventoriesData);
@@ -95,7 +95,7 @@ exports.deleteInventoryHandeler = (req, res) => {
   WriteInventory(newInventory);
 
   fs.writeFileSync(
-      "./Data/inventories.json",
+      "server/Data/inventories.json",
       JSON.stringify(updatedFullInventoryData)
   );
   res.send(updatedFullInventoryData);
