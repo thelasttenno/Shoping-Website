@@ -20,8 +20,8 @@ function Header(props) {
   //
   const location = useLocation();
   return (
-    <header class="header">
-      <nav class="nav">
+    <header className="header">
+      <nav className="nav">
         <div className="nav--content">
           <Link
             className="link"
@@ -30,7 +30,7 @@ function Header(props) {
           >
             <img src={Logo} className="nav-logo" alt="" />
           </Link>
-          <ul class="nav-menu">
+          <ul className="nav-menu">
             <li>
               <Link
                 to={"/"}

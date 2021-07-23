@@ -2,10 +2,10 @@ import React from "react";
 import "./Collabs.scss"
 function Collabs() {
   return (
-    <section class="Collabs">
-      <div class="Collabs__head"></div>
-      <div class="Collabs__header">
-        <h2 class="Collabs__title">Collabs</h2>
+    <section className="Collabs">
+      <div className="Collabs__head"></div>
+      <div className="Collabs__header">
+        <h2 className="Collabs__title">Collabs</h2>
         <div>
           
         </div>

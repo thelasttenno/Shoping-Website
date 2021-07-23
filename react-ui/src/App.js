@@ -53,7 +53,7 @@ function App() {
   const [message, setMessage] = useState(null);
   const [isFetching, setIsFetching] = useState(false);
   const [isLoading, setIsLoading] = useState(true)
-  const [url, setUrl] = useState("/inventory");
+  const [url, setUrl] = useState("http://localhost:5000/inventory");
 
   function SortInventory(result) {
     return new Promise((resolve) => {

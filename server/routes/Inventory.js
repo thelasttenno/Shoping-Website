@@ -4,7 +4,9 @@ const { v4: uuidv4 } = require("uuid");
 require("dotenv").config();
 
 function LoadInventory() {
-  const fileContent = fs.readFileSync("server/Data/inventories.json");
+  // const fileContent = fs.readFileSync("server/Data/inventories.json");
+  const fileContent = fs.readFileSync("Data/inventories.json");
+
   console.log("inventory loaded to memory!")
   return JSON.parse(fileContent);
 }
@@ -13,7 +15,9 @@ function LoadInventory() {
 let loadedInventory = LoadInventory()
 
 function WriteInventory(inventory) {
-  fs.writeFileSync("server/Data/inventories.json", JSON.stringify(inventory));
+  // fs.writeFileSync("server/Data/inventories.json", JSON.stringify(inventory));
+  fs.writeFileSync("Data/inventories.json", JSON.stringify(inventory));
+
   //also update loaded inventory
   loadedInventory = LoadInventory()
 }
@@ -57,7 +61,9 @@ exports.postInventoryHandeler = (req, res) => {
 
     }
     loadedInventory.unshift(newPost);
-    fs.writeFileSync("server/Data/inventories.json", JSON.stringify(inventories))
+    // fs.writeFileSync("server/Data/inventories.json", JSON.stringify(inventories))
+    fs.writeFileSync("Data/inventories.json", JSON.stringify(inventories))
+
     res.send(inventories)
 };
 
@@ -79,10 +85,8 @@ exports.putInventoryHandeler = (req, res) => {
   let updatedInventoriesData = inventories.map((inventory) =>
     inventory.id === inventoryId ? updatedInventory : inventory
   );
-  fs.writeFileSync(
-    "server/Data/inventories.json",
-    JSON.stringify(updatedInventoriesData)
-  );
+  // fs.writeFileSync("server/Data/inventories.json", JSON.stringify(updatedInventoriesData));
+  fs.writeFileSync("Data/inventories.json", JSON.stringify(updatedInventoriesData));
   res.send(updatedInventoriesData);
 };
 
@@ -94,9 +98,7 @@ exports.deleteInventoryHandeler = (req, res) => {
 
   WriteInventory(newInventory);
 
-  fs.writeFileSync(
-      "server/Data/inventories.json",
-      JSON.stringify(updatedFullInventoryData)
-  );
+  // fs.writeFileSync("server/Data/inventories.json", JSON.stringify(updatedFullInventoryData));
+  fs.writeFileSync("Data/inventories.json", JSON.stringify(updatedFullInventoryData));
   res.send(updatedFullInventoryData);
 };

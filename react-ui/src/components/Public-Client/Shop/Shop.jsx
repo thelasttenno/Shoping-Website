@@ -4,7 +4,7 @@ import SingleItem from "../SingleItem/SingleItem";
 import SingleCollabItem from "../SingleCollabItem/SingleCollabItem";
 class Shop extends Component {
   state = {
-    status: null,
+    status: "All Items",
   };
   updateStatus = (e) => {
     const { value } = e.target;
@@ -22,7 +22,7 @@ class Shop extends Component {
       <section className="Shop">
         <div className="Shop__head">
           <div className="hero-content">
-            {/* <!-- <h1 class="hero-content__title">50% off all Tee shirts with a purches of any item!</h1> --> */}
+            {/* <!-- <h1 className="hero-content__title">50% off all Tee shirts with a purches of any item!</h1> --> */}
           </div>
         </div>
         <div>
@@ -33,7 +33,7 @@ class Shop extends Component {
             placeholder="Please select"
             onChange={this.updateStatus}
           >
-            <option value="all">Please Select</option>
+            <option value="All Items">Please Select</option>
             <option value="Colabs">Colabs</option>
             <option value="T-Shirt">T-Shirt</option>
             <option value="Hoodies">Hoodies</option>
@@ -43,7 +43,7 @@ class Shop extends Component {
           </select>
         </div>
         <div className="Shop__header">
-          <h2 className="Shop__title">All Products</h2>
+          <h2 className="Shop__title">{this.state.status}</h2>
           <div
             style={{
               display:
