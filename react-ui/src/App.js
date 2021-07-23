@@ -27,17 +27,10 @@ import SingleCollabItem from "./components/Public-Client/SingleCollabItem/Single
 import SingleItem from "./components/Public-Client/SingleItem/SingleItem";
 import { useWillMount } from "./lib/useWillMount";
 function App() {
-  //Setup session
-
   //Shopping cart state
   let [shoppingCart, setShoppingCart] = useState([]);
-  //session state
-  let [sessionState, setSessionState] = useState(null);
 
-  // let [invReady, setInvReady] = useState(false)
-
-  let [itemMap, setItemMap] = useState([]);
-
+  //MegaState
   let [Inventory, setInventory] = useState(null);
   let [Collabitems, setCollabitems] = useState([]);
   let [NotCollabitems, setNotCollabitems] = useState([]);
@@ -57,23 +50,25 @@ function App() {
   const [isLoading, setIsLoading] = useState(true);
   const [url, setUrl] = useState("http://localhost:5000/inventory");
 
+  let [sessionState, setSessionState] = useState(null);
+
   function SortInventory(result) {
     return new Promise((resolve) => {
       console.log(Inventory);
       let newCollab = [];
       let newNotCollab = [];
-      let newCollabitemsHoodies = [];
-      let newNotCollabitemsHoodies = [];
-      let newCollabitemsTShirt = [];
-      let newNotCollabitemsTShirt = [];
-      // let newCollab = []
-      // let newNotCollab = []
-      // let newCollab = []
-      // let newNotCollab = []
-      // let newCollab = []
-      // let newNotCollab = []
-      // let newCollab = []
-      // let newNotCollab = []
+      // let newCollabitemsHoodies = [];
+      // let newNotCollabitemsHoodies = [];
+      // let newCollabitemsTShirt = [];
+      // let newNotCollabitemsTShirt = [];
+      // // let newCollab = []
+      // // let newNotCollab = []
+      // // let newCollab = []
+      // // let newNotCollab = []
+      // // let newCollab = []
+      // // let newNotCollab = []
+      // // let newCollab = []
+      // // let newNotCollab = []
       Inventory.data.forEach((Item) => {
         if (Item.collab === true) {
           newCollab.push(Item);
@@ -132,11 +127,6 @@ function App() {
   }
 
   useEffect(() => {
-    // if (NotCollabitems > 0 && Collabitems > 0) {
-    console.log("did it change", isLoading, Collabitems);
-    console.log("running");
-    console.log(Collabitems);
-    console.log(Collabitems);
     setMegaState({
       ...megaState,
       Inventory,
@@ -204,36 +194,38 @@ function App() {
     }
   }, [Inventory]);
 
-  //ShoppingCart
-  const addToCart = (itemId) => {
-    setShoppingCart(shoppingCart.concat([itemId]));
+  // #### Shopping Cart
+
+  //Append item to global cart
+  const addToCart = (Item) => {
+    setShoppingCart(shoppingCart.concat([Item]));
     return;
   };
 
+  //Debug
   useEffect(() => {
-    console.log(shoppingCart);
+    console.log("cart_mutation: ", shoppingCart);
   }, [shoppingCart]);
 
-  const removeFromCart = (itemId) => {
-    let tempCart = shoppingCart;
-    setShoppingCart([]);
+  //Remove item from global cart
+  const removeFromCart = (Item) => {
+    let newCart = [];
     //
-    tempCart.forEach((element) => {
-      if (element !== itemId) {
-        addToCart(itemId);
+    shoppingCart.forEach((element) => {
+      if (element && element.id !== Item.id) {
+        newCart.push(element);
       }
     });
+    setShoppingCart(newCart);
     return;
   };
 
-  const cartHasItem = (itemId) => {
-    return shoppingCart.includes(itemId);
-  };
-
+  //Return number of items in cart
   const numCartItems = () => {
     return shoppingCart.length;
   };
 
+  //Render
   if (Inventory && megaState !== null) {
     if (!isFetching) {
       // console.log(megaState);
@@ -320,6 +312,7 @@ function App() {
                         orders={"orders"}
                         removeFromCart={removeFromCart}
                         addToCart={addToCart}
+                        shoppingCart={shoppingCart}
                       />
                     </section>
                   )}
