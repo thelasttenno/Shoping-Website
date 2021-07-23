@@ -235,6 +235,8 @@ function App() {
           <BrowserRouter>
             <Router className="App">
               <Switch>
+                <Redirect from="/success" to="/" />
+                <Redirect from="/cancel" to="/" />
                 <Redirect from="/home" to="/" />
                 <Route
                   path="/"

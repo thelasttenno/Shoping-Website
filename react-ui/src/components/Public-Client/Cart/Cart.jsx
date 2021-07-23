@@ -212,6 +212,48 @@ export default function Cart(props) {
   //     });
   // }
 
+  const createStripeCheckoutSession = (cart) => {
+    // axios
+    //   .post("http://localhost:5000/payments/createSession", {
+    //     firstName: "Fred",
+    //     lastName: "Flintstone",
+    //   })
+    //   .then((response) => {
+    //     // handle success
+    //     console.log(response);
+    //     console.log(response.data.url);
+    //   })
+    //   .catch((err) => {
+    //     // handle error
+    //     console.log(err);
+    //   });
+    //Configure cart to be sent to server
+    if (cart.length !== 0) {
+      axios({
+        method: "post",
+        url: "http://localhost:5000/payments/createSession",
+        headers: {
+          // "Content-Type": "application/json; charset=UTF-8",
+        },
+        params: { shoppingCart: cart },
+      })
+        .then((response) => {
+          // handle success
+          console.log(response);
+          console.log(response.data.url);
+          if (response.data.url) {
+            // window.location.assign(response.data.url);
+          }
+        })
+        .catch((err) => {
+          // handle error
+          console.log(err);
+        });
+    } else {
+      console.log("EMPTY CART");
+    }
+  };
+
   return (
     <section className="Cart">
       <div className="Cart__head"></div>
@@ -227,23 +269,20 @@ export default function Cart(props) {
               </div>
             </div>
           ))}
-
-        <Link
-          to={async () => {
-            let checkouturl = "";
-            // await this.getStripeCheckoutUrl((url, err) => {
-            //   if (err) {
-            //     checkouturl = "";
-            //   } else {
-            //     checkouturl = url;
-            //   }
-            // });
-            return checkouturl;
+        <div
+          style={{
+            visibility: props.shoppingCart.length !== 0 ? undefined : "hidden",
           }}
-          className=""
         >
-          CHECKOUT
-        </Link>
+          <button
+            onClick={() => {
+              createStripeCheckoutSession(props.shoppingCart);
+            }}
+            className=""
+          >
+            CHECKOUT
+          </button>
+        </div>
       </div>
     </section>
   );
