@@ -36,6 +36,8 @@ function App() {
 
   // let [invReady, setInvReady] = useState(false)
 
+  let [itemMap, setItemMap] = useState([]);
+
   let [Inventory, setInventory] = useState(null);
   let [Collabitems, setCollabitems] = useState([]);
   let [NotCollabitems, setNotCollabitems] = useState([]);
@@ -52,18 +54,18 @@ function App() {
   let [megaState, setMegaState] = useState(null);
   const [message, setMessage] = useState(null);
   const [isFetching, setIsFetching] = useState(false);
-  const [isLoading, setIsLoading] = useState(true)
+  const [isLoading, setIsLoading] = useState(true);
   const [url, setUrl] = useState("http://localhost:5000/inventory");
 
   function SortInventory(result) {
     return new Promise((resolve) => {
       console.log(Inventory);
-      let newCollab = []
-      let newNotCollab = []
-      let newCollabitemsHoodies = []
-      let newNotCollabitemsHoodies = []
-      let newCollabitemsTShirt = []
-      let newNotCollabitemsTShirt = []
+      let newCollab = [];
+      let newNotCollab = [];
+      let newCollabitemsHoodies = [];
+      let newNotCollabitemsHoodies = [];
+      let newCollabitemsTShirt = [];
+      let newNotCollabitemsTShirt = [];
       // let newCollab = []
       // let newNotCollab = []
       // let newCollab = []
@@ -73,74 +75,55 @@ function App() {
       // let newCollab = []
       // let newNotCollab = []
       Inventory.data.forEach((Item) => {
-        console.log(Item);
         if (Item.collab === true) {
-          console.log("I FOUND A FUCKING ITEM HAHA")
-          newCollab.push(<SingleCollabItem Item={Item} />);
+          newCollab.push(Item);
         } else {
-          console.log("I FOUND A FUCKING not collab ITEM HAHA")
-          newNotCollab.push(<SingleItem Item={Item} />);
+          newNotCollab.push(Item);
         }
       });
-      setNotCollabitems(newNotCollab)
-      setCollabitems(newCollab)
-      setIsLoading(false)
+      setNotCollabitems(newNotCollab);
+      setCollabitems(newCollab);
+      setIsLoading(false);
       Inventory.data.forEach((Item) => {
         if (Item.category === "hoodie") {
           if (Item.collab === true) {
-            let joined = CollabitemsHoodies.concat(
-              <SingleCollabItem Item={Item} />
-            );
-            return(setCollabitemsHoodies(joined));
+            let joined = CollabitemsHoodies.concat(Item);
+            return setCollabitemsHoodies(joined);
           } else {
-            let joined = NotCollabitemsHoodies.concat(
-              <SingleItem Item={Item} />
-            );
-            return(setNotCollabitemsHoodies(joined));
+            let joined = NotCollabitemsHoodies.concat(Item);
+            return setNotCollabitemsHoodies(joined);
           }
         } else if (Item.category === "T-Shirt") {
           if (Item.collab === true) {
-            let joined = CollabitemsTShirt.concat(
-              <SingleCollabItem Item={Item} />
-            );
-            return(setCollabitemsTShirt(joined));
+            let joined = CollabitemsTShirt.concat(Item);
+            return setCollabitemsTShirt(joined);
           } else {
-            let joined = NotCollabitemsTShirt.concat(
-              <SingleItem Item={Item} />
-            );
-            return(setNotCollabitemsTShirt(joined));
+            let joined = NotCollabitemsTShirt.concat(Item);
+            return setNotCollabitemsTShirt(joined);
           }
         } else if (Item.category === "Long-T") {
           if (Item.collab === true) {
-            let joined = CollabitemsLongT.concat(
-              <SingleCollabItem Item={Item} />
-            );
-            return(setCollabitemsLongT(joined));
+            let joined = CollabitemsLongT.concat(Item);
+            return setCollabitemsLongT(joined);
           } else {
-            let joined = NotCollabitemsLongT.concat(<SingleItem Item={Item} />);
-            return(setNotCollabitemsLongT(joined));
+            let joined = NotCollabitemsLongT.concat(Item);
+            return setNotCollabitemsLongT(joined);
           }
         } else if (Item.category === "Crop-Top") {
           if (Item.collab === true) {
-            let joined = CollabitemsCropTop.concat(
-              <SingleCollabItem Item={Item} />
-            );
-            return(setCollabitemsCropTop(joined));
+            let joined = CollabitemsCropTop.concat(Item);
+            return setCollabitemsCropTop(joined);
           } else {
-            let joined = NotCollabitemsCropTop.concat(
-              <SingleItem Item={Item} />
-            );
-            return(setNotCollabitemsCropTop(joined));
+            let joined = NotCollabitemsCropTop.concat(Item);
+            return setNotCollabitemsCropTop(joined);
           }
         } else if (Item.category === "Pants") {
           if (Item.collab === true) {
-            let joined = CollabitemsPants.concat(
-              <SingleCollabItem Item={Item} />
-            );
-            return(setCollabitemsPants(joined));
+            let joined = CollabitemsPants.concat(Item);
+            return setCollabitemsPants(joined);
           } else {
-            let joined = NotCollabitemsPants.concat(<SingleItem Item={Item} />);
-            return(setNotCollabitemsPants(joined));
+            let joined = NotCollabitemsPants.concat(Item);
+            return setNotCollabitemsPants(joined);
           }
         }
       });
@@ -148,34 +131,32 @@ function App() {
     });
   }
 
- 
-
-  useEffect(()=>{
+  useEffect(() => {
     // if (NotCollabitems > 0 && Collabitems > 0) {
-    console.log("did it change", isLoading, Collabitems)
+    console.log("did it change", isLoading, Collabitems);
     console.log("running");
-      console.log(Collabitems);
-      console.log(Collabitems)
-      setMegaState({
-        ...megaState,
-        Inventory,
-        Collabitems,
-        NotCollabitems,
-        CollabitemsHoodies,
-        NotCollabitemsHoodies,
-        CollabitemsTShirt,
-        NotCollabitemsTShirt,
-        CollabitemsCropTop,
-        NotCollabitemsCropTop,
-        CollabitemsLongT,
-        NotCollabitemsLongT,
-        CollabitemsPants,
-        NotCollabitemsPants,
-      });
-      console.log(megaState);
-      setIsFetching(false);
+    console.log(Collabitems);
+    console.log(Collabitems);
+    setMegaState({
+      ...megaState,
+      Inventory,
+      Collabitems,
+      NotCollabitems,
+      CollabitemsHoodies,
+      NotCollabitemsHoodies,
+      CollabitemsTShirt,
+      NotCollabitemsTShirt,
+      CollabitemsCropTop,
+      NotCollabitemsCropTop,
+      CollabitemsLongT,
+      NotCollabitemsLongT,
+      CollabitemsPants,
+      NotCollabitemsPants,
+    });
+    console.log(megaState);
+    setIsFetching(false);
     // }
-  }, [isLoading])
+  }, [isLoading]);
 
   useEffect(() => {
     //Check if sessionId from previous session is stored in the localStorage
@@ -195,31 +176,30 @@ function App() {
       //
       //
     });
-   
   }, []);
 
   useEffect(() => {
     axios
-    .get(url)
-    .then((response) => {
-      // handle success
-      setInventory(response)
-    })
-    // .then(()=>{
-    //   return(resolve(Inventory === !null));
-    // })
-    .catch(function (error) {
-      // handle error
-      console.log(error);
-      return (setIsFetching(false));
-    });
-  }, [url])
+      .get(url)
+      .then((response) => {
+        // handle success
+        setInventory(response);
+      })
+      // .then(()=>{
+      //   return(resolve(Inventory === !null));
+      // })
+      .catch(function (error) {
+        // handle error
+        console.log(error);
+        return setIsFetching(false);
+      });
+  }, [url]);
 
   useEffect(() => {
-    //run if not null, this effect will run on load 
+    //run if not null, this effect will run on load
     if (Inventory) {
       console.log("Hey inv changed", Inventory);
-      const result2 = SortInventory()
+      const result2 = SortInventory();
       console.log(result2);
     }
   }, [Inventory]);
@@ -229,6 +209,10 @@ function App() {
     setShoppingCart(shoppingCart.concat([itemId]));
     return;
   };
+
+  useEffect(() => {
+    console.log(shoppingCart);
+  }, [shoppingCart]);
 
   const removeFromCart = (itemId) => {
     let tempCart = shoppingCart;
@@ -251,7 +235,6 @@ function App() {
   };
 
   if (Inventory && megaState !== null) {
-
     if (!isFetching) {
       // console.log(megaState);
       // let props={,NotCollabitemsPants,CollabitemsPants}
@@ -305,6 +288,7 @@ function App() {
                         removeFromCart={removeFromCart}
                         megaState={megaState}
                         addToCart={addToCart}
+                        shoppingCart={shoppingCart}
                         isFetching={isFetching}
                       />
                     </section>

@@ -24,12 +24,12 @@ class Home extends Component {
         <div className="Home__header">
           <h2 className="Home__title">New Products</h2>
 
-          <div className="cards">
+          {/* <div className="cards">
             {this.props.megaState.Inventory.data.slice(0, size).map((Item) => {
               console.log(Item);
               return <SingleItem {...this.props} Item={Item}/>;
             })}
-          </div>
+          </div> */}
           <div className="cards"></div>
         </div>
       </section>
