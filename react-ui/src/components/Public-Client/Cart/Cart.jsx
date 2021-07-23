@@ -242,7 +242,7 @@ export default function Cart(props) {
           console.log(response);
           console.log(response.data.url);
           if (response.data.url) {
-            // window.location.assign(response.data.url);
+            window.location.assign(response.data.url);
           }
         })
         .catch((err) => {
