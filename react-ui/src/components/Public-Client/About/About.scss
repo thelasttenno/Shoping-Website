@@ -12,16 +12,7 @@
     top: -5.8rem;
     margin: 0 2rem;
   }
-  &__header {
-    @include divider;
-    padding: 2rem 1.5rem;
-    @include tablet {
-      @include flex-row;
-      justify-content: space-between;
-      border: none;
-    }
-  }
-
+  
   &__title {
     @include h1-page-header;
   }
@@ -34,7 +25,11 @@
     padding-top: 2rem;
     padding-bottom: 1rem;
     border-bottom: 1px solid $cloud;
+    height: 400px;
     background-image: url("../../../assets/photos/Photoshoot/4_inarow.JPG");
+    background-position: 0px -100px;
+    background-repeat: no-repeat;
+    background-size: cover;
     @include tablet {
       flex-direction: row;
       justify-content: space-between;
@@ -92,12 +87,16 @@
     }
   }
   &__header {
+    @include divider;
+    padding: 2rem 1.5rem;
     display: none;
     @include tablet {
       @include flex-row;
       justify-content: space-between;
       padding: 1rem 2rem;
       background-color: $light-grey;
+      border: none;
+
     }
     &-single {
       @include flex-row;
