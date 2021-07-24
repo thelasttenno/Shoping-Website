@@ -53,9 +53,9 @@ export default class AddInventory extends Component {
     const price = e.target.price.value;
     const collab = e.target.collab.value;
     const ImgName = {
-      1: e.target.name2.value,
-      2: e.target.name3.value,
-      3: e.target.name4.value,
+      1: e.target.name.value,
+      2: e.target.name2.value,
+      3: e.target.name3.value,
     };
 
     //VALIDATE THE DATA FIRST
@@ -129,21 +129,39 @@ export default class AddInventory extends Component {
 /// Expanded post Version photo Upload works but not form data ///
 
       // axios
-      //   // .post("http://localhost:5000/inventory", {
-      //   //   id: ItemId,
-      //   //   name: name,
-      //   //   description: description,
-      //   //   category: category,
-      //   //   size: size,
-      //   //   status: status,
-      //   //   quantity: quantity,
-      //   //   price: price,
-      //   //   collab: collab,
-      //   // })
-      //   .then((res) => {
-      //     console.log(res);
+      //   .post("http://localhost:5000/inventory", {
+      //     id: ItemId,
+      //     name: name,
+      //     description: description,
+      //     category: category,
+      //     size: size,
+      //     status: status,
+      //     quantity: quantity,
+      //     price: price,
+      //     collab: collab,
       //   })
-      //   // .then(() => {
+      axios({
+        method: "post",
+        url: "http://localhost:5000/inventory",
+        headers: {
+          // "Content-Type": "application/json; charset=UTF-8",
+        },
+        params:{
+              id: ItemId,
+              name: name,
+              description: description,
+              category: category,
+              size: size,
+              status: status,
+              quantity: quantity,
+              price: price,
+              collab: collab,
+            },
+      })
+        .then((res) => {
+          console.log(res);
+        })
+        .then(() => {
           //POST THE NEW Inventory INFO TO OUR BACKEND
           let id = ItemId;
           var bodyFormData = new FormData();
@@ -153,10 +171,8 @@ export default class AddInventory extends Component {
           bodyFormData.append("id", id);
           var imagefile2 = document.querySelector("#file2");
           bodyFormData.append("image2", imagefile2.files[0]);
-          bodyFormData.append("id2", id);
           var imagefile3 = document.querySelector("#file3");
           bodyFormData.append("image3", imagefile3.files[0]);
-          bodyFormData.append("id3", id);
 
           axios({
             method: "post",
@@ -173,10 +189,10 @@ export default class AddInventory extends Component {
             .catch((err) => {
               console.log("There is something wrong..", err);
             });
-        // })
-      //   .catch((err) => {
-      //     console.log("There is something FUCKED..", err);
-      //   });
+        })
+        .catch((err) => {
+          console.log("There is something FUCKED..", err);
+        });
 
       this.setState({ nameError: false });
       this.setState({ descriptionError: false });

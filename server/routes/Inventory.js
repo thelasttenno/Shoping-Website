@@ -49,23 +49,26 @@ exports.getSingleItemHandeler = (req, res) => {
 };
 exports.postInventoryHandeler = (req, res) => {
   // const inventories = ReadInventory();
+  console.log(req.query);
   console.log(req.body);
+  console.log(req.params);
     const newPost = {
-      id: req.body.id,
-      itemName : req.body.name,
-      description: req.body.description,
-      category: req.body.category,
-      status: req.body.status,
-      quantity:req.body.quantity,
-      price: req.body.price,
-      collab: req.body.collab
+      id: req.query.id,
+      itemName : req.query.name,
+      description: req.query.description,
+      category: req.query.category,
+      status: req.query.status,
+      quantity:req.query.quantity,
+      price: req.query.price,
+      collab: req.query.collab
 
     }
     loadedInventory.unshift(newPost);
-    // fs.writeFileSync("server/Data/inventories.json", JSON.stringify(inventories))
-    fs.writeFileSync("Data/inventories.json", JSON.stringify(inventories))
 
-    res.send(inventories)
+    // fs.writeFileSync("server/Data/inventories.json", JSON.stringify(inventories))
+    fs.writeFileSync("Data/inventories.json", JSON.stringify(loadedInventory))
+
+    res.send(loadedInventory)
 };
 
 // inventory put req handler:
