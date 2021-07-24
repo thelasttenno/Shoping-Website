@@ -53,9 +53,9 @@ export default class AddInventory extends Component {
     const price = e.target.price.value;
     const collab = e.target.collab.value;
     const ImgName = {
-      1: e.target.name.value,
-      2: e.target.name2.value,
-      3: e.target.name3.value,
+      1: e.target.name2.value,
+      2: e.target.name3.value,
+      3: e.target.name4.value,
     };
 
     //VALIDATE THE DATA FIRST
@@ -68,100 +68,115 @@ export default class AddInventory extends Component {
       status &&
       quantity &&
       price &&
-      collab &&
-      ImgName
+      collab
     ) {
       //POST THE NEW Inventory INFO TO OUR BACKEND
       console.log(ImgName);
       console.log(ItemId);
       //VALIDATE THE DATA FIRST
       //POST THE NEW Inventory INFO TO OUR BACKEND
+
+/// COMPACT POST VERSION NOTHING WORKS ////
+
+      // let postData = {
+      //   id: ItemId,
+      //   name: name,
+      //   description: description,
+      //   category: category,
+      //   size: size,
+      //   status: status,
+      //   quantity: quantity,
+      //   price: price,
+      //   collab: collab,
+      // };
+      // let id = ItemId;
+      // var bodyFormData = new FormData();
+      // var imagefile = document.querySelector("#file");
+      // console.log(imagefile);
+      // bodyFormData.append("image", imagefile.files[0]);
+      // bodyFormData.append("id", id);
+      // var imagefile2 = document.querySelector("#file2");
+      // bodyFormData.append("image2", imagefile2.files[0]);
+      // bodyFormData.append("id2", id);
+      // var imagefile3 = document.querySelector("#file3");
+      // bodyFormData.append("image3", imagefile3.files[0]);
+      // bodyFormData.append("id3", id);
+      // console.log(bodyFormData.image);
+      // setTimeout(() => {
+      //   function getUserAccount() {
+      //     return axios.post("http://localhost:5000/inventory", {postData});
+      //   }
+      //   function getUserPermissions() {
+      //     return axios.post(
+      //       `http://localhost:5000/upload/pics`,
+      //       { data: bodyFormData },
+      //       {
+      //         "Content-Type": `multipart/form-data; boundary=${bodyFormData._boundary}`,
+      //       }
+      //     );
+      //   }
+
+      //   Promise.all([getUserAccount(), getUserPermissions()]).then(function (
+      //     results
+      //   ) {
+      //     const acct = results[0];
+      //     console.log(acct);
+      //     const perm = results[1];
+      //     console.log(perm);
+      //   });
+      // }, 10000);
+
+/// Expanded post Version photo Upload works but not form data ///
+
       // axios
-      //   .post("/orders/inventory", {
-      //     id: ItemId,
-      //     name: name,
-      //     description: description,
-      //     category: category,
-      //     size: size,
-      //     status: status,
-      //     quantity: quantity,
-      //     price: price,
-      //     collab: collab,
-      //   })
+      //   // .post("http://localhost:5000/inventory", {
+      //   //   id: ItemId,
+      //   //   name: name,
+      //   //   description: description,
+      //   //   category: category,
+      //   //   size: size,
+      //   //   status: status,
+      //   //   quantity: quantity,
+      //   //   price: price,
+      //   //   collab: collab,
+      //   // })
       //   .then((res) => {
       //     console.log(res);
       //   })
-      //   .then(() => {
+      //   // .then(() => {
+          //POST THE NEW Inventory INFO TO OUR BACKEND
+          let id = ItemId;
+          var bodyFormData = new FormData();
+          var imagefile = document.querySelector("#file");
+          console.log(imagefile);
+          bodyFormData.append("image", imagefile.files[0]);
+          bodyFormData.append("id", id);
+          var imagefile2 = document.querySelector("#file2");
+          bodyFormData.append("image2", imagefile2.files[0]);
+          bodyFormData.append("id2", id);
+          var imagefile3 = document.querySelector("#file3");
+          bodyFormData.append("image3", imagefile3.files[0]);
+          bodyFormData.append("id3", id);
 
-      //POST THE NEW Inventory INFO TO OUR BACKEND
-      let id = uuidv4();
-      var bodyFormData = new FormData();
-      var imagefile = document.querySelector("#file");
-      console.log(imagefile);
-      bodyFormData.append("image", imagefile.files[0]);
-      bodyFormData.append("id", id);
-      bodyFormData.append("name2", ImgName);
-      var bodyFormData2 = new FormData();
-      var imagefile2 = document.querySelector("#file2");
-      bodyFormData.append("image2", imagefile2.files[0]);
-      bodyFormData.append("id2", id);
-      bodyFormData.append("name2", ImgName);
-      var bodyFormData3 = new FormData();
-      var imagefile3 = document.querySelector("#file3");
-      bodyFormData.append("image3", imagefile3.files[0]);
-      bodyFormData.append("id3", id);
-      bodyFormData.append("name3", ImgName);
-
-      axios({
-        method: "post",
-        url: `/upload/pics`,
-        data: bodyFormData,
-        headers: {
-          "Content-Type": `multipart/form-data; boundary=${bodyFormData._boundary}`,
-        },
-      })
-        .then((res) => {
-          console.log(res);
-        })
-        .then(() => {
           axios({
             method: "post",
-            url: `/upload/pics`,
-            data: bodyFormData2,
+            // url: `/upload/pics`,
+            url: `http://localhost:5000/upload/pics`,
+            data: bodyFormData,
             headers: {
-              "Content-Type": `multipart/form-data; boundary=${bodyFormData2._boundary}`,
+              "Content-Type": `multipart/form-data; boundary=${bodyFormData._boundary}`,
             },
           })
             .then((res) => {
               console.log(res);
             })
-            .then(() => {
-              axios({
-                method: "post",
-                url: `/upload/pics`,
-                data: bodyFormData3,
-                headers: {
-                  "Content-Type": `multipart/form-data; boundary=${bodyFormData3._boundary}`,
-                },
-              })
-                .then((res) => {
-                  console.log(res);
-                })
-                .catch((err) => {
-                  console.log("There is something wrong..", err);
-                });
-            })
             .catch((err) => {
               console.log("There is something wrong..", err);
             });
-        })
-        .catch((err) => {
-          console.log("There is something wrong..", err);
-        });
-      // })
-      // .catch((err) => {
-      //   console.log("There is something FUCKED..", err);
-      // });
+        // })
+      //   .catch((err) => {
+      //     console.log("There is something FUCKED..", err);
+      //   });
 
       this.setState({ nameError: false });
       this.setState({ descriptionError: false });

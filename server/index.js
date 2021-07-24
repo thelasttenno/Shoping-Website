@@ -9,7 +9,6 @@ const SessionRoutes = require("./routes/Session");
 const session = require("./lib/session");
 const cluster = require("cluster");
 const numCPUs = require("os").cpus().length;
-
 const isDev = process.env.NODE_ENV !== "production";
 
 const PORT = process.env.PORT || 5000;
@@ -57,34 +56,64 @@ if (!isDev && cluster.isMaster) {
     "/upload/pics",
     upload.any(/* name attribute of <file> element in your form */),
     (req, res) => {
+      var multiparty = require("multiparty");
+      var form = new multiparty.Form();
       console.log(req.files[0]);
-
+      console.log(req.files[1]);
+      console.log(req.files[2]);
       const obj = JSON.parse(JSON.stringify(req.body)); // req.body = [Object: null prototype] { title: 'product' }
-
       console.log(obj);
-      const tempPath = req.files[0].path;
-      const targetPath = path.join(
-        __dirname,
-        //NEED TO MAKE IT SAVE IN PROPER FOLDER
-        `./upload/${req.files[0].originalname}.png`
-      );
 
-      if (path.extname(req.files[0].originalname).toLowerCase() === ".png") {
-        fs.rename(tempPath, targetPath, (err) => {
-          if (err) return handleError(err, res);
+      form.parse(req, function (err, fields, files) {
+        console.log(fields);
+        console.log(files);
+        console.log(req.files);
+        var imgArray = req.files;
 
-          res.status(200).contentType("text/plain").end("File uploaded!");
-        });
-      } else {
-        fs.unlink(tempPath, (err) => {
-          if (err) return handleError(err, res);
+        for (var i = 0; i < imgArray.length; i++) {
+          var singleImg = imgArray[i];
+          var newPath = "./uploads/" + obj.id + "/";
+          if (!fs.existsSync(newPath)) {
+            fs.mkdirSync(newPath);
+          }
+          newPath += "img" + i +".png";
+          readAndWriteFile(singleImg, newPath);
+        }
+        res.send("File uploaded to: " + newPath);
+      });
 
-          res
-            .status(403)
-            .contentType("text/plain")
-            .end("Only .png files are allowed!");
+      function readAndWriteFile(singleImg, newPath) {
+        fs.readFile(singleImg.path, function (err, data) {
+          fs.writeFile(newPath, data, function (err) {
+            if (err) console.log("ERRRRRR!! :" + err);
+            console.log("Fitxer: " + singleImg.originalname + " - " + newPath);
+          });
         });
       }
+      // console.log(obj);
+      // const tempPath = req.files[0].path;
+      // const targetPath = path.join(
+      //   __dirname,
+      //   //NEED TO MAKE IT SAVE IN PROPER FOLDER
+      //   `./upload/${req.files[0].originalname}`
+      // );
+
+      // if (path.extname(req.files[0].originalname).toLowerCase() === ".png") {
+      //   fs.rename(tempPath, targetPath, (err) => {
+      //     if (err) return handleError(err, res);
+
+      //     res.status(200).contentType("text/plain").end("File uploaded!");
+      //   });
+      // } else {
+      //   fs.unlink(tempPath, (err) => {
+      //     if (err) return handleError(err, res);
+
+      //     res
+      //       .status(403)
+      //       .contentType("text/plain")
+      //       .end("Only .png files are allowed!");
+      //   });
+      // }
     }
   );
   app.get("/image.png", (req, res) => {
@@ -98,6 +127,7 @@ if (!isDev && cluster.isMaster) {
   app.delete("/orders/:orderId", ordersRoutes.deleteordersHandeler);
   //////////////////////InventoryRoutes examples////////////////////////////////////////
   app.get("/inventory", InventoryRoutes.getInventoryHandeler);
+  app.post("/inventory", InventoryRoutes.postInventoryHandeler);
   app.get(
     "/:orderId/inventory",
     InventoryRoutes.getSingleorderInventoryHandeler
@@ -106,7 +136,7 @@ if (!isDev && cluster.isMaster) {
     "/:orderId/inventory/:inventoryId",
     InventoryRoutes.getSingleItemHandeler
   );
-  app.post("/orders/inventory", InventoryRoutes.postInventoryHandeler);
+  app.post("/inventory", InventoryRoutes.postInventoryHandeler);
   app.put(
     "/orders/inventory/:inventoryId",
     InventoryRoutes.putInventoryHandeler

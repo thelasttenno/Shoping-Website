@@ -338,7 +338,7 @@ function App() {
                     path="/admin"
                     render={(props) => (
                       <section>
-                        <AdminClient {...props} orders={"orders"} />
+                        <AdminClient {...props} orders={"orders"} Inventory={Inventory} />
                       </section>
                     )}
                   />

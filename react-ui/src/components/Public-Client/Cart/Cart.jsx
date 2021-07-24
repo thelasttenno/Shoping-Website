@@ -3,45 +3,6 @@ import SingleCartItem from "../SingleCartItem/SingleCartItem";
 import { Link } from "react-router-dom";
 import "./Cart.scss";
 import axios from "axios";
-//////
-let BuyList = [
-  {
-    id: "dea4f511-9dbb-4290-ad6e-444aa4e05c12",
-    itemName: "angelic T",
-    description: "1313123eeqweadafsaasfg34124tgwebwsfbasfvafas",
-    category: "Hoodie",
-    status: "In Stock",
-    quantity: "20",
-    price: "55.99",
-  },
-  {
-    id: "dea4f511-9dbb-4290-ad6e-444aa4e05c12",
-    itemName: "angelic T",
-    description: "1313123eeqweadafsaasfg34124tgwebwsfbasfvafas",
-    category: "Hoodie",
-    status: "In Stock",
-    quantity: "20",
-    price: "55.99",
-  },
-  {
-    id: "dea4f511-9dbb-4290-ad6e-444aa4e05c12",
-    itemName: "angelic T",
-    description: "1313123eeqweadafsaasfg34124tgwebwsfbasfvafas",
-    category: "Hoodie",
-    status: "In Stock",
-    quantity: "20",
-    price: "55.99",
-  },
-  {
-    id: "dea4f511-9dbb-4290-ad6e-444aa4e05c12",
-    itemName: "angelic T",
-    description: "1313123eeqweadafsaasfg34124tgwebwsfbasfvafas",
-    category: "Hoodie",
-    status: "In Stock",
-    quantity: "20",
-    price: "55.99",
-  },
-];
 //////////////////////
 // class Cart extends Component {
 //   constructor(props) {

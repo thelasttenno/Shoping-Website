@@ -49,8 +49,9 @@ exports.getSingleItemHandeler = (req, res) => {
 };
 exports.postInventoryHandeler = (req, res) => {
   // const inventories = ReadInventory();
+  console.log(req.body);
     const newPost = {
-      id: uuidv4(),
+      id: req.body.id,
       itemName : req.body.name,
       description: req.body.description,
       category: req.body.category,
