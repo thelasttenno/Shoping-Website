@@ -33,7 +33,7 @@ const handleError = (err, res) => {
 };
 
 const upload = multer({
-  dest: "uploads/",
+  dest: "./uploads/",
   // you might also want to set some limits: https://github.com/expressjs/multer#limits
 });
 // Multi-process to utilize all CPU cores.
@@ -56,13 +56,14 @@ if (!isDev && cluster.isMaster) {
     "/upload/pics",
     upload.any(/* name attribute of <file> element in your form */),
     (req, res) => {
+      console.log("req", req.files);
       var multiparty = require("multiparty");
       var form = new multiparty.Form();
       console.log(req.files[0]);
       console.log(req.files[1]);
       console.log(req.files[2]);
       const obj = JSON.parse(JSON.stringify(req.body)); // req.body = [Object: null prototype] { title: 'product' }
-      console.log(obj);
+      console.log("obj", obj);
 
       form.parse(req, function (err, fields, files) {
         console.log(fields);
@@ -73,10 +74,11 @@ if (!isDev && cluster.isMaster) {
         for (var i = 0; i < imgArray.length; i++) {
           var singleImg = imgArray[i];
           var newPath = "./uploads/" + obj.id + "/";
+          console.log("path", newPath);
           if (!fs.existsSync(newPath)) {
             fs.mkdirSync(newPath);
           }
-          newPath += "img" + i +".png";
+          newPath += "img" + i + ".png";
           readAndWriteFile(singleImg, newPath);
         }
         res.send("File uploaded to: " + newPath);
