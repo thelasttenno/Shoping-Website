@@ -34,6 +34,11 @@
         padding-top: 2rem;
         padding-bottom: 1rem;
         border-bottom: 1px solid $cloud;
+        height: 400px;
+        background-image: url("../../../assets/photos/Photoshoot/4_inarow.JPG");
+        background-position: 0px -100px;
+        background-repeat: no-repeat;
+        background-size: cover;
         @include tablet {
             flex-direction: row;
             justify-content: space-between;

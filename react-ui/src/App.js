@@ -250,7 +250,7 @@ function App() {
                           {...props}
                           orders={"orders"}
                           Inventory={Inventory}
-                          // megaState={megaState}
+                          megaState={megaState}
                           removeFromCart={removeFromCart}
                           addToCart={addToCart}
                         />

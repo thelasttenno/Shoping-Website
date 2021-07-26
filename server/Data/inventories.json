@@ -1,1 +1,12 @@
-[]
+[
+    {
+        "id": "3284c4f7-9a5f-4755-96c6-343211ae434b",
+        "itemName": "angelic hoodie tester",
+        "description": "sdadasdas",
+        "category": "Hoodie",
+        "status": "In Stock",
+        "quantity": "3333",
+        "price": 55.99,
+        "collab": "true"
+    }
+]
