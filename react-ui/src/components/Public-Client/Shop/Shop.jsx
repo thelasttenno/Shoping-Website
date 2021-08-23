@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import "./Shop.scss";
 import SingleItem from "../SingleItem/SingleItem";
 import SingleCollabItem from "../SingleCollabItem/SingleCollabItem";
-import Inventory from "../../../pages/Inventory/Inventory";
 class Shop extends Component {
   state = {
     status: "All Items",
@@ -15,8 +14,8 @@ class Shop extends Component {
     console.log(e.target.value);
   };
   render() {
-    console.log(this.props); 
-    if (this.props.isFetching === false) {
+    console.log(this.props);
+    if (this.props.isFetching !== true) {
       return (
         <section className="Shop">
           <div className="Shop__head">
@@ -33,7 +32,7 @@ class Shop extends Component {
               onChange={this.updateStatus}
             >
               <option value="All Items">Please Select</option>
-              <option value="Colabs">Colabs</option>
+              <option value="Collabs">Collabs</option>
               <option value="T-Shirt">T-Shirt</option>
               <option value="Hoodies">Hoodies</option>
               <option value="Crop-Tops">Crop-Tops</option>
@@ -45,8 +44,7 @@ class Shop extends Component {
             <h2 className="Shop__title">{this.state.status}</h2>
             <div
               style={{
-                display:
-                  this.state.status === "collab" || "all" ? "flex" : "none",
+                display: this.state.status === "Collabs" ? "flex" : "none",
                 flexDirection: "column",
               }}
               className="cards Collabitems"
@@ -57,7 +55,6 @@ class Shop extends Component {
                   shoppingCart={this.props.shoppingCart}
                   addToCart={this.props.addToCart}
                   removeFromCart={this.props.removeFromCart}
-                  key={Item.id}
                 />
               ))}
             </div>
