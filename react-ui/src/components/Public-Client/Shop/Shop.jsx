@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import "./Shop.scss";
 import SingleItem from "../SingleItem/SingleItem";
 import SingleCollabItem from "../SingleCollabItem/SingleCollabItem";
+import Inventory from "../../../pages/Inventory/Inventory";
 class Shop extends Component {
   state = {
     status: "All Items",
@@ -14,8 +15,8 @@ class Shop extends Component {
     console.log(e.target.value);
   };
   render() {
-    console.log(this.props);
-    if (this.props.isFetching !== true) {
+    console.log(this.props); 
+    if (this.props.isFetching === false) {
       return (
         <section className="Shop">
           <div className="Shop__head">
@@ -56,6 +57,7 @@ class Shop extends Component {
                   shoppingCart={this.props.shoppingCart}
                   addToCart={this.props.addToCart}
                   removeFromCart={this.props.removeFromCart}
+                  key={Item.id}
                 />
               ))}
             </div>
@@ -72,6 +74,7 @@ class Shop extends Component {
                   shoppingCart={this.props.shoppingCart}
                   addToCart={this.props.addToCart}
                   removeFromCart={this.props.removeFromCart}
+                  key={Item.id}
                 />
               ))}
             </div>

@@ -46,87 +46,121 @@ function App() {
   let [NotCollabitemsPants, setNotCollabitemsPants] = useState([]);
   let [megaState, setMegaState] = useState(null);
   const [message, setMessage] = useState(null);
-  const [isFetching, setIsFetching] = useState(false);
+  const [isFetching, setIsFetching] = useState(true);
   const [isLoading, setIsLoading] = useState(true);
   const [url, setUrl] = useState("http://localhost:5000/inventory");
 
   let [sessionState, setSessionState] = useState(null);
+
+  useEffect(() => {
+    axios
+      .get(url)
+      .then((response) => {
+        // handle success
+        setInventory(response);
+      })
+      // .then(()=>{
+      //   return(resolve(Inventory === !null));
+      // })
+      .catch(function (error) {
+        // handle error
+        console.log(error);
+        // return setIsFetching(false);
+      });
+  }, [url]);
+
+  useEffect(() => {
+    //run if not null, this effect will run on load
+    if (Inventory) {
+      console.log("Hey inv changed", Inventory);
+      const result2 = SortInventory();
+      console.log(result2);
+    }
+  }, [Inventory]);
 
   function SortInventory(result) {
     return new Promise((resolve) => {
       console.log(Inventory);
       let newCollab = [];
       let newNotCollab = [];
-      // let newCollabitemsHoodies = [];
-      // let newNotCollabitemsHoodies = [];
-      // let newCollabitemsTShirt = [];
-      // let newNotCollabitemsTShirt = [];
-      // // let newCollab = []
-      // // let newNotCollab = []
-      // // let newCollab = []
-      // // let newNotCollab = []
-      // // let newCollab = []
-      // // let newNotCollab = []
-      // // let newCollab = []
-      // // let newNotCollab = []
+      let newCollabitemsHoodies = [];
+      let newNotCollabitemsHoodies = [];
+      let newCollabitemsTShirt = [];
+      let newNotCollabitemsTShirt = [];
+      // let newCollab = []
+      // let newNotCollab = []
+      // let newCollab = []
+      // let newNotCollab = []
+      // let newCollab = []
+      // let newNotCollab = []
+      // let newCollab = []
+      // let newNotCollab = []
       Inventory.data.forEach((Item) => {
         if (Item.collab === true) {
           newCollab.push(Item);
         } else {
+          // let joined = NotCollabitems.concat(Item);
+          // return setNotCollabitems(joined);
+          console.log(Item);
           newNotCollab.push(Item);
         }
       });
+      console.log(newNotCollab);
       setNotCollabitems(newNotCollab);
       setCollabitems(newCollab);
+      console.log(NotCollabitems);
       setIsLoading(false);
-      Inventory.data.forEach((Item) => {
-        if (Item.category === "hoodie") {
-          if (Item.collab === true) {
-            let joined = CollabitemsHoodies.concat(Item);
-            return setCollabitemsHoodies(joined);
-          } else {
-            let joined = NotCollabitemsHoodies.concat(Item);
-            return setNotCollabitemsHoodies(joined);
-          }
-        } else if (Item.category === "T-Shirt") {
-          if (Item.collab === true) {
-            let joined = CollabitemsTShirt.concat(Item);
-            return setCollabitemsTShirt(joined);
-          } else {
-            let joined = NotCollabitemsTShirt.concat(Item);
-            return setNotCollabitemsTShirt(joined);
-          }
-        } else if (Item.category === "Long-T") {
-          if (Item.collab === true) {
-            let joined = CollabitemsLongT.concat(Item);
-            return setCollabitemsLongT(joined);
-          } else {
-            let joined = NotCollabitemsLongT.concat(Item);
-            return setNotCollabitemsLongT(joined);
-          }
-        } else if (Item.category === "Crop-Top") {
-          if (Item.collab === true) {
-            let joined = CollabitemsCropTop.concat(Item);
-            return setCollabitemsCropTop(joined);
-          } else {
-            let joined = NotCollabitemsCropTop.concat(Item);
-            return setNotCollabitemsCropTop(joined);
-          }
-        } else if (Item.category === "Pants") {
-          if (Item.collab === true) {
-            let joined = CollabitemsPants.concat(Item);
-            return setCollabitemsPants(joined);
-          } else {
-            let joined = NotCollabitemsPants.concat(Item);
-            return setNotCollabitemsPants(joined);
-          }
-        }
-      });
       resolve("resolved " + result);
+      // Inventory.data.forEach((Item) => {
+      //   if (Item.category === "hoodie") {
+      //     if (Item.collab === true) {
+      //       newCollabitemsHoodies.push(Item);
+      //     } else {
+      //       newNotCollabitemsHoodies.push(Item);
+      //     }
+      //   } else if (Item.category === "T-Shirt") {
+      //     if (Item.collab === true) {
+      //       newCollabitemsTShirt.push(Item);
+      //     } else {
+      //       newNotCollabitemsTShirt.push(Item);
+      //     }
+      //   } else if (Item.category === "Long-T") {
+      //     if (Item.collab === true) {
+      //       let joined = CollabitemsLongT.concat(Item);
+      //       return setCollabitemsLongT(joined);
+      //     } else {
+      //       let joined = NotCollabitemsLongT.concat(Item);
+      //       return setNotCollabitemsLongT(joined);
+      //     }
+      //   } else if (Item.category === "Crop-Top") {
+      //     if (Item.collab === true) {
+      //       let joined = CollabitemsCropTop.concat(Item);
+      //       return setCollabitemsCropTop(joined);
+      //     } else {
+      //       let joined = NotCollabitemsCropTop.concat(Item);
+      //       return setNotCollabitemsCropTop(joined);
+      //     }
+      //   } else if (Item.category === "Pants") {
+      //     if (Item.collab === true) {
+      //       let joined = CollabitemsPants.concat(Item);
+      //       return setCollabitemsPants(joined);
+      //     } else {
+      //       let joined = NotCollabitemsPants.concat(Item);
+      //       return setNotCollabitemsPants(joined);
+      //     }
+      //   }
+      // });
+
+      // setCollabitemsHoodies(newCollabitemsHoodies);
+      // setNotCollabitemsHoodies(newNotCollabitemsHoodies);
+      // setNotCollabitemsTShirt(newNotCollabitemsTShirt);
+      // setCollabitemsTShirt(newCollabitemsTShirt);
     });
   }
 
   useEffect(() => {
+    console.log("Hey IsLoading changed to:" + isLoading);
+    console.log("NotCollab:" + NotCollabitems);
     setMegaState({
       ...megaState,
       Inventory,
@@ -168,32 +202,6 @@ function App() {
     });
   }, []);
 
-  useEffect(() => {
-    axios
-      .get(url)
-      .then((response) => {
-        // handle success
-        setInventory(response);
-      })
-      // .then(()=>{
-      //   return(resolve(Inventory === !null));
-      // })
-      .catch(function (error) {
-        // handle error
-        console.log(error);
-        return setIsFetching(false);
-      });
-  }, [url]);
-
-  useEffect(() => {
-    //run if not null, this effect will run on load
-    if (Inventory) {
-      console.log("Hey inv changed", Inventory);
-      const result2 = SortInventory();
-      console.log(result2);
-    }
-  }, [Inventory]);
-
   // #### Shopping Cart
 
   //Append item to global cart
@@ -226,8 +234,8 @@ function App() {
   };
 
   //Render
-  if (Inventory && megaState !== null) {
-    if (!isFetching) {
+  if (megaState !== null) {
+    if (isFetching === false && isLoading === false) {
       // console.log(megaState);
       // let props={,NotCollabitemsPants,CollabitemsPants}
       return (
@@ -249,10 +257,11 @@ function App() {
                         <Home
                           {...props}
                           orders={"orders"}
-                          Inventory={Inventory}
                           megaState={megaState}
                           removeFromCart={removeFromCart}
                           addToCart={addToCart}
+                          shoppingCart={shoppingCart}
+                          isFetching={isFetching}
                         />
                       </section>
                     );
@@ -278,12 +287,12 @@ function App() {
                       <Shop
                         {...props}
                         orders={"orders"}
-                        Inventory={Inventory}
                         removeFromCart={removeFromCart}
                         megaState={megaState}
                         addToCart={addToCart}
                         shoppingCart={shoppingCart}
                         isFetching={isFetching}
+                        isLoading={isLoading}
                       />
                     </section>
                   )}
@@ -338,7 +347,11 @@ function App() {
                     path="/admin"
                     render={(props) => (
                       <section>
-                        <AdminClient {...props} orders={"orders"} Inventory={Inventory} />
+                        <AdminClient
+                          {...props}
+                          orders={"orders"}
+                          Inventory={Inventory}
+                        />
                       </section>
                     )}
                   />
