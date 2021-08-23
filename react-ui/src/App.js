@@ -78,9 +78,8 @@ function App() {
       });
       setNotCollabitems(newNotCollab);
       setCollabitems(newCollab);
-      setIsLoading(false);
       Inventory.data.forEach((Item) => {
-        if (Item.category === "hoodie") {
+        if (Item.category === "Hoodie") {
           if (Item.collab === true) {
             let joined = CollabitemsHoodies.concat(Item);
             return setCollabitemsHoodies(joined);
@@ -122,6 +121,7 @@ function App() {
           }
         }
       });
+      setIsLoading(false);
       resolve("resolved " + result);
     });
   }
