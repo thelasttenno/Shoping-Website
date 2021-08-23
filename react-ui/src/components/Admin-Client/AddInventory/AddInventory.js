@@ -76,7 +76,7 @@ export default class AddInventory extends Component {
       //VALIDATE THE DATA FIRST
       //POST THE NEW Inventory INFO TO OUR BACKEND
 
-      /// COMPACT POST VERSION NOTHING WORKS ////
+/// COMPACT POST VERSION NOTHING WORKS ////
 
       // let postData = {
       //   id: ItemId,
@@ -126,7 +126,7 @@ export default class AddInventory extends Component {
       //   });
       // }, 10000);
 
-      /// Expanded post Version photo Upload works but not form data ///
+/// Expanded post Version photo Upload works but not form data ///
 
       // axios
       //   .post("http://localhost:5000/inventory", {
@@ -146,72 +146,66 @@ export default class AddInventory extends Component {
         headers: {
           // "Content-Type": "application/json; charset=UTF-8",
         },
-        params: {
-          id: ItemId,
-          name: name,
-          description: description,
-          category: category,
-          size: size,
-          status: status,
-          quantity: quantity,
-          price: price,
-          collab: collab,
-        },
+        params:{
+              id: ItemId,
+              name: name,
+              description: description,
+              category: category,
+              size: size,
+              status: status,
+              quantity: quantity,
+              price: price,
+              collab: collab,
+            },
       })
         .then((res) => {
+          console.log(res);
+        })
+        .then(() => {
           //POST THE NEW Inventory INFO TO OUR BACKEND
           let id = ItemId;
           var bodyFormData = new FormData();
           var imagefile = document.querySelector("#file");
+          console.log(imagefile);
           bodyFormData.append("image", imagefile.files[0]);
           bodyFormData.append("id", id);
           var imagefile2 = document.querySelector("#file2");
           bodyFormData.append("image2", imagefile2.files[0]);
           var imagefile3 = document.querySelector("#file3");
           bodyFormData.append("image3", imagefile3.files[0]);
-          console.log(bodyFormData);
 
-          axios
-            .post(`http://localhost:5000/upload/pics`, bodyFormData, {
-              headers: {
-                "Content-Type": bodyFormData.headers, //`multipart/form-data; boundary=${bodyFormData._boundary}`,
-              },
-            })
-
-            //Moved form reset to occur after the upload has finished, or it finds null images.
+          axios({
+            method: "post",
+            // url: `/upload/pics`,
+            url: `http://localhost:5000/upload/pics`,
+            data: bodyFormData,
+            headers: {
+              "Content-Type": `multipart/form-data; boundary=${bodyFormData._boundary}`,
+            },
+          })
             .then((res) => {
-              this.setState({ nameError: false });
-              this.setState({ descriptionError: false });
-              this.setState({ categoryError: false });
-              this.setState({ sizeError: false });
-              this.setState({ statusError: false });
-              this.setState({ quantityError: false });
-              this.setState({ priceError: false });
-
-              window.alert("New Inventory item successfully added");
-
-              //RESET THE FORM
-              e.target.reset();
+              console.log(res);
             })
             .catch((err) => {
-              this.setState({ nameError: false });
-              this.setState({ descriptionError: false });
-              this.setState({ categoryError: false });
-              this.setState({ sizeError: false });
-              this.setState({ statusError: false });
-              this.setState({ quantityError: false });
-              this.setState({ priceError: false });
-
-              window.alert("Error!");
-
-              //RESET THE FORM
               console.log("There is something wrong..", err);
-              e.target.reset();
             });
         })
         .catch((err) => {
           console.log("There is something FUCKED..", err);
         });
+
+      this.setState({ nameError: false });
+      this.setState({ descriptionError: false });
+      this.setState({ categoryError: false });
+      this.setState({ sizeError: false });
+      this.setState({ statusError: false });
+      this.setState({ quantityError: false });
+      this.setState({ priceError: false });
+
+      window.alert("New Inventory item successfully added");
+
+      //RESET THE FORM
+      e.target.reset();
     } else {
       console.log("There is something really FUCKED..");
 
