@@ -46,7 +46,7 @@ import axios from "axios";
 //             images: ["https://i.imgur.com/EHyR2nP.png"], //Will need to point to the item image, can be disabled i think
 //             description: item.description,
 //           },
-//           unit_amount: 5000, // this needs tuning, do reading lel
+//           unit_amount: 4242, // this needs tuning, do reading lel
 //         },
 //         quantity: 1,
 //       };
@@ -149,7 +149,7 @@ export default function Cart(props) {
   //           images: ["https://i.imgur.com/EHyR2nP.png"], //Will need to point to the item image, can be disabled i think
   //           description: item.description,
   //         },
-  //         unit_amount: 5000, // this needs tuning, do reading lel
+  //         unit_amount: 4242, // this needs tuning, do reading lel
   //       },
   //       quantity: 1,
   //     };
@@ -175,7 +175,7 @@ export default function Cart(props) {
 
   const createStripeCheckoutSession = (cart) => {
     // axios
-    //   .post("http://localhost:5000/payments/createSession", {
+    //   .post("http://localhost:4242/payments/createSession", {
     //     firstName: "Fred",
     //     lastName: "Flintstone",
     //   })
@@ -192,7 +192,7 @@ export default function Cart(props) {
     if (cart.length !== 0) {
       axios({
         method: "post",
-        url: "http://localhost:5000/payments/createSession",
+        url: "http://localhost:4242/payments/createSession",
         headers: {
           // "Content-Type": "application/json; charset=UTF-8",
         },

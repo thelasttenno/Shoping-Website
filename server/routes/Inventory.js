@@ -4,8 +4,8 @@ const { v4: uuidv4 } = require("uuid");
 require("dotenv").config();
 
 function LoadInventory() {
-  // const fileContent = fs.readFileSync("server/Data/inventories.json");
-  const fileContent = fs.readFileSync("Data/inventories.json");
+  const fileContent = fs.readFileSync("server/Data/inventories.json");
+  // const fileContent = fs.readFileSync("Data/inventories.json");
 
   console.log("inventory loaded to memory!");
   return JSON.parse(fileContent);
@@ -15,15 +15,14 @@ function LoadInventory() {
 let loadedInventory = LoadInventory();
 
 function WriteInventory(inventory) {
-  // fs.writeFileSync("server/Data/inventories.json", JSON.stringify(inventory));
-  fs.writeFileSync("Data/inventories.json", JSON.stringify(inventory));
+  fs.writeFileSync("server/Data/inventories.json", JSON.stringify(inventory));
+  // fs.writeFileSync("Data/inventories.json", JSON.stringify(inventory));
 
   //also update loaded inventory
   loadedInventory = LoadInventory();
 }
 
 function GetInventoryById(inventoryId) {
-  // const inventories = ReadInventory();
   const inventoryById = loadedInventory.filter(
     (inventory) => inventory.id === inventoryId
   );
@@ -31,13 +30,11 @@ function GetInventoryById(inventoryId) {
 }
 
 function GetInventoryByorderId(orderId) {
-  // const inventories = ReadInventory();
   return loadedInventory.filter((inventory) => inventory.orderID === orderId);
 }
-// USE ReadInventory() TO READ FROM FILE INSIDE HANDLER
+// USE LoadedInventory() TO READ FROM FILE INSIDE HANDLER
 
 exports.getInventoryHandeler = (req, res) => {
-  // const inventories = ReadInventory();
   res.json(loadedInventory);
 };
 exports.getSingleorderInventoryHandeler = (req, res) => {
@@ -47,7 +44,6 @@ exports.getSingleItemHandeler = (req, res) => {
   res.json(GetInventoryById(req.params.inventoryId));
 };
 exports.postInventoryHandeler = (req, res) => {
-  // const inventories = ReadInventory();
   console.log(req.query);
   console.log(req.body);
   console.log(req.params);
@@ -63,8 +59,8 @@ exports.postInventoryHandeler = (req, res) => {
   };
   loadedInventory.unshift(newPost);
 
-  // fs.writeFileSync("server/Data/inventories.json", JSON.stringify(inventories))
-  fs.writeFileSync("Data/inventories.json", JSON.stringify(loadedInventory));
+  fs.writeFileSync("server/Data/inventories.json", JSON.stringify(inventories))
+  // fs.writeFileSync("Data/inventories.json", JSON.stringify(loadedInventory));
 
   res.send(loadedInventory);
 };
@@ -90,11 +86,8 @@ exports.putInventoryHandeler = (req, res) => {
   let updatedInventoriesData = inventories.map((inventory) =>
     inventory.id === inventoryId ? updatedInventory : inventory
   );
-  // fs.writeFileSync("server/Data/inventories.json", JSON.stringify(updatedInventoriesData));
-  fs.writeFileSync(
-    "Data/inventories.json",
-    JSON.stringify(updatedInventoriesData)
-  );
+  fs.writeFileSync("server/Data/inventories.json", JSON.stringify(updatedInventoriesData));
+  // fs.writeFileSync("Data/inventories.json", JSON.stringify(updatedInventoriesData));
   LoadInventory();
   res.send(updatedInventoriesData);
 };

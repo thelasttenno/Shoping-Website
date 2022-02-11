@@ -1,12 +1,19 @@
 const stripe = require("stripe")(
   "sk_test_51IMkDmCVRuCafbBMzwq0EeKVw2tOLZHTmyLIGnMFUIR5knk7ayyZN046wNF2VeZdec3K1NZLPCg4l4GtX2c3M63300jGZGnGR1"
 );
-
-const siteURL = "http://localhost:3000";
-
+exports.stripeSesssion = async (req, res) => {
+  const { sessionId } = req.query;
+  const session = await stripe.checkout.sessions.retrieve(sessionId);
+  res.send(session);
+};
 // app.post("/create-checkout-session",
-exports.stripeSesssionCreate = (req, res) => {
+exports.stripeSesssionCreate = async (req, res) => {
   //parse query
+  const domainURL = process.env.DOMAIN;
+  console.log(req.body);
+  // const { quantity } = req.body;
+  const quantity  = "10" ;
+
   let line_items = [];
   if (req.query.shoppingCart) {
     req.query.shoppingCart.forEach((element) => {
@@ -15,48 +22,98 @@ exports.stripeSesssionCreate = (req, res) => {
 
       line_items.push({
         price_data: {
-          currency: "usd",
+          currency: "CAD",
           product_data: {
             name: elem.itemName,
           },
           unit_amount: elem.price * 100,
+          tax_behavior: "exclusive",
         },
-        quantity: 1,
+        quantity: quantity,
       });
     });
   }
-
-  stripe.checkout.sessions
+  const session = await stripe.checkout.sessions
     .create({
       payment_method_types: ["card"],
+      automatic_tax: {
+        enabled: true,
+      },
+      billing_address_collection: 'auto',
+      shipping_address_collection: {
+        allowed_countries: ["US", "CA"],
+      },
+      shipping_options: [
+        {
+          shipping_rate_data: {
+            type: "fixed_amount",
+            fixed_amount: {
+              amount: 0,
+              currency: "cad",
+            },
+            display_name: "Free shipping",
+            // tax_behavior: 'exclusive',
+            // # From https://stripe.com/docs/tax/tax-codes
+            // #
+            // #   "A shipping charge for delivery by a common carrier."
+            // tax_code: "txcd_92010001",
+            // Delivers between 5-7 business days
+            delivery_estimate: {
+              minimum: {
+                unit: "business_day",
+                value: 5,
+              },
+              maximum: {
+                unit: "business_day",
+                value: 7,
+              },
+            },
+          },
+        },
+        {
+          shipping_rate_data: {
+            type: "fixed_amount",
+            fixed_amount: {
+              amount: 1500,
+              currency: "cad",
+            },
+            display_name: "Next day air",
+            tax_behavior: "exclusive",
+            // # From https://stripe.com/docs/tax/tax-codes
+            // #
+            // #   "A shipping charge for delivery by a common carrier."
+            // tax_code: "txcd_92010001",
+            // Delivers in exactly 1 business day
+            delivery_estimate: {
+              minimum: {
+                unit: "business_day",
+                value: 1,
+              },
+              maximum: {
+                unit: "business_day",
+                value: 1,
+              },
+            },
+          },
+        },
+      ],
       line_items: line_items,
-      // [
-      //   {
-      //     price_data: {
-      //       currency: "usd",
-      //       product_data: {
-      //         name: "T-shirt",
-      //       },
-      //       unit_amount: 2000,
-      //     },
-      //     quantity: 1,
-      //   },
-      //   {
-      //     price_data: {
-      //       currency: "usd",
-      //       product_data: {
-      //         name: "T-shirt",
-      //       },
-      //       unit_amount: 2000,
-      //     },
-      //     quantity: 1,
-      //   },
-      // ],
+      tax_id_collection: {
+        enabled: true,
+      },
+      customer_update: {
+        name: "auto",
+        shipping: "auto",
+      },
+      metadata: {
+        order_id: uuidv4(),
+      },
       mode: "payment",
-      success_url: `${siteURL}/success`,
-      cancel_url: `${siteURL}/cancel`,
+      success_url: `${domainURL}/success.html?session_id={CHECKOUT_SESSION_ID}`,
+      cancel_url: `${domainURL}/cancel`,
     })
     .then((session) => {
+      console.log(session);
       res.send(JSON.stringify(session));
     });
 };

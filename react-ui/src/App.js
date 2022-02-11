@@ -48,7 +48,7 @@ function App() {
   const [message, setMessage] = useState(null);
   const [isFetching, setIsFetching] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
-  const [url, setUrl] = useState("http://localhost:5000/inventory");
+  const [url, setUrl] = useState("http://localhost:4242/inventory");
 
   let [sessionState, setSessionState] = useState(null);
 
@@ -175,9 +175,6 @@ function App() {
         // handle success
         setInventory(response);
       })
-      // .then(()=>{
-      //   return(resolve(Inventory === !null));
-      // })
       .catch(function (error) {
         // handle error
         console.log(error);

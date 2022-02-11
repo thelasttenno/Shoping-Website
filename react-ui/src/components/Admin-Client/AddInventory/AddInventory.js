@@ -104,11 +104,11 @@ export default class AddInventory extends Component {
       // console.log(bodyFormData.image);
       // setTimeout(() => {
       //   function getUserAccount() {
-      //     return axios.post("http://localhost:5000/inventory", {postData});
+      //     return axios.post("http://localhost:4242/inventory", {postData});
       //   }
       //   function getUserPermissions() {
       //     return axios.post(
-      //       `http://localhost:5000/upload/pics`,
+      //       `http://localhost:4242/upload/pics`,
       //       { data: bodyFormData },
       //       {
       //         "Content-Type": `multipart/form-data; boundary=${bodyFormData._boundary}`,
@@ -129,7 +129,7 @@ export default class AddInventory extends Component {
 /// Expanded post Version photo Upload works but not form data ///
 
       // axios
-      //   .post("http://localhost:5000/inventory", {
+      //   .post("http://localhost:4242/inventory", {
       //     id: ItemId,
       //     name: name,
       //     description: description,
@@ -142,7 +142,7 @@ export default class AddInventory extends Component {
       //   })
       axios({
         method: "post",
-        url: "http://localhost:5000/inventory",
+        url: "http://localhost:4242/inventory",
         headers: {
           // "Content-Type": "application/json; charset=UTF-8",
         },
@@ -177,7 +177,7 @@ export default class AddInventory extends Component {
           axios({
             method: "post",
             // url: `/upload/pics`,
-            url: `http://localhost:5000/upload/pics`,
+            url: `http://localhost:4242/upload/pics`,
             data: bodyFormData,
             headers: {
               "Content-Type": `multipart/form-data; boundary=${bodyFormData._boundary}`,

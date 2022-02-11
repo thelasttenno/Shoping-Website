@@ -44,7 +44,7 @@ class AdminClient extends Component {
   }
 
   handleEditorder = (id, neworderData) => {
-    let putURL = `http://localhost:5000/orders/${id}`;
+    let putURL = `http://localhost:4242/orders/${id}`;
     axios
       .put(putURL, { data: neworderData })
       .then((response) => {
@@ -54,7 +54,7 @@ class AdminClient extends Component {
   };
 
   handleEditInventory = (id, newInventoryData) => {
-    let putURL = `http://localhost:5000/orders/inventory/${id}`;
+    let putURL = `http://localhost:4242/orders/inventory/${id}`;
     axios
       .put(putURL, { data: newInventoryData })
       .then((response) => {
@@ -64,8 +64,8 @@ class AdminClient extends Component {
   };
 
   componentDidMount() {
-    let one = axios.get(`http://localhost:5000/orders`);
-    let two = axios.get(`http://localhost:5000/inventory`);
+    let one = axios.get(`http://localhost:4242/orders`);
+    let two = axios.get(`http://localhost:4242/inventory`);
     axios
       .all([one, two])
       .then(
@@ -84,8 +84,8 @@ class AdminClient extends Component {
       this.props.match !== undefined &&
       prevProps.match.params.id !== this.props.match.params
     ) {
-      let one = axios.get(`http://localhost:5000/orders`);
-      let two = axios.get(`http://localhost:5000/inventory`);
+      let one = axios.get(`http://localhost:4242/orders`);
+      let two = axios.get(`http://localhost:4242/inventory`);
       axios
         .all([one, two])
         .then(
