@@ -1,8 +1,4 @@
 const fs = require("fs");
-const { v4: uuidv4 } = require("uuid");
-
-require("dotenv").config();
-
 function LoadInventory() {
   const fileContent = fs.readFileSync("server/Data/inventories.json");
   // const fileContent = fs.readFileSync("Data/inventories.json");
@@ -43,23 +39,27 @@ exports.getSingleorderInventoryHandeler = (req, res) => {
 exports.getSingleItemHandeler = (req, res) => {
   res.json(GetInventoryById(req.params.inventoryId));
 };
-exports.postInventoryHandeler = (req, res) => {
-  console.log(req.query);
-  console.log(req.body);
-  console.log(req.params);
+exports.postInventoryHandeler = (request, res) => {
+  const payload =JSON.parse(request.body);
+  var myValue = payload.collab;
+  var isTrueSet = myValue === 'true';
   const newPost = {
-    id: req.query.id,
-    itemName: req.query.name,
-    description: req.query.description,
-    category: req.query.category,
-    status: req.query.status,
-    quantity: req.query.quantity,
-    price: req.query.price,
-    collab: req.query.collab,
+    id: payload.id,
+    itemName: payload.name,
+    description: payload.description,
+    category: payload.category,
+    status: payload.status,
+    quantity: Number(payload.quantity),
+    price: Number(payload.price) ,
+    collab: isTrueSet,
+    ImgaeBase64: {
+       mime : "image/jpeg",
+       data : payload.data.split("base64,")[1],
+    }
   };
   loadedInventory.unshift(newPost);
 
-  fs.writeFileSync("server/Data/inventories.json", JSON.stringify(inventories))
+  fs.writeFileSync("server/Data/inventories.json", JSON.stringify(loadedInventory))
   // fs.writeFileSync("Data/inventories.json", JSON.stringify(loadedInventory));
 
   res.send(loadedInventory);

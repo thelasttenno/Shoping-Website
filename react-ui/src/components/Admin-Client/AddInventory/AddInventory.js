@@ -24,6 +24,7 @@ export default class AddInventory extends Component {
     orderError: false,
     name: null,
     data: null,
+    postImage: { myFile: "" },
   };
 
   handleChange = (e) => {
@@ -52,11 +53,12 @@ export default class AddInventory extends Component {
     const quantity = e.target.quantity.value;
     const price = e.target.price.value;
     const collab = e.target.collab.value;
-    const ImgName = {
-      1: e.target.name.value,
-      2: e.target.name2.value,
-      3: e.target.name3.value,
-    };
+    const ImgaeBase64Data = this.state.postImage.myFile;
+    // const ImgName = {
+    //   1: e.target.name.value,
+    //   2: e.target.name2.value,
+    //   3: e.target.name3.value,
+    // };
 
     //VALIDATE THE DATA FIRST
     if (
@@ -68,15 +70,16 @@ export default class AddInventory extends Component {
       status &&
       quantity &&
       price &&
-      collab
+      collab &&
+      this.state.postImage.myFile
     ) {
       //POST THE NEW Inventory INFO TO OUR BACKEND
-      console.log(ImgName);
-      console.log(ItemId);
+      // console.log(ImgName);
+      console.log(this.state.postImage.myFile);
       //VALIDATE THE DATA FIRST
       //POST THE NEW Inventory INFO TO OUR BACKEND
 
-/// COMPACT POST VERSION NOTHING WORKS ////
+      /// COMPACT POST VERSION NOTHING WORKS ////
 
       // let postData = {
       //   id: ItemId,
@@ -126,10 +129,33 @@ export default class AddInventory extends Component {
       //   });
       // }, 10000);
 
-/// Expanded post Version photo Upload works but not form data ///
+      /// Expanded post Version photo Upload works but not form data ///
 
-      // axios
-      //   .post("http://localhost:4242/inventory", {
+      axios
+        .post("http://localhost:4242/inventory", {
+          id: ItemId,
+          name: name,
+          description: description,
+          category: category,
+          size: size,
+          status: status,
+          quantity: quantity,
+          price: price,
+          collab: collab,
+          data: ImgaeBase64Data,
+
+          // ImgaeBase64: {
+          //   // mime: "image/jpeg",
+          // }
+        })
+      // axios({
+      //   method: "post",
+      //   url: "http://localhost:4242/inventory",
+      //   headers: {
+      //     'Content-Type': 'application/x-www-form-urlencoded',
+      //     "Access-Control-Allow-Origin": "*",
+      //   },
+      //   params: {
       //     id: ItemId,
       //     name: name,
       //     description: description,
@@ -139,57 +165,56 @@ export default class AddInventory extends Component {
       //     quantity: quantity,
       //     price: price,
       //     collab: collab,
-      //   })
-      axios({
-        method: "post",
-        url: "http://localhost:4242/inventory",
-        headers: {
-          // "Content-Type": "application/json; charset=UTF-8",
-        },
-        params:{
-              id: ItemId,
-              name: name,
-              description: description,
-              category: category,
-              size: size,
-              status: status,
-              quantity: quantity,
-              price: price,
-              collab: collab,
-            },
-      })
+
+      //   },
+      // })
+      // axios.post('http://localhost:4242/inventory', {
+      //     id: ItemId,
+      //     name: name,
+      //     description: description,
+      //     category: category,
+      //     size: size,
+      //     status: status,
+      //     quantity: quantity,
+      //     price: price,
+      //     collab: collab,
+      //     ImgaeBase64: {
+      //       "mime": "image/jpeg",
+      //       "data": this.state.postImage.myFile,
+      //     }
+      // })
         .then((res) => {
           console.log(res);
         })
-        .then(() => {
-          //POST THE NEW Inventory INFO TO OUR BACKEND
-          let id = ItemId;
-          var bodyFormData = new FormData();
-          var imagefile = document.querySelector("#file");
-          console.log(imagefile);
-          bodyFormData.append("image", imagefile.files[0]);
-          bodyFormData.append("id", id);
-          var imagefile2 = document.querySelector("#file2");
-          bodyFormData.append("image2", imagefile2.files[0]);
-          var imagefile3 = document.querySelector("#file3");
-          bodyFormData.append("image3", imagefile3.files[0]);
+        // .then(() => {
+        //   //POST THE NEW Inventory INFO TO OUR BACKEND
+        //   let id = ItemId;
+        //   var bodyFormData = new FormData();
+        //   var imagefile = document.querySelector("#file");
+        //   console.log(imagefile);
+        //   bodyFormData.append("image", imagefile.files[0]);
+        //   bodyFormData.append("id", id);
+        //   var imagefile2 = document.querySelector("#file2");
+        //   bodyFormData.append("image2", imagefile2.files[0]);
+        //   var imagefile3 = document.querySelector("#file3");
+        //   bodyFormData.append("image3", imagefile3.files[0]);
 
-          axios({
-            method: "post",
-            // url: `/upload/pics`,
-            url: `http://localhost:4242/upload/pics`,
-            data: bodyFormData,
-            headers: {
-              "Content-Type": `multipart/form-data; boundary=${bodyFormData._boundary}`,
-            },
-          })
-            .then((res) => {
-              console.log(res);
-            })
-            .catch((err) => {
-              console.log("There is something wrong..", err);
-            });
-        })
+        //   axios({
+        //     method: "post",
+        //     // url: `/upload/pics`,
+        //     url: `http://localhost:4242/upload/pics`,
+        //     data: bodyFormData,
+        //     headers: {
+        //       "Content-Type": `multipart/form-data; boundary=${bodyFormData._boundary}`,
+        //     },
+        //   })
+        //     .then((res) => {
+        //       console.log(res);
+        //     })
+        //     .catch((err) => {
+        //       console.log("There is something wrong..", err);
+        //     });
+        // })
         .catch((err) => {
           console.log("There is something FUCKED..", err);
         });
@@ -217,6 +242,25 @@ export default class AddInventory extends Component {
       if (!quantity) this.setState({ quantityError: true });
       if (!price) this.setState({ priceError: true });
     }
+  };
+
+  handleFileUpload = async (e) => {
+    const convertToBase64 = (file) => {
+      return new Promise((resolve, reject) => {
+        const fileReader = new FileReader();
+        fileReader.readAsDataURL(file);
+        fileReader.onload = () => {
+          resolve(fileReader.result);
+        };
+        fileReader.onerror = (error) => {
+          reject(error);
+        };
+      });
+    };
+    const file = e.target.files[0];
+    const base64 = await convertToBase64(file);
+    this.setState({ postImage: { ...this.postImage, myFile: base64 } });
+    // PostImage({ ...postImage, myFile: base64 });
   };
   render() {
     return (
@@ -351,15 +395,22 @@ export default class AddInventory extends Component {
               onChange={this.handleChange}
             >
               <option>Please Select</option>
-              <option value="true">yes</option>
-              <option value="false">no</option>
+              <option value={true}>yes</option>
+              <option value={false}>no</option>
             </select>
           </div>
 
           {/* AVAILABILITY */}
           <div className="add-inventory__availability-container">
             <div>
-              <PhotoUpload />
+              {/* <PhotoUpload /> */}
+              <input
+                type="file"
+                label="Image"
+                name="myFile"
+                accept=".jpeg, .png, .jpg"
+                onChange={(e) => this.handleFileUpload(e)}
+              />
             </div>
             <h3 className="add-inventory__subheading">Item Availability</h3>
             <div className="add-inventory__status-container">
@@ -419,7 +470,7 @@ export default class AddInventory extends Component {
                 Quantity
               </label>
               <input
-                type="text"
+                type="number"
                 name="quantity"
                 className="add-inventory__quantity"
                 placeholder="0"

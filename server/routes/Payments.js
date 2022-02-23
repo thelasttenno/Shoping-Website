@@ -1,6 +1,7 @@
 const stripe = require("stripe")(
   "sk_test_51IMkDmCVRuCafbBMzwq0EeKVw2tOLZHTmyLIGnMFUIR5knk7ayyZN046wNF2VeZdec3K1NZLPCg4l4GtX2c3M63300jGZGnGR1"
 );
+const { v4: uuidv4 } = require("uuid");
 exports.stripeSesssion = async (req, res) => {
   const { sessionId } = req.query;
   const session = await stripe.checkout.sessions.retrieve(sessionId);
@@ -9,8 +10,8 @@ exports.stripeSesssion = async (req, res) => {
 // app.post("/create-checkout-session",
 exports.stripeSesssionCreate = async (req, res) => {
   //parse query
-  const domainURL = process.env.DOMAIN;
-  console.log(req.body);
+  // const domainURL = process.env.DOMAIN;
+  const domainURL = "http://localhost:3000/";
   // const { quantity } = req.body;
   const quantity  = "10" ;
 
@@ -18,8 +19,6 @@ exports.stripeSesssionCreate = async (req, res) => {
   if (req.query.shoppingCart) {
     req.query.shoppingCart.forEach((element) => {
       let elem = JSON.parse(element);
-      console.log(elem);
-
       line_items.push({
         price_data: {
           currency: "CAD",
@@ -29,7 +28,7 @@ exports.stripeSesssionCreate = async (req, res) => {
           unit_amount: elem.price * 100,
           tax_behavior: "exclusive",
         },
-        quantity: quantity,
+        quantity: elem.quantity,
       });
     });
   }
@@ -52,6 +51,7 @@ exports.stripeSesssionCreate = async (req, res) => {
               currency: "cad",
             },
             display_name: "Free shipping",
+            tax_behavior: "exclusive",
             // tax_behavior: 'exclusive',
             // # From https://stripe.com/docs/tax/tax-codes
             // #
@@ -101,10 +101,10 @@ exports.stripeSesssionCreate = async (req, res) => {
       tax_id_collection: {
         enabled: true,
       },
-      customer_update: {
-        name: "auto",
-        shipping: "auto",
-      },
+      // customer_update: {
+      //   name: "auto",
+      //   shipping: "auto",
+      // },
       metadata: {
         order_id: uuidv4(),
       },
@@ -113,7 +113,6 @@ exports.stripeSesssionCreate = async (req, res) => {
       cancel_url: `${domainURL}/cancel`,
     })
     .then((session) => {
-      console.log(session);
       res.send(JSON.stringify(session));
     });
 };

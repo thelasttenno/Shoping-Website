@@ -39,7 +39,7 @@ class AdminClient extends Component {
 
     this.state = {
       orders: null,
-      inventory: null
+      inventory: null,
     };
   }
 
@@ -101,11 +101,13 @@ class AdminClient extends Component {
   }
 
   render() {
-   
     if (this.state.inventory !== null && this.state.orders !== null) {
       return (
         <div className="App">
-          <Header />
+          <Header
+            deleteCookie={this.props.deleteCookie}
+            token={this.props.token}
+          />
           <Switch>
             <Route
               path="/admin"

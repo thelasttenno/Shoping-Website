@@ -55,6 +55,9 @@ class Shop extends Component {
                   shoppingCart={this.props.shoppingCart}
                   addToCart={this.props.addToCart}
                   removeFromCart={this.props.removeFromCart}
+                  addSingleItemToCart={this.props.addSingleItemToCart}
+                  removeSingleItemFromCart={this.props.removeSingleItemFromCart}
+                  key={Item.id}
                 />
               ))}
             </div>
@@ -71,6 +74,8 @@ class Shop extends Component {
                   shoppingCart={this.props.shoppingCart}
                   addToCart={this.props.addToCart}
                   removeFromCart={this.props.removeFromCart}
+                  addSingleItemToCart={this.props.addSingleItemToCart}
+                  removeSingleItemFromCart={this.props.removeSingleItemFromCart}
                   key={Item.id}
                 />
               ))}
@@ -88,6 +93,9 @@ class Shop extends Component {
                   shoppingCart={this.props.shoppingCart}
                   addToCart={this.props.addToCart}
                   removeFromCart={this.props.removeFromCart}
+                  addSingleItemToCart={this.props.addSingleItemToCart}
+                  removeSingleItemFromCart={this.props.removeSingleItemFromCart}
+                  key={Item.id}
                 />
               ))}
             </div>
@@ -104,6 +112,9 @@ class Shop extends Component {
                   shoppingCart={this.props.shoppingCart}
                   addToCart={this.props.addToCart}
                   removeFromCart={this.props.removeFromCart}
+                  addSingleItemToCart={this.props.addSingleItemToCart}
+                  removeSingleItemFromCart={this.props.removeSingleItemFromCart}
+                  key={Item.id}
                 />
               ))}
             </div>
@@ -120,6 +131,10 @@ class Shop extends Component {
                   shoppingCart={this.props.shoppingCart}
                   addToCart={this.props.addToCart}
                   removeFromCart={this.props.removeFromCart}
+                  addSingleItemToCart={this.props.addSingleItemToCart}
+                  removeSingleItemFromCart={this.props.removeSingleItemFromCart}
+                  key={Item.id}
+
                 />
               ))}
             </div>
@@ -136,6 +151,10 @@ class Shop extends Component {
                   shoppingCart={this.props.shoppingCart}
                   addToCart={this.props.addToCart}
                   removeFromCart={this.props.removeFromCart}
+                  addSingleItemToCart={this.props.addSingleItemToCart}
+                  removeSingleItemFromCart={this.props.removeSingleItemFromCart}
+                  key={Item.id}
+
                 />
               ))}
             </div>
@@ -152,6 +171,10 @@ class Shop extends Component {
                   shoppingCart={this.props.shoppingCart}
                   addToCart={this.props.addToCart}
                   removeFromCart={this.props.removeFromCart}
+                  addSingleItemToCart={this.props.addSingleItemToCart}
+                  removeSingleItemFromCart={this.props.removeSingleItemFromCart}
+                  key={Item.id}
+
                 />
               ))}
             </div>
@@ -168,6 +191,10 @@ class Shop extends Component {
                   shoppingCart={this.props.shoppingCart}
                   addToCart={this.props.addToCart}
                   removeFromCart={this.props.removeFromCart}
+                  addSingleItemToCart={this.props.addSingleItemToCart}
+                  removeSingleItemFromCart={this.props.removeSingleItemFromCart}
+                  key={Item.id}
+
                 />
               ))}
             </div>
@@ -184,6 +211,10 @@ class Shop extends Component {
                   shoppingCart={this.props.shoppingCart}
                   addToCart={this.props.addToCart}
                   removeFromCart={this.props.removeFromCart}
+                  addSingleItemToCart={this.props.addSingleItemToCart}
+                  removeSingleItemFromCart={this.props.removeSingleItemFromCart}
+                  key={Item.id}
+
                 />
               ))}
             </div>
@@ -200,6 +231,10 @@ class Shop extends Component {
                   shoppingCart={this.props.shoppingCart}
                   addToCart={this.props.addToCart}
                   removeFromCart={this.props.removeFromCart}
+                  addSingleItemToCart={this.props.addSingleItemToCart}
+                  removeSingleItemFromCart={this.props.removeSingleItemFromCart}
+                  key={Item.id}
+
                 />
               ))}
             </div>
@@ -216,6 +251,10 @@ class Shop extends Component {
                   shoppingCart={this.props.shoppingCart}
                   addToCart={this.props.addToCart}
                   removeFromCart={this.props.removeFromCart}
+                  addSingleItemToCart={this.props.addSingleItemToCart}
+                  removeSingleItemFromCart={this.props.removeSingleItemFromCart}
+                  key={Item.id}
+
                 />
               ))}
             </div>
@@ -231,6 +270,10 @@ class Shop extends Component {
                   Item={Item}
                   shoppingCart={this.props.shoppingCart}
                   addToCart={this.props.addToCart}
+                  addSingleItemToCart={this.props.addSingleItemToCart}
+                  removeSingleItemFromCart={this.props.removeSingleItemFromCart}
+                  key={Item.id}
+
                 />
               ))}
             </div>

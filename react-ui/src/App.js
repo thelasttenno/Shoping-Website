@@ -1,6 +1,6 @@
 import { useState, useEffect, Component, useCallback } from "react";
 import "./App.css";
-import { getNewSession, sessionEvent, verifySession } from "./lib/session";
+// import { getNewSession, Event, verifySession } from "./lib/session";
 import { Provider } from "react-redux";
 
 import {
@@ -49,27 +49,73 @@ function App() {
   const [isFetching, setIsFetching] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [url, setUrl] = useState("http://localhost:4242/inventory");
-
+  const [token, setToken] = useState(null);
   let [sessionState, setSessionState] = useState(null);
+  const readCookie = useCallback(async () => {
+    try {
+      const res = await axios.get("/read-cookie");
+
+      if (res.data.token !== undefined) {
+        await setToken(res.data.token);
+      }
+    } catch (e) {
+      await setToken(undefined);
+      console.log(e);
+    }
+  }, []);
+
+  useEffect(() => {
+    readCookie();
+  }, [readCookie]);
+
+  function PrivateRoute({ children, ...rest }) {
+    return (
+      <Route
+        {...rest}
+        render={({ location }) => {
+          return rest.token !== undefined ? (
+            children
+          ) : (
+            <Redirect
+              to={{
+                pathname: "/SignIn",
+                state: { from: location },
+              }}
+            />
+          );
+        }}
+      />
+    );
+  }
+
+  const deleteCookie = async () => {
+    try {
+      await axios.get("/clear-cookie");
+      setToken(undefined);
+    } catch (e) {
+      console.log(e);
+    }
+  };
 
   function SortInventory(result) {
     return new Promise((resolve) => {
       console.log(Inventory);
       let newCollab = [];
       let newNotCollab = [];
-      // let newCollabitemsHoodies = [];
-      // let newNotCollabitemsHoodies = [];
-      // let newCollabitemsTShirt = [];
-      // let newNotCollabitemsTShirt = [];
-      // // let newCollab = []
-      // // let newNotCollab = []
-      // // let newCollab = []
-      // // let newNotCollab = []
-      // // let newCollab = []
-      // // let newNotCollab = []
+      let newCollabitemsHoodies = [];
+      let newNotCollabitemsHoodies = [];
+      let newCollabitemsTShirt = [];
+      let newNotCollabitemsTShirt = [];
+      let newCollabitemsLongT = [];
+      let newNotCollabitemsLongT = [];
+      let newCollabitemsCropTop = [];
+      let newNotCollabitemsCropTop = [];
+      let newCollabitemsPants = [];
+      let newNotCollabitemsPants = [];
       // // let newCollab = []
       // // let newNotCollab = []
       Inventory.data.forEach((Item) => {
+        Item.quantity = 0;
         if (Item.collab === true) {
           newCollab.push(Item);
         } else {
@@ -81,46 +127,46 @@ function App() {
       Inventory.data.forEach((Item) => {
         if (Item.category === "Hoodie") {
           if (Item.collab === true) {
-            let joined = CollabitemsHoodies.concat(Item);
-            return setCollabitemsHoodies(joined);
+            newCollabitemsHoodies.push(Item);
           } else {
-            let joined = NotCollabitemsHoodies.concat(Item);
-            return setNotCollabitemsHoodies(joined);
+            newNotCollabitemsHoodies.push(Item);
           }
         } else if (Item.category === "T-Shirt") {
           if (Item.collab === true) {
-            let joined = CollabitemsTShirt.concat(Item);
-            return setCollabitemsTShirt(joined);
+            newCollabitemsTShirt.push(Item);
           } else {
-            let joined = NotCollabitemsTShirt.concat(Item);
-            return setNotCollabitemsTShirt(joined);
+            newNotCollabitemsTShirt.push(Item);
           }
         } else if (Item.category === "Long-T") {
           if (Item.collab === true) {
-            let joined = CollabitemsLongT.concat(Item);
-            return setCollabitemsLongT(joined);
+            newCollabitemsLongT.push(Item);
           } else {
-            let joined = NotCollabitemsLongT.concat(Item);
-            return setNotCollabitemsLongT(joined);
+            newNotCollabitemsLongT.push(Item);
           }
         } else if (Item.category === "Crop-Top") {
           if (Item.collab === true) {
-            let joined = CollabitemsCropTop.concat(Item);
-            return setCollabitemsCropTop(joined);
+            newCollabitemsCropTop.push(Item);
           } else {
-            let joined = NotCollabitemsCropTop.concat(Item);
-            return setNotCollabitemsCropTop(joined);
+            newNotCollabitemsCropTop.push(Item);
           }
         } else if (Item.category === "Pants") {
           if (Item.collab === true) {
-            let joined = CollabitemsPants.concat(Item);
-            return setCollabitemsPants(joined);
+            newCollabitemsPants.push(Item);
           } else {
-            let joined = NotCollabitemsPants.concat(Item);
-            return setNotCollabitemsPants(joined);
+            newNotCollabitemsPants.push(Item);
           }
         }
       });
+      setCollabitemsHoodies(newCollabitemsHoodies);
+      setNotCollabitemsHoodies(newNotCollabitemsHoodies);
+      setCollabitemsTShirt(newCollabitemsTShirt);
+      setNotCollabitemsTShirt(newNotCollabitemsTShirt);
+      setCollabitemsLongT(newCollabitemsLongT);
+      setNotCollabitemsLongT(newNotCollabitemsLongT);
+      setCollabitemsCropTop(newCollabitemsCropTop);
+      setNotCollabitemsCropTop(newNotCollabitemsCropTop);
+      setCollabitemsPants(newCollabitemsPants);
+      setNotCollabitemsPants(newNotCollabitemsPants);
       setIsLoading(false);
       resolve("resolved " + result);
     });
@@ -148,25 +194,25 @@ function App() {
     // }
   }, [isLoading]);
 
-  useEffect(() => {
-    //Check if sessionId from previous session is stored in the localStorage
-    let prevSessionId = window.localStorage.getItem("sessionId");
-    //If this value is null or "", the server will not use it. Pass it along as is.
-    //
-    //Establish session
-    getNewSession(prevSessionId, (err, sessionObj) => {
-      if (err) {
-        //TODO: Handle session error here
-        console.log(err);
-        return;
-      }
-      //Set sessionState
-      setSessionState(sessionObj);
-      console.log("new_session", sessionObj);
-      //
-      //
-    });
-  }, []);
+  // useEffect(() => {
+  //   //Check if sessionId from previous session is stored in the localStorage
+  //   let prevSessionId = window.localStorage.getItem("sessionId");
+  //   //If this value is null or "", the server will not use it. Pass it along as is.
+  //   //
+  //   //Establish session
+  //   getNewSession(prevSessionId, (err, sessionObj) => {
+  //     if (err) {
+  //       //TODO: Handle session error here
+  //       console.log(err);
+  //       return;
+  //     }
+  //     //Set sessionState
+  //     setSessionState(sessionObj);
+  //     console.log("new_session", sessionObj);
+  //     //
+  //     //
+  //   });
+  // }, []);
 
   useEffect(() => {
     axios
@@ -186,19 +232,48 @@ function App() {
     //run if not null, this effect will run on load
     if (Inventory) {
       console.log("Hey inv changed", Inventory);
-      const result2 = SortInventory().then(()=>{
-
-      console.log(result2);
-    });
-  }
+      const result2 = SortInventory().then(() => {
+        console.log(result2);
+      });
+    }
   }, [Inventory]);
 
   // #### Shopping Cart
 
   //Append item to global cart
   const addToCart = (Item) => {
+    console.log("addToCart", Item);
+    Item.quantity = Item.quantity + 1;
     setShoppingCart(shoppingCart.concat([Item]));
     return;
+  };
+
+  const addSingleItemToCart = (Item) => {
+    Item.quantity = Item.quantity + 1;
+    let newCart = [];
+    shoppingCart.forEach((element) => {
+      if (element && element.id !== Item.id) {
+        newCart.push(element);
+      } else {
+        console.log(element);
+        newCart.push(element);
+      }
+    });
+    setShoppingCart(newCart);
+  };
+  const removeSingleItemFromCart = (Item) => {
+    console.log("removeSingleItemFromCart", Item);
+    Item.quantity = Item.quantity - 1;
+    let newCart = [];
+    shoppingCart.forEach((element) => {
+      if (element && element.id !== Item.id) {
+        newCart.push(element);
+      } else if (Item.quantity > 0 && element.id === Item.id) {
+        console.log(element);
+        newCart.push(element);
+      }
+    });
+    setShoppingCart(newCart);
   };
 
   //Debug
@@ -208,6 +283,7 @@ function App() {
 
   //Remove item from global cart
   const removeFromCart = (Item) => {
+    Item.quantity = 0;
     let newCart = [];
     //
     shoppingCart.forEach((element) => {
@@ -244,7 +320,11 @@ function App() {
                     //
                     return (
                       <section>
-                        <Header numCartItems={numCartItems} />
+                        <Header
+                          numCartItems={numCartItems}
+                          deleteCookie={deleteCookie}
+                          token={token}
+                        />
                         <Home
                           {...props}
                           orders={"orders"}
@@ -263,7 +343,11 @@ function App() {
                     //
                     return (
                       <section>
-                        <Header numCartItems={numCartItems} />
+                        <Header
+                          numCartItems={numCartItems}
+                          deleteCookie={deleteCookie}
+                          token={token}
+                        />
                         <About {...props} orders={"orders"} />
                       </section>
                     );
@@ -273,7 +357,11 @@ function App() {
                   path="/shop"
                   render={(props) => (
                     <section>
-                      <Header numCartItems={numCartItems} />
+                      <Header
+                        numCartItems={numCartItems}
+                        deleteCookie={deleteCookie}
+                        token={token}
+                      />
                       <Shop
                         {...props}
                         orders={"orders"}
@@ -283,6 +371,8 @@ function App() {
                         addToCart={addToCart}
                         shoppingCart={shoppingCart}
                         isFetching={isFetching}
+                        addSingleItemToCart={addSingleItemToCart}
+                        removeSingleItemFromCart={removeSingleItemFromCart}
                       />
                     </section>
                   )}
@@ -291,7 +381,11 @@ function App() {
                   path="/collabs"
                   render={(props) => (
                     <section>
-                      <Header numCartItems={numCartItems} />
+                      <Header
+                        numCartItems={numCartItems}
+                        deleteCookie={deleteCookie}
+                        token={token}
+                      />
                       <Collabs
                         {...props}
                         orders={"orders"}
@@ -307,7 +401,11 @@ function App() {
                   path="/Cart"
                   render={(props) => (
                     <section>
-                      <Header numCartItems={numCartItems} />
+                      <Header
+                        numCartItems={numCartItems}
+                        deleteCookie={deleteCookie}
+                        token={token}
+                      />
                       <Cart
                         {...props}
                         orders={"orders"}
@@ -322,7 +420,11 @@ function App() {
                   path="/Checkout"
                   render={(props) => (
                     <section>
-                      <Header numCartItems={numCartItems} />
+                      <Header
+                        numCartItems={numCartItems}
+                        deleteCookie={deleteCookie}
+                        token={token}
+                      />
                       <Checkout
                         {...props}
                         orders={"orders"}
@@ -333,19 +435,32 @@ function App() {
                   )}
                 />
                 <Provider store={store}>
+                  <PrivateRoute path="/admin" token={token}>
+                    <Route
+                      path="/admin"
+                      exact
+                      render={(props) => {
+                        return (
+                          <section>
+                            <AdminClient
+                              {...props}
+                              orders={"orders"}
+                              Inventory={Inventory}
+                              deleteCookie={deleteCookie}
+                              token={token}
+                            />
+                          </section>
+                        );
+                      }}
+                    />
+                  </PrivateRoute>
                   <Route
-                    path="/admin"
-                    render={(props) => (
-                      <section>
-                        <AdminClient {...props} orders={"orders"} Inventory={Inventory} />
-                      </section>
-                    )}
-                  />
-                  <Route
-                    path="/admin/signin"
+                    path="/signin"
                     exact
                     render={(props) => {
-                      return <section>{<Signin />}</section>;
+                      return (
+                        <section>{<Signin setToken={setToken} />}</section>
+                      );
                     }}
                   />
                 </Provider>
