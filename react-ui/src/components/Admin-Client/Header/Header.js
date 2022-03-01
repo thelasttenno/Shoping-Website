@@ -2,7 +2,6 @@
 import React from 'react';
 import { useLocation } from 'react-router-dom'
 import Logo from "../../../assets/photos/logos/KL-Logos/$krilla-GangLogo3Website.png";
-import './Header.scss';
 
 const Navbar= (props) => {
     const location = useLocation();

@@ -50,7 +50,6 @@ function App() {
   const [url] = useState("http://localhost:4242/inventory");
   const [token, setToken] = useState(undefined);
 
-
   const readCookie = useCallback(async () => {
     try {
       const res = await axios.get("http://localhost:4242/read-cookie");
@@ -309,6 +308,11 @@ function App() {
         <div className="App">
           <BrowserRouter>
             <Router className="App">
+              <Header
+                numCartItems={numCartItems}
+                deleteCookie={deleteCookie}
+                token={token}
+              />
               <Switch>
                 <Redirect from="/success" to="/" />
                 <Redirect from="/cancel" to="/" />
@@ -320,18 +324,16 @@ function App() {
                     //
                     return (
                       <section>
-                        <Header
-                          numCartItems={numCartItems}
-                          deleteCookie={deleteCookie}
-                          token={token}
-                        />
+
                         <Home
                           {...props}
                           orders={"orders"}
                           Inventory={Inventory}
-                          // megaState={megaState}
                           removeFromCart={removeFromCart}
                           addToCart={addToCart}
+                          shoppingCart={shoppingCart}
+                          addSingleItemToCart={addSingleItemToCart}
+                          removeSingleItemFromCart={removeSingleItemFromCart}
                         />
                       </section>
                     );
@@ -343,11 +345,6 @@ function App() {
                     //
                     return (
                       <section>
-                        <Header
-                          numCartItems={numCartItems}
-                          deleteCookie={deleteCookie}
-                          token={token}
-                        />
                         <About {...props} orders={"orders"} />
                       </section>
                     );
@@ -357,11 +354,7 @@ function App() {
                   path="/shop"
                   render={(props) => (
                     <section>
-                      <Header
-                        numCartItems={numCartItems}
-                        deleteCookie={deleteCookie}
-                        token={token}
-                      />
+ 
                       <Shop
                         {...props}
                         orders={"orders"}
@@ -381,11 +374,7 @@ function App() {
                   path="/collabs"
                   render={(props) => (
                     <section>
-                      <Header
-                        numCartItems={numCartItems}
-                        deleteCookie={deleteCookie}
-                        token={token}
-                      />
+ 
                       <Collabs
                         {...props}
                         orders={"orders"}
@@ -401,11 +390,7 @@ function App() {
                   path="/Cart"
                   render={(props) => (
                     <section>
-                      <Header
-                        numCartItems={numCartItems}
-                        deleteCookie={deleteCookie}
-                        token={token}
-                      />
+ 
                       <Cart
                         {...props}
                         orders={"orders"}
@@ -420,11 +405,7 @@ function App() {
                   path="/Checkout"
                   render={(props) => (
                     <section>
-                      <Header
-                        numCartItems={numCartItems}
-                        deleteCookie={deleteCookie}
-                        token={token}
-                      />
+ 
                       <Checkout
                         {...props}
                         orders={"orders"}
@@ -435,22 +416,22 @@ function App() {
                   )}
                 />
                 <Provider store={store}>
-                    <Route
-                      path="/admin"
-                      render={(props) => {
-                        return (
-                          <section>
-                            <AdminClient
-                              {...props}
-                              orders={"orders"}
-                              Inventory={Inventory}
-                              deleteCookie={deleteCookie}
-                              token={token}
-                            />
-                          </section>
-                        );
-                      }}
-                    />
+                  <Route
+                    path="/admin"
+                    render={(props) => {
+                      return (
+                        <section>
+                          <AdminClient
+                            {...props}
+                            orders={"orders"}
+                            Inventory={Inventory}
+                            deleteCookie={deleteCookie}
+                            token={token}
+                          />
+                        </section>
+                      );
+                    }}
+                  />
                   <Route
                     path="/signin"
                     exact

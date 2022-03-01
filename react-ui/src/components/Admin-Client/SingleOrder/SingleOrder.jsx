@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
-import "./SingleOrder.scss";
 import DeleteModule from "../DeleteModule/DeleteModule";
 import chevron_right from "../../../assets/images/chevron_right.svg";
 import edit from '../../../assets/images/edit.svg';

@@ -1,7 +1,19 @@
 import React, { Component } from "react";
-import "./Shop.scss";
 import SingleItem from "../SingleItem/SingleItem";
 import SingleCollabItem from "../SingleCollabItem/SingleCollabItem";
+import { styled } from "@mui/material/styles";
+import Box from "@mui/material/Box";
+import Paper from "@mui/material/Paper";
+import Grid from "@mui/material/Grid";
+
+const Item = styled(Paper)(({ theme }) => ({
+  backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
+  ...theme.typography.body2,
+  padding: theme.spacing(1),
+  textAlign: "center",
+  color: theme.palette.text.secondary,
+}));
+
 class Shop extends Component {
   state = {
     status: "All Items",
@@ -49,18 +61,29 @@ class Shop extends Component {
               }}
               className="cards Collabitems"
             >
-              {this.props.megaState.Collabitems.map((Item) => (
-                <SingleCollabItem
-                  Item={Item}
-                  shoppingCart={this.props.shoppingCart}
-                  addToCart={this.props.addToCart}
-                  removeFromCart={this.props.removeFromCart}
-                  addSingleItemToCart={this.props.addSingleItemToCart}
-                  removeSingleItemFromCart={this.props.removeSingleItemFromCart}
-                  key={Item.id}
-                />
-              ))}
+              {/* <Box sx={{ flexGrow: 1 }}>
+                <Grid container spacing={12} columns={16}> */}
+                  {this.props.megaState.Collabitems.map((Item) => (
+                    // <Grid item xs={"auto"}>
+                    //   <Item>
+                        <SingleCollabItem
+                          Item={Item}
+                          shoppingCart={this.props.shoppingCart}
+                          addToCart={this.props.addToCart}
+                          removeFromCart={this.props.removeFromCart}
+                          addSingleItemToCart={this.props.addSingleItemToCart}
+                          removeSingleItemFromCart={
+                            this.props.removeSingleItemFromCart
+                          }
+                          key={Item.id}
+                        />
+                    //   </Item>
+                    // </Grid>
+                  ))}
+                {/* </Grid>
+              </Box> */}
             </div>
+
             <div
               style={{
                 display: this.state.status === "all" ? "flex" : "none",
@@ -134,7 +157,6 @@ class Shop extends Component {
                   addSingleItemToCart={this.props.addSingleItemToCart}
                   removeSingleItemFromCart={this.props.removeSingleItemFromCart}
                   key={Item.id}
-
                 />
               ))}
             </div>
@@ -154,7 +176,6 @@ class Shop extends Component {
                   addSingleItemToCart={this.props.addSingleItemToCart}
                   removeSingleItemFromCart={this.props.removeSingleItemFromCart}
                   key={Item.id}
-
                 />
               ))}
             </div>
@@ -174,7 +195,6 @@ class Shop extends Component {
                   addSingleItemToCart={this.props.addSingleItemToCart}
                   removeSingleItemFromCart={this.props.removeSingleItemFromCart}
                   key={Item.id}
-
                 />
               ))}
             </div>
@@ -194,7 +214,6 @@ class Shop extends Component {
                   addSingleItemToCart={this.props.addSingleItemToCart}
                   removeSingleItemFromCart={this.props.removeSingleItemFromCart}
                   key={Item.id}
-
                 />
               ))}
             </div>
@@ -214,7 +233,6 @@ class Shop extends Component {
                   addSingleItemToCart={this.props.addSingleItemToCart}
                   removeSingleItemFromCart={this.props.removeSingleItemFromCart}
                   key={Item.id}
-
                 />
               ))}
             </div>
@@ -234,7 +252,6 @@ class Shop extends Component {
                   addSingleItemToCart={this.props.addSingleItemToCart}
                   removeSingleItemFromCart={this.props.removeSingleItemFromCart}
                   key={Item.id}
-
                 />
               ))}
             </div>
@@ -254,7 +271,6 @@ class Shop extends Component {
                   addSingleItemToCart={this.props.addSingleItemToCart}
                   removeSingleItemFromCart={this.props.removeSingleItemFromCart}
                   key={Item.id}
-
                 />
               ))}
             </div>
@@ -273,7 +289,6 @@ class Shop extends Component {
                   addSingleItemToCart={this.props.addSingleItemToCart}
                   removeSingleItemFromCart={this.props.removeSingleItemFromCart}
                   key={Item.id}
-
                 />
               ))}
             </div>

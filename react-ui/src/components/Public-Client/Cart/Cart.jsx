@@ -1,6 +1,5 @@
 import React from "react";
 import SingleCartItem from "../SingleCartItem/SingleCartItem";
-import "./Cart.scss";
 import axios from "axios";
 export default function Cart(props) {
   const createStripeCheckoutSession = (cart) => {

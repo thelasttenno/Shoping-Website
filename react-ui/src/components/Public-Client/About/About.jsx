@@ -1,6 +1,5 @@
 import React from "react";
 import KaiPic from "../../../assets/photos/Photoshoot/Kai_looking_Good.JPG";
-import "./About.scss";
 
 function About() {
   return (

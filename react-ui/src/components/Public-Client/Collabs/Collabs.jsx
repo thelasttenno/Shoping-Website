@@ -2,7 +2,6 @@ import React from "react";
 import { Link } from "react-router-dom";
 import KaiPic from "../../../assets/photos/Photoshoot/Kai_looking_Good.JPG";
 
-import "./Collabs.scss";
 function Collabs() {
   return (
     <section className="Collabs">
