@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, {useEffect} from "react";
 import axios from "axios";
 
 import {
@@ -9,7 +9,9 @@ import {
 import Header from "./Header/Header";
 import Orders from "../../pages/Order/Orders";
 import OrdersInventory from "./Order/OrderInventory";
+// import Editorder from "./EditOrder/EditOrder";
 import Inventory from "../../pages/Inventory/Inventory";
+// import Addorder from "./AddOrder/AddOrder.js";
 
 import AddInventory from "./AddInventory/AddInventory";
 import EditInventory from "./EditInventory/EditInventory";
@@ -17,114 +19,116 @@ import EditInventory from "./EditInventory/EditInventory";
 import InventoryDetails from "./InventoryDetails/InventoryDetails";
 import Footer from "./Footer/Footer";
 import AdminHome from "./AdminHome/AdminHome.jsx";
-class AdminClient extends Component {
-  constructor(props) {
-    super(props);
 
-    this.state = {
-      orders: null,
-      inventory: null
-    };
-  }
 
-  handleEditorder = (id, neworderData) => {
+
+function PrivateRoute({ children, ...rest }) {
+  console.log(children, "and rest", rest);
+  return (
+    <Route
+      {...rest}
+      render={({ location }) => {
+        return rest.token !== undefined ? (
+          children
+        ) : (
+          <Redirect
+            to={{
+              pathname: "/SignIn",
+              state: { from: location },
+            }}
+          />
+        );
+      }}
+    />
+  );
+}
+function AdminClient (props) {
+  
+  const [orders, setOrders] = React.useState(null);
+  const [inventory, setInventory] = React.useState(null);
+
+  function handleEditorder (id, neworderData) {
     let putURL = `http://localhost:4242/orders/${id}`;
     axios
       .put(putURL, { data: neworderData })
       .then((response) => {
-        this.setState({ orders: response.data });
+        setOrders(response.data);
       })
       .catch((error) => console.log('New order couldn"t be added', error));
   };
 
-  handleEditInventory = (id, newInventoryData) => {
+  function handleEditInventory (id, newInventoryData) {
     let putURL = `http://localhost:4242/orders/inventory/${id}`;
     axios
       .put(putURL, { data: newInventoryData })
       .then((response) => {
-        this.setState({ inventory: response.data });
+        setInventory(response.data);
       })
       .catch((error) => console.log('New inventory couldn"t be added', error));
   };
 
-  componentDidMount() {
+  useEffect(() => {
     let one = axios.get(`http://localhost:4242/orders`);
     let two = axios.get(`http://localhost:4242/inventory`);
     axios
       .all([one, two])
       .then(
         axios.spread((...responses) => {
-          this.setState({
-            orders: responses[0].data,
-            inventory: responses[1].data,
-          });
+          let responseZero = responses[0].data
+          let responseOne = responses[1].data
+          setOrders(responseZero);
+          setInventory(responseOne);
         })
       )
       .catch((errors) => {});
-  }
+  }, []);
 
-  componentDidUpdate(prevProps) {
-    if (
-      this.props.match !== undefined &&
-      prevProps.match.params.id !== this.props.match.params
-    ) {
-      let one = axios.get(`http://localhost:4242/orders`);
-      let two = axios.get(`http://localhost:4242/inventory`);
-      axios
-        .all([one, two])
-        .then(
-          axios.spread((...responses) => {
-            this.setState({
-              orders: responses[0].data,
-              inventory: responses[1].data,
-            });
-          })
-        )
-        .catch((errors) => {});
-    }
-  }
-
-  render() {
-    if (this.state.inventory !== null && this.state.orders !== null) {
+  
+    if (inventory !== null && orders !== null) {
       return (
         <div className="App">
           <Header
-            deleteCookie={this.props.deleteCookie}
-            token={this.props.token}
+            deleteCookie={props.deleteCookie}
+            token={props.token}
           />
           <Switch>
-            <Route
-              path="/admin"
-              exact
-              render={(props) => {
-                return (<AdminHome {...props} />);
-              }}
-            />
-
+            <PrivateRoute path="/admin" token={props.token} exact>
+              <Route
+                path="/admin"
+                exact
+                render={() => {
+                  return <AdminHome {...props} />;
+                }}
+              />
+            </PrivateRoute>
+            
+            <PrivateRoute path="/admin/orders" token={props.token} exact>
             <Route
               path="/admin/orders"
               exact
               render={(props) => {
-                return (
-                  <Orders {...props} inventory={this.state.inventory} />
-                );
+                return <Orders {...props} inventory={inventory} />;
               }}
             />
+            </PrivateRoute>
 
+            <PrivateRoute path="/admin/orders/:orderId/edit-order" token={props.token} exact>
             <Route
               path="/admin/orders/:orderId/edit-order"
               render={() => {
                 return (
                   <OrdersInventory
-                    {...this.props}
-                    order={this.state.orders.find(
-                      (el) => el.id === this.props.match.params.orderId
+                    {...props}
+                    order={orders.find(
+                      (el) => el.id === props.match.params.orderId
                     )}
-                    handleEditorder={this.handleEditorder}
+                    handleEditorder={handleEditorder}
                   />
                 );
               }}
             />
+            </PrivateRoute>
+            <PrivateRoute path="/admin/addorder" token={props.token} exact>
 
             <Route
               path="/admin/addorder"
@@ -132,42 +136,50 @@ class AdminClient extends Component {
               render={() => {
                 return (
                   <OrdersInventory
-                    {...this.props}
-                    inventory={this.state.inventory}
+                    {...props}
+                    inventory={inventory}
                   />
                 );
               }}
             />
+            </PrivateRoute>
+            <PrivateRoute path="/admin/:orderId/inventory" token={props.token} exact>
 
             <Route
               path="/admin/:orderId/inventory"
               render={() => {
                 return (
                   <OrdersInventory
-                    {...this.props}
-                    inventory={this.state.inventory}
+                    {...props}
+                    inventory={inventory}
                   />
                 );
               }}
             />
+            </PrivateRoute>
+            <PrivateRoute path="/admin/inventory" token={props.token} exact>
 
             <Route
               path="/admin/inventory"
               exact
               render={(props) => {
                 return (
-                  <Inventory {...this.props} inventory={this.state.inventory} />
+                  <Inventory {...props} inventory={inventory} />
                 );
               }}
             />
+            </PrivateRoute>
+            <PrivateRoute path="/admin/inventory/new-inventory" token={props.token} exact>
 
             <Route
               path="/admin/inventory/new-inventory"
               exact
               render={(props) => {
-                return (<AddInventory {...this.props} />);
+                return <AddInventory {...props} />;
               }}
             />
+            </PrivateRoute>
+            <PrivateRoute path="/admin/inventory/:inventoryId/edit-inventory" token={props.token} exact>
 
             <Route
               path="/admin/inventory/:inventoryId/edit-inventory"
@@ -176,31 +188,31 @@ class AdminClient extends Component {
                 return (
                   <EditInventory
                     {...props}
-                    inventory={this.state.inventory.find(
+                    inventory={inventory.find(
                       (el) => el.id === props.match.params.inventoryId
                     )}
                     categoryList={[
-                      ...new Set(this.state.inventory.map((el) => el.category)),
+                      ...new Set(inventory.map((el) => el.category)),
                     ]}
                     orderList={[
-                      ...new Set(this.state.orders.map((el) => el.name)),
+                      ...new Set(orders.map((el) => el.name)),
                     ]}
-                    handleEditInventory={this.handleEditInventory}
+                    handleEditInventory={handleEditInventory}
                   />
                 );
               }}
             />
+            </PrivateRoute>
+            <PrivateRoute path="/admin/inventory/:inventoryId" token={props.token} exact>
+
             <Route
               path="/admin/inventory/:inventoryId"
-              render={(props) =>
-                (
-                  <InventoryDetails
-                    {...props}
-                    inventory={this.state.inventory}
-                  />
-                )
-              }
+              render={(props) => (
+                <InventoryDetails {...props} inventory={inventory} />
+              )}
             />
+            </PrivateRoute>
+            
           </Switch>
           <Footer />
         </div>
@@ -213,5 +225,4 @@ class AdminClient extends Component {
       );
     }
   }
-}
 export default AdminClient;

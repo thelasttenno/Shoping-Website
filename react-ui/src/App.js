@@ -23,6 +23,9 @@ import AdminClient from "./components/Admin-Client/AdminClient";
 import axios from "axios";
 import store from "./store/index";
 import Signin from "./components/Admin-Client/Authentication/Signin";
+// import SingleCollabItem from "./components/Public-Client/SingleCollabItem/SingleCollabItem";
+// import SingleItem from "./components/Public-Client/SingleItem/SingleItem";
+// import { useWillMount } from "./lib/useWillMount";
 function App() {
   //Shopping cart state
   let [shoppingCart, setShoppingCart] = useState([]);
@@ -44,50 +47,50 @@ function App() {
   let [megaState, setMegaState] = useState(null);
   const [isFetching, setIsFetching] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
-  const [url, setUrl] = useState("http://localhost:4242/inventory");
-  const [token, setToken] = useState(null);
+  const [url] = useState("http://localhost:4242/inventory");
+  const [token, setToken] = useState(undefined);
 
 
-  // const readCookie = useCallback(async () => {
-  //   try {
-  //     const res = await axios.get("http://localhost:4242/read-cookie");
+  const readCookie = useCallback(async () => {
+    try {
+      const res = await axios.get("http://localhost:4242/read-cookie");
 
-  //     if (res.data.token !== undefined) {
-  //       await setToken(res.data.token);
-  //     }
-  //   } catch (e) {
-  //     await setToken(undefined);
-  //     console.log(e);
-  //   }
-  // }, []);
+      if (res.data.token !== undefined) {
+        await setToken(res.data.token);
+      }
+    } catch (e) {
+      await setToken(undefined);
+      console.log(e);
+    }
+  }, []);
 
-  // useEffect(() => {
-  //   readCookie();
-  // }, [readCookie]);
+  useEffect(() => {
+    readCookie();
+  }, [readCookie]);
 
-  function PrivateRoute({ children, ...rest }) {
-    return (
-      <Route
-        {...rest}
-        render={({ location }) => {
-          return rest.token !== undefined ? (
-            children
-          ) : (
-            <Redirect
-              to={{
-                pathname: "/SignIn",
-                state: { from: location },
-              }}
-            />
-          );
-        }}
-      />
-    );
-  }
+  // function PrivateRoute({ children, ...rest }) {
+  //   return (
+  //     <Route
+  //       {...rest}
+  //       render={({ location }) => {
+  //         return rest.token !== undefined ? (
+  //           children
+  //         ) : (
+  //           <Redirect
+  //             to={{
+  //               pathname: "/SignIn",
+  //               state: { from: location },
+  //             }}
+  //           />
+  //         );
+  //       }}
+  //     />
+  //   );
+  // }
 
   const deleteCookie = async () => {
     try {
-      await axios.get("/clear-cookie");
+      await axios.get("http://localhost:4242/clear-cookie");
       setToken(undefined);
     } catch (e) {
       console.log(e);
@@ -432,10 +435,8 @@ function App() {
                   )}
                 />
                 <Provider store={store}>
-                  {/* <PrivateRoute path="/admin" token={token}> */}
                     <Route
                       path="/admin"
-                      exact
                       render={(props) => {
                         return (
                           <section>
@@ -450,7 +451,6 @@ function App() {
                         );
                       }}
                     />
-                  {/* </PrivateRoute> */}
                   <Route
                     path="/signin"
                     exact

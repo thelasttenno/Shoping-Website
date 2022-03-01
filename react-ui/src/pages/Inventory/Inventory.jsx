@@ -1,10 +1,8 @@
-// import { Link } from "react-router-dom";
 import SingleInventoryItem from "../../components/Admin-Client/SingleInventoryItem/SingleInventoryItem";
 import { Link } from "react-router-dom";
 import "./inventory.scss";
 import sort from "../../assets/images/sort.svg";
-
-setTimeout(() => { console.log("pausing"); }, 1000);
+console.log("Inventory");
 
 const Inventory = (props) => {
   if (props.inventory !== "") {

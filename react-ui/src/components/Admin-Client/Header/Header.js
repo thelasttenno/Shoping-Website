@@ -4,14 +4,14 @@ import { useLocation } from 'react-router-dom'
 import Logo from "../../../assets/photos/logos/KL-Logos/$krilla-GangLogo3Website.png";
 import './Header.scss';
 
-const Navbar= () => {
+const Navbar= (props) => {
     const location = useLocation();
-    // console.log(location.pathname);
+    console.log(props);
     return(
         <header>
             <nav className='nav'>
                 <div className='nav--content'>
-                    <a className='link' href='/'>
+                    <a className='link' href='/admin'>
                         <img className='nav-logo' src={Logo} alt='InStock logo'/>
                     </a>
                     <div className='nav-menu--admin'>

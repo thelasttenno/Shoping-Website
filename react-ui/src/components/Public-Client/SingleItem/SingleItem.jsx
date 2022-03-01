@@ -1,5 +1,4 @@
 import React, {useState} from "react";
-import pic from "../../../assets/photos/Mockups/b_roll/ManWearingFuckitShirt.png";
 
 // import "./Home.scss";
 // class SingleItem extends Component {

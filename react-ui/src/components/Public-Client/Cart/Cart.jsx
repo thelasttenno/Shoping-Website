@@ -1,6 +1,5 @@
-import React, { Component } from "react";
+import React from "react";
 import SingleCartItem from "../SingleCartItem/SingleCartItem";
-import { Link } from "react-router-dom";
 import "./Cart.scss";
 import axios from "axios";
 export default function Cart(props) {

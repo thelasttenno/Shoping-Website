@@ -3,7 +3,6 @@ import axios from "axios";
 import { v4 as uuidv4 } from "uuid";
 import arrow from "../../../assets/Icons/arrow_back-24px.svg";
 import errorIcon from "../../../assets/Icons/error-24px.svg";
-import PhotoUpload from "../PhotoUpload/PhotoUpload";
 
 import { Link } from "react-router-dom";
 import "./AddInventory.scss";

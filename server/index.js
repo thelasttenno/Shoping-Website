@@ -12,23 +12,21 @@ const numCPUs = require("os").cpus().length;
 require("dotenv").config({ path: "./.env" });
 const isDev = process.env.NODE_ENV !== "production";
 // See your keys here: https://dashboard.stripe.com/apikeys
-const basicAuth = require('express-basic-auth');
-const auth =(basicAuth({ authorizer: myAuthorizer, unauthorizedResponse: getUnauthorizedResponse } ))
-const cookieParser = require('cookie-parser');
-const UIDGenerator = require('uid-generator');
+const basicAuth = require("express-basic-auth");
+const auth = basicAuth({
+  authorizer: myAuthorizer,
+  unauthorizedResponse: getUnauthorizedResponse,
+});
+const cookieParser = require("cookie-parser");
+const UIDGenerator = require("uid-generator");
 const bcrypt = require("bcrypt");
-
-app.use(cookieParser("TennoGen"));
 
 user = {
   _id: "19234",
-  Name:"admin",
-  PasswordHashed:"",
-  isAdmin:"true"
-}
-
-
-
+  Name: "admin",
+  PasswordHashed: "",
+  isAdmin: "true",
+};
 
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY, {
   apiVersion: "2022-02-04",
@@ -84,47 +82,43 @@ app.use(cors());
 // }
 
 //////////////////////////////////////////////////////////////////////////////////
-  ///Auth Function//
-  async function myAuthorizer(username, password) {
-    // console.log(username);
-    // console.log(password);
-    // await findOne(username)
-    // console.log(user);
+///Auth Function//
+function myAuthorizer(username, password) {
+  // console.log(username);
+  // console.log(password);
+  // await findOne(username)
+  // console.log(user);
 
-    const userMatches = basicAuth.safeCompare(
-      username,
-      "customuser" || "admin"
-    );
-    const passwordMatches = basicAuth.safeCompare(
-      password,
-      "custompassword" || "adminpassword"
-    );
-    return userMatches & passwordMatches;
-    // const hashedPassword = await hashIt(password);
-    // const hashedCheck = await compareIt(password, hashedPassword);
+  const userMatches = basicAuth.safeCompare(username, "customuser" || "admin");
+  const passwordMatches = basicAuth.safeCompare(password, "custompassword" || "adminpassword");
 
-    // & hashedCheck
-  }
+  // const hashedPassword = await hashIt(password);
+  // const hashedCheck = await compareIt(password, hashedPassword);
+  console.log(userMatches);
+  console.log(passwordMatches, "wtf");
+  return userMatches & passwordMatches;
+  // & hashedCheck
+}
 
-  ///Password Hashing/////
-  const { TIMEOUT } = require("dns");
-  async function hashIt(password) {
-    const salt = await bcrypt.genSalt(6);
-    const hashed = await bcrypt.hash(password, salt);
-  }
-  // compare the password user entered with hashed pass.
-  async function compareIt(password, hashedPassword) {
-    console.log(password);
-    console.log(hashedPassword);
-    const validPassword = await bcrypt.compare(password, hashedPassword);
-  }
+///Password Hashing/////
+const { TIMEOUT } = require("dns");
+async function hashIt(password) {
+  const salt = await bcrypt.genSalt(6);
+  const hashed = await bcrypt.hash(password, salt);
+}
+// compare the password user entered with hashed pass.
+async function compareIt(password, hashedPassword) {
+  console.log(password);
+  console.log(hashedPassword);
+  const validPassword = await bcrypt.compare(password, hashedPassword);
+}
 
-  ///Autherizer options/////
-  function getUnauthorizedResponse(req) {
-    return req.auth
-      ? "Credentials " + req.auth.user + ":" + req.auth.password + " rejected"
-      : "No credentials provided";
-  }
+///Autherizer options/////
+function getUnauthorizedResponse(req) {
+  return req.auth
+    ? "Credentials " + req.auth.user + ":" + req.auth.password + " rejected"
+    : "No credentials provided";
+}
 const { randomInt } = require("crypto");
 
 const handleError = (err, res) => {
@@ -148,7 +142,7 @@ if (!isDev && cluster.isMaster) {
 } else {
   const app = express();
   //////////////////////authentacation///////////////////////////////////////////////\
-
+  app.use(cookieParser("TennoGen"));
   app.use("/authenticate", auth, (req, res) => {
     const options = {
       httpOnly: true,
