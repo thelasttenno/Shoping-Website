@@ -4,6 +4,8 @@ import { Link } from "react-router-dom";
 import "./inventory.scss";
 import sort from "../../assets/images/sort.svg";
 
+setTimeout(() => { console.log("pausing"); }, 1000);
+
 const Inventory = (props) => {
   if (props.inventory !== "") {
   return (

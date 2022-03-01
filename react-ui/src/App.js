@@ -1,4 +1,4 @@
-import { useState, useEffect, Component, useCallback } from "react";
+import { useState, useEffect, useCallback } from "react";
 import "./App.css";
 // import { getNewSession, Event, verifySession } from "./lib/session";
 import { Provider } from "react-redux";
@@ -23,9 +23,6 @@ import AdminClient from "./components/Admin-Client/AdminClient";
 import axios from "axios";
 import store from "./store/index";
 import Signin from "./components/Admin-Client/Authentication/Signin";
-import SingleCollabItem from "./components/Public-Client/SingleCollabItem/SingleCollabItem";
-import SingleItem from "./components/Public-Client/SingleItem/SingleItem";
-import { useWillMount } from "./lib/useWillMount";
 function App() {
   //Shopping cart state
   let [shoppingCart, setShoppingCart] = useState([]);
@@ -45,28 +42,28 @@ function App() {
   let [CollabitemsPants, setCollabitemsPants] = useState([]);
   let [NotCollabitemsPants, setNotCollabitemsPants] = useState([]);
   let [megaState, setMegaState] = useState(null);
-  const [message, setMessage] = useState(null);
   const [isFetching, setIsFetching] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [url, setUrl] = useState("http://localhost:4242/inventory");
   const [token, setToken] = useState(null);
-  let [sessionState, setSessionState] = useState(null);
-  const readCookie = useCallback(async () => {
-    try {
-      const res = await axios.get("/read-cookie");
 
-      if (res.data.token !== undefined) {
-        await setToken(res.data.token);
-      }
-    } catch (e) {
-      await setToken(undefined);
-      console.log(e);
-    }
-  }, []);
 
-  useEffect(() => {
-    readCookie();
-  }, [readCookie]);
+  // const readCookie = useCallback(async () => {
+  //   try {
+  //     const res = await axios.get("http://localhost:4242/read-cookie");
+
+  //     if (res.data.token !== undefined) {
+  //       await setToken(res.data.token);
+  //     }
+  //   } catch (e) {
+  //     await setToken(undefined);
+  //     console.log(e);
+  //   }
+  // }, []);
+
+  // useEffect(() => {
+  //   readCookie();
+  // }, [readCookie]);
 
   function PrivateRoute({ children, ...rest }) {
     return (
@@ -435,7 +432,7 @@ function App() {
                   )}
                 />
                 <Provider store={store}>
-                  <PrivateRoute path="/admin" token={token}>
+                  {/* <PrivateRoute path="/admin" token={token}> */}
                     <Route
                       path="/admin"
                       exact
@@ -453,7 +450,7 @@ function App() {
                         );
                       }}
                     />
-                  </PrivateRoute>
+                  {/* </PrivateRoute> */}
                   <Route
                     path="/signin"
                     exact

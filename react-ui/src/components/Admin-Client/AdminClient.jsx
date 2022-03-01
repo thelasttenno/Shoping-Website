@@ -2,44 +2,28 @@ import React, { Component } from "react";
 import axios from "axios";
 
 import {
-  BrowserRouter as Router,
   Switch,
   Route,
   Redirect,
-  BrowserRouter,
 } from "react-router-dom";
 import Header from "./Header/Header";
 import Orders from "../../pages/Order/Orders";
 import OrdersInventory from "./Order/OrderInventory";
-import Editorder from "./EditOrder/EditOrder";
 import Inventory from "../../pages/Inventory/Inventory";
-import Addorder from "./AddOrder/AddOrder.js";
 
 import AddInventory from "./AddInventory/AddInventory";
 import EditInventory from "./EditInventory/EditInventory";
 
 import InventoryDetails from "./InventoryDetails/InventoryDetails";
 import Footer from "./Footer/Footer";
-import Login from "./login/Login.jsx";
-import Signin from "./Authentication/Signin";
-
-//If no authenticated object, then return redirect to signin
-function authCheck(protectedComponent) {
-  const isAuthenticated = localStorage.getItem("isAuthenticated");
-
-  if (isAuthenticated) {
-    return <>{protectedComponent}</>;
-  } else {
-    return <Redirect to="/admin/signin" />;
-  }
-}
+import AdminHome from "./AdminHome/AdminHome.jsx";
 class AdminClient extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
       orders: null,
-      inventory: null,
+      inventory: null
     };
   }
 
@@ -113,7 +97,7 @@ class AdminClient extends Component {
               path="/admin"
               exact
               render={(props) => {
-                return authCheck(<Login {...props} />);
+                return (<AdminHome {...props} />);
               }}
             />
 
@@ -121,7 +105,7 @@ class AdminClient extends Component {
               path="/admin/orders"
               exact
               render={(props) => {
-                return authCheck(
+                return (
                   <Orders {...props} inventory={this.state.inventory} />
                 );
               }}
@@ -130,7 +114,7 @@ class AdminClient extends Component {
             <Route
               path="/admin/orders/:orderId/edit-order"
               render={() => {
-                return authCheck(
+                return (
                   <OrdersInventory
                     {...this.props}
                     order={this.state.orders.find(
@@ -146,7 +130,7 @@ class AdminClient extends Component {
               path="/admin/addorder"
               exact
               render={() => {
-                return authCheck(
+                return (
                   <OrdersInventory
                     {...this.props}
                     inventory={this.state.inventory}
@@ -158,7 +142,7 @@ class AdminClient extends Component {
             <Route
               path="/admin/:orderId/inventory"
               render={() => {
-                return authCheck(
+                return (
                   <OrdersInventory
                     {...this.props}
                     inventory={this.state.inventory}
@@ -171,7 +155,7 @@ class AdminClient extends Component {
               path="/admin/inventory"
               exact
               render={(props) => {
-                return authCheck(
+                return (
                   <Inventory {...this.props} inventory={this.state.inventory} />
                 );
               }}
@@ -181,7 +165,7 @@ class AdminClient extends Component {
               path="/admin/inventory/new-inventory"
               exact
               render={(props) => {
-                return authCheck(<AddInventory {...this.props} />);
+                return (<AddInventory {...this.props} />);
               }}
             />
 
@@ -189,7 +173,7 @@ class AdminClient extends Component {
               path="/admin/inventory/:inventoryId/edit-inventory"
               exact
               render={(props) => {
-                return authCheck(
+                return (
                   <EditInventory
                     {...props}
                     inventory={this.state.inventory.find(
@@ -209,7 +193,7 @@ class AdminClient extends Component {
             <Route
               path="/admin/inventory/:inventoryId"
               render={(props) =>
-                authCheck(
+                (
                   <InventoryDetails
                     {...props}
                     inventory={this.state.inventory}

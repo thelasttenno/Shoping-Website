@@ -164,7 +164,6 @@ if (!isDev && cluster.isMaster) {
     });
   });
   app.get("/read-cookie", (req, res) => {
-    console.log(req.signedCookies.token);
     let token = new UIDGenerator(user._id);
     console.log(token);
     if (req.signedCookies.token !== undefined) {
