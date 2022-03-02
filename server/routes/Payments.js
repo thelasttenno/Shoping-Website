@@ -109,8 +109,8 @@ exports.stripeSesssionCreate = async (req, res) => {
         order_id: uuidv4(),
       },
       mode: "payment",
-      success_url: `${domainURL}/success.html?session_id={CHECKOUT_SESSION_ID}`,
-      cancel_url: `${domainURL}/cancel`,
+      success_url: `${domainURL}success?session_id={CHECKOUT_SESSION_ID}`,
+      cancel_url: `${domainURL}cancel`,
     })
     .then((session) => {
       res.send(JSON.stringify(session));

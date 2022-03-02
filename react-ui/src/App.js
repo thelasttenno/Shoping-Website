@@ -23,6 +23,8 @@ import AdminClient from "./components/Admin-Client/AdminClient";
 import axios from "axios";
 import store from "./store/index";
 import Signin from "./components/Admin-Client/Authentication/Signin";
+import Success from "./components/Public-Client/Success/Success";
+import Cancel from "./components/Public-Client/Cancel/Cancel";
 // import SingleCollabItem from "./components/Public-Client/SingleCollabItem/SingleCollabItem";
 // import SingleItem from "./components/Public-Client/SingleItem/SingleItem";
 // import { useWillMount } from "./lib/useWillMount";
@@ -314,8 +316,6 @@ function App() {
                 token={token}
               />
               <Switch>
-                <Redirect from="/success" to="/" />
-                <Redirect from="/cancel" to="/" />
                 <Redirect from="/home" to="/" />
                 <Route
                   path="/"
@@ -324,7 +324,6 @@ function App() {
                     //
                     return (
                       <section>
-
                         <Home
                           {...props}
                           orders={"orders"}
@@ -354,7 +353,6 @@ function App() {
                   path="/shop"
                   render={(props) => (
                     <section>
- 
                       <Shop
                         {...props}
                         orders={"orders"}
@@ -374,7 +372,6 @@ function App() {
                   path="/collabs"
                   render={(props) => (
                     <section>
- 
                       <Collabs
                         {...props}
                         orders={"orders"}
@@ -390,7 +387,6 @@ function App() {
                   path="/Cart"
                   render={(props) => (
                     <section>
- 
                       <Cart
                         {...props}
                         orders={"orders"}
@@ -405,7 +401,6 @@ function App() {
                   path="/Checkout"
                   render={(props) => (
                     <section>
- 
                       <Checkout
                         {...props}
                         orders={"orders"}
@@ -438,6 +433,24 @@ function App() {
                     render={(props) => {
                       return (
                         <section>{<Signin setToken={setToken} />}</section>
+                      );
+                    }}
+                  />
+                  <Route
+                    path="/success"
+                    exact
+                    render={(props) => {
+                      return (
+                        <section>{<Success {...props} setToken={setToken} />}</section>
+                      );
+                    }}
+                  />
+                  <Route
+                    path="/cancel"
+                    exact
+                    render={(props) => {
+                      return (
+                        <section>{<Cancel {...props} setToken={setToken} />}</section>
                       );
                     }}
                   />

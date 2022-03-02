@@ -1,91 +1,3 @@
-// import React from "react";
-// import { Link, useLocation } from "react-router-dom";
-
-// function Header(props) {
-//   const location = useLocation();
-//   return (
-//     <header className="header">
-//       <nav className="nav">
-//         <div className="nav--content">
-//           <Link
-//             className="link"
-//             to={"/"}
-//           >
-//             <img src={Logo} className="nav-logo" alt="" />
-//           </Link>
-//           <ul className="nav-menu">
-//             <li>
-//               <Link
-//                 to={"/"}
-//                 className={`link nav-link ${
-//                   location.pathname.toLowerCase().includes("inventory")
-//                     ? "nav-button nav-link--active nav-button--right"
-//                     : ""
-//                 }`}
-//               >
-//                 <p>HOME</p>
-//               </Link>
-//             </li>
-//             <li>
-//               <Link
-//                 to={"/about"}
-//                 className={`link nav-link ${
-//                   location.pathname.toLowerCase().includes("inventory")
-//                     ? "nav-button nav-link--active nav-button--right"
-//                     : ""
-//                 }`}
-//               >
-//                 <p>ABOUT</p>
-//               </Link>
-//             </li>
-//             <li>
-//               <Link
-//                 to={"/shop"}
-//                 className={`link nav-link ${
-//                   location.pathname.toLowerCase().includes("inventory")
-//                     ? "nav-button nav-link--active nav-button--right"
-//                     : ""
-//                 }`}
-//               >
-//                 <p>SHOP</p>
-//               </Link>
-//             </li>
-//             <li>
-//               <Link
-//                 to={"/collabs"}
-//                 className={`link nav-link ${
-//                   location.pathname.toLowerCase().includes("inventory")
-//                     ? "nav-button nav-link--active nav-button--right"
-//                     : ""
-//                 }`}
-//               >
-//                 <p>COLLABS</p>
-//               </Link>
-//             </li>
-//             <li>
-//               <Link
-//                 to={"/cart"}
-//                 className={`link nav-link ${
-//                   location.pathname.toLowerCase().includes("inventory")
-//                     ? "nav-button nav-link--active nav-button--right"
-//                     : ""
-//                 }`}
-//               >
-//                 <p>
-//                   CART{" "}
-//                   {props.numCartItems() !== 0
-//                     ? `(${props.numCartItems()})`
-//                     : ""}
-//                 </p>
-//               </Link>
-//             </li>
-//           </ul>
-//         </div>
-//       </nav>
-//     </header>
-//   );
-// }
-// export default Header;
 import * as React from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
@@ -166,7 +78,7 @@ const Header = (props) => {
                 display: { xs: "block", md: "none" },
               }}
             >
-              <MenuItem key={"Home"} onClick={handleCloseNavMenu}>
+              <MenuItem key={"HomeD"} onClick={handleCloseNavMenu}>
                 <Button
                   onClick={handleCloseNavMenu}
                   textAlign="center"
@@ -176,7 +88,7 @@ const Header = (props) => {
                   Home
                 </Button>
               </MenuItem>
-              <MenuItem key={"About"} onClick={handleCloseNavMenu}>
+              <MenuItem key={"AboutD"} onClick={handleCloseNavMenu}>
                 <Button
                   onClick={handleCloseNavMenu}
                   textAlign="center"
@@ -186,7 +98,7 @@ const Header = (props) => {
                   About
                 </Button>
               </MenuItem>
-              <MenuItem key={"Collabs"} onClick={handleCloseNavMenu}>
+              <MenuItem key={"CollabsD"} onClick={handleCloseNavMenu}>
                 <Button
                   onClick={handleCloseNavMenu}
                   textAlign="center"
@@ -196,7 +108,7 @@ const Header = (props) => {
                   Collabs
                 </Button>
               </MenuItem>
-              <MenuItem key={"Shop"} onClick={handleCloseNavMenu}>
+              <MenuItem key={"ShopD"} onClick={handleCloseNavMenu}>
                 <Button
                   onClick={handleCloseNavMenu}
                   textAlign="center"
@@ -206,7 +118,7 @@ const Header = (props) => {
                   Shop
                 </Button>
               </MenuItem>
-              <MenuItem key={"Cart"} onClick={handleCloseNavMenu}>
+              <MenuItem key={"CartD"} onClick={handleCloseNavMenu}>
                 <Button
                   onClick={handleCloseNavMenu}
                   textAlign="center"

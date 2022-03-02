@@ -5,7 +5,11 @@ import { styled } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
-
+import Container from "@mui/material/Container";
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+import FormControl from "@mui/material/FormControl";
+import Select from "@mui/material/Select";
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
   ...theme.typography.body2,
@@ -14,284 +18,423 @@ const Item = styled(Paper)(({ theme }) => ({
   color: theme.palette.text.secondary,
 }));
 
-class Shop extends Component {
-  state = {
-    status: "All Items",
-  };
-  updateStatus = (e) => {
+function Shop (props) {
+    // status: "All Items",
+ const [statuss1, setStatuss1] = React.useState("All Items");
+
+ function updateStatus (e) {
     const { value } = e.target;
-    this.setState({
-      status: value,
-    });
+    setStatuss1(value);
     console.log(e.target.value);
   };
-  render() {
-    console.log(this.props);
-    if (this.props.isFetching !== true) {
+  
+    console.log(props);
+    if (props.isFetching !== true) {
       return (
         <section className="Shop">
-          <div className="Shop__head">
-            <div className="hero-content">
-              {/* <!-- <h1 className="hero-content__title">50% off all Tee shirts with a purches of any item!</h1> --> */}
-            </div>
+          <Box item xs={"auto"} sx={{ marginY: 6 }}>
+            <Container maxWidth="xs">
+              <Item sx={{ paddingY: 6 }}>
+                <FormControl sx={{ m: 1, minWidth: 80 }}>
+                  <InputLabel id="demo-simple-select-autowidth-label">
+                    Item Type
+                  </InputLabel>
+                  <Select
+                    labelId="demo-simple-select-autowidth-label"
+                    id="demo-simple-select-autowidth"
+                    value={statuss1}
+                    onChange={updateStatus}
+                    autoWidth
+                    label="Item Type"
+                  >
+                    <MenuItem value="All Items">Please Select</MenuItem>
+                    <MenuItem value="Collabs">Collabs</MenuItem>
+                    <MenuItem value="T-Shirt">T-Shirt</MenuItem>
+                    <MenuItem value="Hoodies">Hoodies</MenuItem>
+                    <MenuItem value="Crop-Tops">Crop-Tops</MenuItem>
+                    <MenuItem value="Long-T">Long</MenuItem>
+                    <MenuItem value="Pants">Pants</MenuItem>
+
+                  </Select>
+                </FormControl>
+              </Item>
+            </Container>
+          </Box>
+          {/* {if (statuss1 === "Collabs") {} else {}} */}
+          <h2 className="Shop__title">{statuss1}</h2>
+
+          <Box
+            sx={{ flexGrow: 1 }}
+            style={{
+              display: statuss1 === "All Items" ? "flex" : "none",
+              flexDirection: "column",
+            }}
+          >
+            <Grid container spacing={12} columns={16}>
+              {props.megaState.Collabitems.map((_Item, index) => (
+                <Grid item xs={"auto"} key={index}>
+                  <Item>
+                    <SingleCollabItem
+                      Item={_Item}
+                      shoppingCart={props.shoppingCart}
+                      addToCart={props.addToCart}
+                      removeFromCart={props.removeFromCart}
+                      addSingleItemToCart={props.addSingleItemToCart}
+                      removeSingleItemFromCart={
+                        props.removeSingleItemFromCart
+                      }
+                      key={Item.id}
+                    />
+                  </Item>
+                </Grid>
+              ))}
+              {props.megaState.NotCollabitems.map((_Item, index) => (
+                <Grid item xs={"auto"} key={index}>
+                  <Item>
+                    <SingleCollabItem
+                      Item={_Item}
+                      shoppingCart={props.shoppingCart}
+                      addToCart={props.addToCart}
+                      removeFromCart={props.removeFromCart}
+                      addSingleItemToCart={props.addSingleItemToCart}
+                      removeSingleItemFromCart={
+                        props.removeSingleItemFromCart
+                      }
+                      key={Item.id}
+                    />
+                  </Item>
+                </Grid>
+              ))}
+            </Grid>
+          </Box>
+          <Box
+            sx={{ flexGrow: 1 }}
+            style={{
+              display: statuss1 === "Collabs" ? "flex" : "none",
+              flexDirection: "column",
+            }}
+          >
+            <Grid container spacing={12} columns={16}>
+              {props.megaState.Collabitems.map((_Item, index) => (
+                <Grid item xs={"auto"} key={index}>
+                  <Item>
+                    <SingleCollabItem
+                      Item={_Item}
+                      shoppingCart={props.shoppingCart}
+                      addToCart={props.addToCart}
+                      removeFromCart={props.removeFromCart}
+                      addSingleItemToCart={props.addSingleItemToCart}
+                      removeSingleItemFromCart={
+                        props.removeSingleItemFromCart
+                      }
+                      key={Item.id}
+                    />
+                  </Item>
+                </Grid>
+              ))}
+            </Grid>
+          </Box>
+
+          <div
+            style={{
+              display: statuss1 === "T-Shirt" ? "flex" : "none",
+              flexDirection: "column",
+            }}
+            className="cards CollabitemsTShirt"
+          >
+            {" "}
+            <Box sx={{ flexGrow: 1 }}>
+              <Grid container spacing={12} columns={16}>
+                {props.megaState.CollabitemsTShirt.map((_Item, index) => (
+                  <Grid item xs={"auto"} key={index}>
+                    <Item>
+                      <SingleCollabItem
+                        Item={_Item}
+                        shoppingCart={props.shoppingCart}
+                        addToCart={props.addToCart}
+                        removeFromCart={props.removeFromCart}
+                        addSingleItemToCart={props.addSingleItemToCart}
+                        removeSingleItemFromCart={
+                          props.removeSingleItemFromCart
+                        }
+                        key={Item.id}
+                      />
+                    </Item>
+                  </Grid>
+                ))}
+              </Grid>
+            </Box>
           </div>
-          <div>
-            <select
-              type="text"
-              name="ItemSelector"
-              className="input select"
-              placeholder="Please select"
-              onChange={this.updateStatus}
-            >
-              <option value="All Items">Please Select</option>
-              <option value="Collabs">Collabs</option>
-              <option value="T-Shirt">T-Shirt</option>
-              <option value="Hoodies">Hoodies</option>
-              <option value="Crop-Tops">Crop-Tops</option>
-              <option value="Long-T">Long-T</option>
-              <option value="Pants">Pants</option>
-            </select>
-          </div>
-          <div className="Shop__header">
-            <h2 className="Shop__title">{this.state.status}</h2>
-            <div
-              style={{
-                display: this.state.status === "Collabs" ? "flex" : "none",
-                flexDirection: "column",
-              }}
-              className="cards Collabitems"
-            >
-              {/* <Box sx={{ flexGrow: 1 }}>
-                <Grid container spacing={12} columns={16}> */}
-                  {this.props.megaState.Collabitems.map((Item) => (
-                    // <Grid item xs={"auto"}>
-                    //   <Item>
-                        <SingleCollabItem
-                          Item={Item}
-                          shoppingCart={this.props.shoppingCart}
-                          addToCart={this.props.addToCart}
-                          removeFromCart={this.props.removeFromCart}
-                          addSingleItemToCart={this.props.addSingleItemToCart}
+          <div
+            style={{
+              display: statuss1 === "T-Shirt" ? "flex" : "none",
+              flexDirection: "column",
+            }}
+            className="cards NotCollabitemsTShirt"
+          >
+            <Box sx={{ flexGrow: 1 }}>
+              <Grid container spacing={12} columns={16}>
+                {props.megaState.NotCollabitemsTShirt.map(
+                  (_Item, index) => (
+                    <Grid item xs={"auto"} key={index}>
+                      <Item>
+                        <SingleItem
+                          Item={_Item}
+                          shoppingCart={props.shoppingCart}
+                          addToCart={props.addToCart}
+                          removeFromCart={props.removeFromCart}
+                          addSingleItemToCart={props.addSingleItemToCart}
                           removeSingleItemFromCart={
-                            this.props.removeSingleItemFromCart
+                            props.removeSingleItemFromCart
                           }
                           key={Item.id}
                         />
-                    //   </Item>
-                    // </Grid>
-                  ))}
-                {/* </Grid>
-              </Box> */}
-            </div>
-
-            <div
-              style={{
-                display: this.state.status === "all" ? "flex" : "none",
-                flexDirection: "column",
-              }}
-              className="cards NotCollabitems"
-            >
-              {this.props.megaState.NotCollabitems.map((Item) => (
-                <SingleItem
-                  Item={Item}
-                  shoppingCart={this.props.shoppingCart}
-                  addToCart={this.props.addToCart}
-                  removeFromCart={this.props.removeFromCart}
-                  addSingleItemToCart={this.props.addSingleItemToCart}
-                  removeSingleItemFromCart={this.props.removeSingleItemFromCart}
-                  key={Item.id}
-                />
-              ))}
-            </div>
-            <div
-              style={{
-                display: this.state.status === "T-Shirt" ? "flex" : "none",
-                flexDirection: "column",
-              }}
-              className="cards CollabitemsTShirt"
-            >
-              {this.props.megaState.CollabitemsTShirt.map((Item) => (
-                <SingleCollabItem
-                  Item={Item}
-                  shoppingCart={this.props.shoppingCart}
-                  addToCart={this.props.addToCart}
-                  removeFromCart={this.props.removeFromCart}
-                  addSingleItemToCart={this.props.addSingleItemToCart}
-                  removeSingleItemFromCart={this.props.removeSingleItemFromCart}
-                  key={Item.id}
-                />
-              ))}
-            </div>
-            <div
-              style={{
-                display: this.state.status === "T-Shirt" ? "flex" : "none",
-                flexDirection: "column",
-              }}
-              className="cards NotCollabitemsTShirt"
-            >
-              {this.props.megaState.NotCollabitemsTShirt.map((Item) => (
-                <SingleItem
-                  Item={Item}
-                  shoppingCart={this.props.shoppingCart}
-                  addToCart={this.props.addToCart}
-                  removeFromCart={this.props.removeFromCart}
-                  addSingleItemToCart={this.props.addSingleItemToCart}
-                  removeSingleItemFromCart={this.props.removeSingleItemFromCart}
-                  key={Item.id}
-                />
-              ))}
-            </div>
-            <div
-              style={{
-                display: this.state.status === "Long-T" ? "flex" : "none",
-                flexDirection: "column",
-              }}
-              className="cards CollabitemsLongT"
-            >
-              {this.props.megaState.CollabitemsLongT.map((Item) => (
-                <SingleCollabItem
-                  Item={Item}
-                  shoppingCart={this.props.shoppingCart}
-                  addToCart={this.props.addToCart}
-                  removeFromCart={this.props.removeFromCart}
-                  addSingleItemToCart={this.props.addSingleItemToCart}
-                  removeSingleItemFromCart={this.props.removeSingleItemFromCart}
-                  key={Item.id}
-                />
-              ))}
-            </div>
-            <div
-              style={{
-                display: this.state.status === "Long-T" ? "flex" : "none",
-                flexDirection: "column",
-              }}
-              className="cards NotCollabitemsLongT"
-            >
-              {this.props.megaState.NotCollabitemsLongT.map((Item) => (
-                <SingleItem
-                  Item={Item}
-                  shoppingCart={this.props.shoppingCart}
-                  addToCart={this.props.addToCart}
-                  removeFromCart={this.props.removeFromCart}
-                  addSingleItemToCart={this.props.addSingleItemToCart}
-                  removeSingleItemFromCart={this.props.removeSingleItemFromCart}
-                  key={Item.id}
-                />
-              ))}
-            </div>
-            <div
-              style={{
-                display: this.state.status === "Crop-Top" ? "flex" : "none",
-                flexDirection: "column",
-              }}
-              className="cards CollabitemsCropTop"
-            >
-              {this.props.megaState.CollabitemsCropTop.map((Item) => (
-                <SingleCollabItem
-                  Item={Item}
-                  shoppingCart={this.props.shoppingCart}
-                  addToCart={this.props.addToCart}
-                  removeFromCart={this.props.removeFromCart}
-                  addSingleItemToCart={this.props.addSingleItemToCart}
-                  removeSingleItemFromCart={this.props.removeSingleItemFromCart}
-                  key={Item.id}
-                />
-              ))}
-            </div>
-            <div
-              style={{
-                display: this.state.status === "Crop-Top" ? "flex" : "none",
-                flexDirection: "column",
-              }}
-              className="cards NotCollabitemsCropTop"
-            >
-              {this.props.megaState.NotCollabitemsCropTop.map((Item) => (
-                <SingleItem
-                  Item={Item}
-                  shoppingCart={this.props.shoppingCart}
-                  addToCart={this.props.addToCart}
-                  removeFromCart={this.props.removeFromCart}
-                  addSingleItemToCart={this.props.addSingleItemToCart}
-                  removeSingleItemFromCart={this.props.removeSingleItemFromCart}
-                  key={Item.id}
-                />
-              ))}
-            </div>
-            <div
-              style={{
-                display: this.state.status === "Pants" ? "flex" : "none",
-                flexDirection: "column",
-              }}
-              className="cards CollabitemsPants"
-            >
-              {this.props.megaState.CollabitemsPants.map((Item) => (
-                <SingleCollabItem
-                  Item={Item}
-                  shoppingCart={this.props.shoppingCart}
-                  addToCart={this.props.addToCart}
-                  removeFromCart={this.props.removeFromCart}
-                  addSingleItemToCart={this.props.addSingleItemToCart}
-                  removeSingleItemFromCart={this.props.removeSingleItemFromCart}
-                  key={Item.id}
-                />
-              ))}
-            </div>
-            <div
-              style={{
-                display: this.state.status === "Pants" ? "flex" : "none",
-                flexDirection: "column",
-              }}
-              className="cards NotCollabitemsPants"
-            >
-              {this.props.megaState.NotCollabitemsPants.map((Item) => (
-                <SingleItem
-                  Item={Item}
-                  shoppingCart={this.props.shoppingCart}
-                  addToCart={this.props.addToCart}
-                  removeFromCart={this.props.removeFromCart}
-                  addSingleItemToCart={this.props.addSingleItemToCart}
-                  removeSingleItemFromCart={this.props.removeSingleItemFromCart}
-                  key={Item.id}
-                />
-              ))}
-            </div>
-            <div
-              style={{
-                display: this.state.status === "Hoodies" ? "flex" : "none",
-                flexDirection: "column",
-              }}
-              className="cards CollabitemsHoodies"
-            >
-              {this.props.megaState.CollabitemsHoodies.map((Item) => (
-                <SingleCollabItem
-                  Item={Item}
-                  shoppingCart={this.props.shoppingCart}
-                  addToCart={this.props.addToCart}
-                  removeFromCart={this.props.removeFromCart}
-                  addSingleItemToCart={this.props.addSingleItemToCart}
-                  removeSingleItemFromCart={this.props.removeSingleItemFromCart}
-                  key={Item.id}
-                />
-              ))}
-            </div>
-            <div
-              style={{
-                display: this.state.status === "Hoodies" ? "flex" : "none",
-                flexDirection: "column",
-              }}
-              className="cards NotCollabitemsHoodies"
-            >
-              {this.props.megaState.NotCollabitemsHoodies.map((Item) => (
-                <SingleItem
-                  Item={Item}
-                  shoppingCart={this.props.shoppingCart}
-                  addToCart={this.props.addToCart}
-                  addSingleItemToCart={this.props.addSingleItemToCart}
-                  removeSingleItemFromCart={this.props.removeSingleItemFromCart}
-                  key={Item.id}
-                />
-              ))}
-            </div>
+                      </Item>
+                    </Grid>
+                  )
+                )}
+              </Grid>
+            </Box>
+          </div>
+          <div
+            style={{
+              display: props.status === "Long-T" ? "flex" : "none",
+              flexDirection: "column",
+            }}
+            className="cards CollabitemsLongT"
+          >
+            <Box sx={{ flexGrow: 1 }}>
+              <Grid container spacing={12} columns={16}>
+                {props.megaState.CollabitemsLongT.map((_Item, index) => (
+                  <Grid item xs={"auto"} key={index}>
+                    <Item>
+                      <SingleCollabItem
+                        Item={_Item}
+                        shoppingCart={props.shoppingCart}
+                        addToCart={props.addToCart}
+                        removeFromCart={props.removeFromCart}
+                        addSingleItemToCart={props.addSingleItemToCart}
+                        removeSingleItemFromCart={
+                          props.removeSingleItemFromCart
+                        }
+                        key={Item.id}
+                      />
+                    </Item>
+                  </Grid>
+                ))}
+              </Grid>
+            </Box>
+          </div>
+          <div
+            style={{
+              display: props.status === "Long-T" ? "flex" : "none",
+              flexDirection: "column",
+            }}
+            className="cards NotCollabitemsLongT"
+          >
+            <Box sx={{ flexGrow: 1 }}>
+              <Grid container spacing={12} columns={16}>
+                {props.megaState.NotCollabitemsLongT.map(
+                  (_Item, index) => (
+                    <Grid item xs={"auto"} key={index}>
+                      <Item>
+                        <SingleItem
+                          Item={_Item}
+                          shoppingCart={props.shoppingCart}
+                          addToCart={props.addToCart}
+                          removeFromCart={props.removeFromCart}
+                          addSingleItemToCart={props.addSingleItemToCart}
+                          removeSingleItemFromCart={
+                            props.removeSingleItemFromCart
+                          }
+                          key={Item.id}
+                        />
+                      </Item>
+                    </Grid>
+                  )
+                )}
+              </Grid>
+            </Box>
+          </div>
+          <div
+            style={{
+              display: statuss1 === "Crop-Top" ? "flex" : "none",
+              flexDirection: "column",
+            }}
+            className="cards CollabitemsCropTop"
+          >
+            <Box sx={{ flexGrow: 1 }}>
+              <Grid container spacing={12} columns={16}>
+                {props.megaState.CollabitemsCropTop.map((_Item, index) => (
+                  <Grid item xs={"auto"} key={index}>
+                    <Item>
+                      <SingleCollabItem
+                        Item={_Item}
+                        shoppingCart={props.shoppingCart}
+                        addToCart={props.addToCart}
+                        removeFromCart={props.removeFromCart}
+                        addSingleItemToCart={props.addSingleItemToCart}
+                        removeSingleItemFromCart={
+                          props.removeSingleItemFromCart
+                        }
+                        key={Item.id}
+                      />
+                    </Item>
+                  </Grid>
+                ))}
+              </Grid>
+            </Box>
+          </div>
+          <div
+            style={{
+              display: statuss1 === "Crop-Top" ? "flex" : "none",
+              flexDirection: "column",
+            }}
+            className="cards NotCollabitemsCropTop"
+          >
+            <Box sx={{ flexGrow: 1 }}>
+              <Grid container spacing={12} columns={16}>
+                {props.megaState.NotCollabitemsCropTop.map(
+                  (_Item, index) => (
+                    <Grid item xs={"auto"} key={index}>
+                      <Item>
+                        <SingleItem
+                          Item={_Item}
+                          shoppingCart={props.shoppingCart}
+                          addToCart={props.addToCart}
+                          removeFromCart={props.removeFromCart}
+                          addSingleItemToCart={props.addSingleItemToCart}
+                          removeSingleItemFromCart={
+                            props.removeSingleItemFromCart
+                          }
+                          key={Item.id}
+                        />
+                      </Item>
+                    </Grid>
+                  )
+                )}
+              </Grid>
+            </Box>
+          </div>
+          <div
+            style={{
+              display: statuss1 === "Pants" ? "flex" : "none",
+              flexDirection: "column",
+            }}
+            className="cards CollabitemsPants"
+          >
+            <Box sx={{ flexGrow: 1 }}>
+              <Grid container spacing={12} columns={16}>
+                {props.megaState.CollabitemsPants.map((_Item, index) => (
+                  <Grid item xs={"auto"} key={index}>
+                    <Item>
+                      <SingleCollabItem
+                        Item={_Item}
+                        shoppingCart={props.shoppingCart}
+                        addToCart={props.addToCart}
+                        removeFromCart={props.removeFromCart}
+                        addSingleItemToCart={props.addSingleItemToCart}
+                        removeSingleItemFromCart={
+                          props.removeSingleItemFromCart
+                        }
+                        key={Item.id}
+                      />
+                    </Item>
+                  </Grid>
+                ))}
+              </Grid>
+            </Box>
+          </div>
+          <div
+            style={{
+              display: statuss1 === "Pants" ? "flex" : "none",
+              flexDirection: "column",
+            }}
+            className="cards NotCollabitemsPants"
+          >
+            <Box sx={{ flexGrow: 1 }}>
+              <Grid container spacing={12} columns={16}>
+                {props.megaState.NotCollabitemsPants.map(
+                  (_Item, index) => (
+                    <Grid item xs={"auto"} key={index}>
+                      <Item>
+                        <SingleItem
+                          Item={_Item}
+                          shoppingCart={props.shoppingCart}
+                          addToCart={props.addToCart}
+                          removeFromCart={props.removeFromCart}
+                          addSingleItemToCart={props.addSingleItemToCart}
+                          removeSingleItemFromCart={
+                            props.removeSingleItemFromCart
+                          }
+                          key={Item.id}
+                        />
+                      </Item>
+                    </Grid>
+                  )
+                )}
+              </Grid>
+            </Box>
+          </div>
+          <div
+            style={{
+              display: statuss1 === "Hoodies" ? "flex" : "none",
+              flexDirection: "column",
+            }}
+            className="cards CollabitemsHoodies"
+          >
+            <Box sx={{ flexGrow: 1 }}>
+              <Grid container spacing={12} columns={16}>
+                {props.megaState.CollabitemsHoodies.map((_Item, index) => (
+                  <Grid item xs={"auto"} key={index}>
+                    <Item>
+                      <SingleCollabItem
+                        Item={_Item}
+                        shoppingCart={props.shoppingCart}
+                        addToCart={props.addToCart}
+                        removeFromCart={props.removeFromCart}
+                        addSingleItemToCart={props.addSingleItemToCart}
+                        removeSingleItemFromCart={
+                          props.removeSingleItemFromCart
+                        }
+                        key={Item.id}
+                      />
+                    </Item>
+                  </Grid>
+                ))}
+              </Grid>
+            </Box>
+          </div>
+          <div
+            style={{
+              display: statuss1 === "Hoodies" ? "flex" : "none",
+              flexDirection: "column",
+            }}
+            className="cards NotCollabitemsHoodies"
+          >
+            <Box sx={{ flexGrow: 1 }}>
+              <Grid container spacing={12} columns={16}>
+                {props.megaState.NotCollabitemsHoodies.map(
+                  (_Item, index) => (
+                    <Grid item xs={"auto"} key={index}>
+                      <Item>
+                        <SingleItem
+                          Item={_Item}
+                          shoppingCart={props.shoppingCart}
+                          addToCart={props.addToCart}
+                          removeFromCart={props.removeFromCart}
+                          addSingleItemToCart={props.addSingleItemToCart}
+                          removeSingleItemFromCart={
+                            props.removeSingleItemFromCart
+                          }
+                          key={Item.id}
+                        />
+                      </Item>
+                    </Grid>
+                  )
+                )}
+              </Grid>
+            </Box>
           </div>
         </section>
       );
@@ -299,5 +442,4 @@ class Shop extends Component {
       return <div>Loading</div>;
     }
   }
-}
 export default Shop;
