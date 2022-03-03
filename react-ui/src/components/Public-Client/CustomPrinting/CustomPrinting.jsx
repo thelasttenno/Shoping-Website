@@ -15,7 +15,7 @@ const Item = styled(Paper)(({ theme }) => ({
   color: theme.palette.text.secondary,
 }));
 
-function Collabs() {
+function CustomPrinting() {
   return (
     <section className="Collabs">
       <Box item xs={"auto"} sx={{ marginY: 6 }}>
@@ -25,7 +25,8 @@ function Collabs() {
             {/* <img src={KaiPic}  alt="" /> */}
           </div>
           <Item sx={{ paddingY: 6 }}>
-            <h2 className="ContentCTA__Title">Want to Collab With us?</h2>
+            <h2 className="ContentCTA__Title">Want to Custom Print With us?</h2>
+            <h3 className="ContentCTA__Title">We do buisness and small projects!</h3>
             <Button
               variant="contained"
               size="large"
@@ -70,4 +71,4 @@ function Collabs() {
     </section>
   );
 }
-export default Collabs;
+export default CustomPrinting;

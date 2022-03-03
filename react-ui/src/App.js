@@ -25,6 +25,7 @@ import store from "./store/index";
 import Signin from "./components/Admin-Client/Authentication/Signin";
 import Success from "./components/Public-Client/Success/Success";
 import Cancel from "./components/Public-Client/Cancel/Cancel";
+import CustomPrinting from "./components/Public-Client/CustomPrinting/CustomPrinting";
 // import SingleCollabItem from "./components/Public-Client/SingleCollabItem/SingleCollabItem";
 // import SingleItem from "./components/Public-Client/SingleItem/SingleItem";
 // import { useWillMount } from "./lib/useWillMount";
@@ -40,12 +41,15 @@ function App() {
   let [NotCollabitemsHoodies, setNotCollabitemsHoodies] = useState([]);
   let [CollabitemsTShirt, setCollabitemsTShirt] = useState([]);
   let [NotCollabitemsTShirt, setNotCollabitemsTShirt] = useState([]);
-  let [CollabitemsCropTop, setCollabitemsCropTop] = useState([]);
-  let [NotCollabitemsCropTop, setNotCollabitemsCropTop] = useState([]);
+  let [CollabitemsSweatPants, setCollabitemsSweatPants] = useState([]);
+  let [NotCollabitemsSweatPants, setNotCollabitemsSweatPants] = useState([]);
   let [CollabitemsLongT, setCollabitemsLongT] = useState([]);
   let [NotCollabitemsLongT, setNotCollabitemsLongT] = useState([]);
-  let [CollabitemsPants, setCollabitemsPants] = useState([]);
-  let [NotCollabitemsPants, setNotCollabitemsPants] = useState([]);
+  let [CollabitemsSocks, setCollabitemsSocks] = useState([]);
+  let [NotCollabitemsSocks, setNotCollabitemsSocks] = useState([]);
+  let [CollabitemsStickers, setCollabitemsStickers] = useState([]);
+  let [NotCollabitemsStickers, setNotCollabitemsStickers] = useState([]);
+
   let [megaState, setMegaState] = useState(null);
   const [isFetching, setIsFetching] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
@@ -109,10 +113,13 @@ function App() {
       let newNotCollabitemsTShirt = [];
       let newCollabitemsLongT = [];
       let newNotCollabitemsLongT = [];
-      let newCollabitemsCropTop = [];
-      let newNotCollabitemsCropTop = [];
-      let newCollabitemsPants = [];
-      let newNotCollabitemsPants = [];
+      let newCollabitemsSweatPants = [];
+      let newNotCollabitemsSweatPants = [];
+      let newCollabitemsSocks = [];
+      let newNotCollabitemsSocks = [];
+      let newCollabitemsStickers = [];
+      let newNotCollabitemsStickers = [];
+
       // // let newCollab = []
       // // let newNotCollab = []
       Inventory.data.forEach((Item) => {
@@ -146,15 +153,21 @@ function App() {
           }
         } else if (Item.category === "Crop-Top") {
           if (Item.collab === true) {
-            newCollabitemsCropTop.push(Item);
+            newCollabitemsSweatPants.push(Item);
           } else {
-            newNotCollabitemsCropTop.push(Item);
+            newNotCollabitemsSweatPants.push(Item);
           }
         } else if (Item.category === "Pants") {
           if (Item.collab === true) {
-            newCollabitemsPants.push(Item);
+            newCollabitemsSocks.push(Item);
           } else {
-            newNotCollabitemsPants.push(Item);
+            newNotCollabitemsSocks.push(Item);
+          }
+        } else if (Item.category === "Stickers") {
+          if (Item.collab === true) {
+            newCollabitemsStickers.push(Item);
+          } else {
+            newNotCollabitemsStickers.push(Item);
           }
         }
       });
@@ -164,10 +177,12 @@ function App() {
       setNotCollabitemsTShirt(newNotCollabitemsTShirt);
       setCollabitemsLongT(newCollabitemsLongT);
       setNotCollabitemsLongT(newNotCollabitemsLongT);
-      setCollabitemsCropTop(newCollabitemsCropTop);
-      setNotCollabitemsCropTop(newNotCollabitemsCropTop);
-      setCollabitemsPants(newCollabitemsPants);
-      setNotCollabitemsPants(newNotCollabitemsPants);
+      setCollabitemsSweatPants(newCollabitemsSweatPants);
+      setNotCollabitemsSweatPants(newNotCollabitemsSweatPants);
+      setCollabitemsSocks(newCollabitemsSocks);
+      setNotCollabitemsSocks(newNotCollabitemsSocks);
+      setCollabitemsStickers(newCollabitemsStickers);
+      setNotCollabitemsStickers(newNotCollabitemsStickers);
       setIsLoading(false);
       resolve("resolved " + result);
     });
@@ -183,12 +198,14 @@ function App() {
       NotCollabitemsHoodies,
       CollabitemsTShirt,
       NotCollabitemsTShirt,
-      CollabitemsCropTop,
-      NotCollabitemsCropTop,
+      CollabitemsSweatPants,
+      NotCollabitemsSweatPants,
       CollabitemsLongT,
       NotCollabitemsLongT,
-      CollabitemsPants,
-      NotCollabitemsPants,
+      CollabitemsSocks,
+      NotCollabitemsSocks,
+      CollabitemsStickers,
+      NotCollabitemsStickers,
     });
     console.log(megaState);
     setIsFetching(false);
@@ -305,7 +322,7 @@ function App() {
   if (Inventory && megaState !== null) {
     if (!isFetching) {
       // console.log(megaState);
-      // let props={,NotCollabitemsPants,CollabitemsPants}
+      // let props={,NotCollabitemsSocks,CollabitemsSocks}
       return (
         <div className="App">
           <BrowserRouter>
@@ -441,7 +458,9 @@ function App() {
                     exact
                     render={(props) => {
                       return (
-                        <section>{<Success {...props} setToken={setToken} />}</section>
+                        <section>
+                          {<Success {...props} setToken={setToken} />}
+                        </section>
                       );
                     }}
                   />
@@ -450,10 +469,27 @@ function App() {
                     exact
                     render={(props) => {
                       return (
-                        <section>{<Cancel {...props} setToken={setToken} />}</section>
+                        <section>
+                          {<Cancel {...props} setToken={setToken} />}
+                        </section>
                       );
                     }}
                   />
+                   <Route
+                  path="/customprinting"
+                  render={(props) => (
+                    <section>
+                      <CustomPrinting
+                        {...props}
+                        orders={"orders"}
+                        Inventory={Inventory}
+                        removeFromCart={removeFromCart}
+                        addToCart={addToCart}
+                        // Collabitems={Collabitems}
+                      />
+                    </section>
+                  )}
+                />
                 </Provider>
               </Switch>
               {/* <Footer /> */}

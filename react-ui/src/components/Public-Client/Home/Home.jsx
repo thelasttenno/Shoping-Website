@@ -5,7 +5,7 @@ import { styled } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
-
+import Container from "@mui/material/Container";
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
   ...theme.typography.body2,
@@ -14,86 +14,93 @@ const Item = styled(Paper)(({ theme }) => ({
   color: theme.palette.text.secondary,
 }));
 
-const size = 4;
 class Home extends Component {
   render() {
-    console.log(this.props);
-
     if (this.props.isFetching !== true) {
       return (
-        <section className="Home">
-          <div className="Home__head">
-            <div className="hero-content">
-              {/* <!-- <h1 className="hero-content__title">50% off all Tee shirts with a purches of any item!</h1> --> */}
-              {/* <!-- <p className="hero-content__blurb">OFFICAL LAUNCH OF WEBSITE AND FIRST CLOTHING DROP IS FEB. 20TH.</p>
-      <p>if your here before the launch, thanks for the support and for sales inquirys you can hit us up over at our
-        <a href="https://www.facebook.com/skrillagangco">facebook</a> or our <a
-          href="https://www.instagram.com/skrilla__gang/">Instagram</a>
-      </p>
-      <p>or email us at <a href="mailto:sales@skrillagang.com">sales@skrillagang.com</a>
-      </p> --> */}
-              {/* <!-- <a className="hero-content__button button" href="/shop/">Shop Now</a> --> */}
-            </div>
-          </div>
-          <div className="Home__header">
-            <h2 className="Home__title">New Products</h2>
+          <Container
+            maxWidth="auto"
+            sx={{
+            marginY: 6,
+            }}
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+            }}
+          >
+            <Item>
+              <h2 className="Home__title">New Products</h2>
+              <Box
+                sx={{ flexGrow: 1 }}
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                }}
+              >
+                <Grid
+                  container
+                  spacing={{ xs: 2, md: 3 }}
+                  columns={{ xs: 4, sm: 8, md: 12 }}
+                  style={{
+                    display: "flex",
+                    flexDirection: "row",
+                    justifyContent: "center",
+                  }}
+                >
+                  <Grid item xs={"auto"}>
+                    <Item>
+                      <SingleItem
+                        {...this.props}
+                        Item={this.props.Inventory.data[0]}
+                      />
+                    </Item>
+                  </Grid>
+                  <Grid item xs={"auto"}>
+                    <Item>
+                      <SingleItem
+                        {...this.props}
+                        Item={this.props.Inventory.data[2]}
+                      />
+                    </Item>
+                  </Grid>
+                  <Grid item xs={"auto"}>
+                    <Item>
+                      <SingleItem
+                        {...this.props}
+                        Item={this.props.Inventory.data[3]}
+                      />
+                    </Item>
+                  </Grid>
 
-            <div className="cards"></div>
-            <Box sx={{ flexGrow: 1 }}>
-              <Grid container spacing={12} columns={16}>
-                <Grid item xs={"auto"}>
-                  <Item>
-                    <SingleItem
-                      {...this.props}
-                      Item={this.props.Inventory.data[0]}
-                    />
-                  </Item>
+                  <Grid item xs={"auto"}>
+                    <Item>
+                      <SingleItem
+                        {...this.props}
+                        Item={this.props.Inventory.data[4]}
+                      />
+                    </Item>
+                  </Grid>
+                  <Grid item xs={"auto"}>
+                    <Item>
+                      <SingleItem
+                        {...this.props}
+                        Item={this.props.Inventory.data[4]}
+                      />
+                    </Item>
+                  </Grid>
+                  <Grid item xs={"auto"}>
+                    <Item>
+                      <SingleItem
+                        {...this.props}
+                        Item={this.props.Inventory.data[4]}
+                      />
+                    </Item>
+                  </Grid>
                 </Grid>
-                <Grid item xs={"auto"}>
-                  <Item>
-                    <SingleItem
-                      {...this.props}
-                      Item={this.props.Inventory.data[2]}
-                    />
-                  </Item>
-                </Grid>
-                <Grid item xs={"auto"}>
-                  <Item>
-                    <SingleItem
-                      {...this.props}
-                      Item={this.props.Inventory.data[3]}
-                    />
-                  </Item>
-                </Grid>
-
-                <Grid item xs={"auto"}>
-                  <Item>
-                    <SingleItem
-                      {...this.props}
-                      Item={this.props.Inventory.data[4]}
-                    />
-                  </Item>
-                </Grid>
-                <Grid item xs={"auto"}>
-                  <Item>
-                    <SingleItem
-                      {...this.props}
-                      Item={this.props.Inventory.data[4]}
-                    />
-                  </Item>
-                </Grid>
-                <Grid item xs={"auto"}>
-                  <Item>
-                    <SingleItem
-                      {...this.props}
-                      Item={this.props.Inventory.data[4]}
-                    />
-                  </Item>
-                </Grid>
-              </Grid>
-            </Box>
-          </div>
-        </section>
+              </Box>
+            </Item>
+          </Container>
       );
     } else {
       return <div>Loading</div>;

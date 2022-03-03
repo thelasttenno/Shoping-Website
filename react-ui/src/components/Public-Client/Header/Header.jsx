@@ -108,6 +108,16 @@ const Header = (props) => {
                   Collabs
                 </Button>
               </MenuItem>
+              <MenuItem key={"CustomPrintingD"} onClick={handleCloseNavMenu}>
+                <Button
+                  onClick={handleCloseNavMenu}
+                  textAlign="center"
+                  component={Link}
+                  to="/CustomPrinting"
+                >
+                  Custom Printing
+                </Button>
+              </MenuItem>
               <MenuItem key={"ShopD"} onClick={handleCloseNavMenu}>
                 <Button
                   onClick={handleCloseNavMenu}
@@ -159,7 +169,7 @@ const Header = (props) => {
               Home
             </Button>
             <Button
-              key={"Home"}
+              key={"About"}
               onClick={handleCloseNavMenu}
               sx={{ my: 2, color: "white", display: "block" }}
               component={Link}
@@ -168,7 +178,7 @@ const Header = (props) => {
               About
             </Button>
             <Button
-              key={"Home"}
+              key={"Collabs"}
               onClick={handleCloseNavMenu}
               sx={{ my: 2, color: "white", display: "block" }}
               component={Link}
@@ -177,7 +187,16 @@ const Header = (props) => {
               Collabs
             </Button>
             <Button
-              key={"Home"}
+              key={"CustomPrinting"}
+              onClick={handleCloseNavMenu}
+              sx={{ my: 2, color: "white", display: "block" }}
+              component={Link}
+              to="/CustomPrinting"
+            >
+              Custom Printing
+            </Button>
+            <Button
+              key={"Shop"}
               onClick={handleCloseNavMenu}
               sx={{ my: 2, color: "white", display: "block" }}
               component={Link}
@@ -186,7 +205,7 @@ const Header = (props) => {
               Shop
             </Button>
             <Button
-              key={"Home"}
+              key={"Cart"}
               onClick={handleCloseNavMenu}
               sx={{ my: 2, color: "white", display: "block" }}
               component={Link}

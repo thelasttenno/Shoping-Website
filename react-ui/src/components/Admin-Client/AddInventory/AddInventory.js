@@ -355,8 +355,10 @@ export default class AddInventory extends Component {
               <option value="Hoodie">Hoodie</option>
               <option value="T-Shirt">T-Shirt</option>
               <option value="Long-T">Long-T</option>
-              <option value="Crop-Top">Crop-Top</option>
-              <option value="Pants">Pants</option>
+              <option value="Socks">Socks</option>
+              <option value="SweatPants">SweatPants</option>
+              <option value="Stickers">Stickers</option>
+
             </select>
 
             <label
@@ -374,10 +376,10 @@ export default class AddInventory extends Component {
               onChange={this.handleChange}
             >
               <option>Please Select</option>
-              <option value="Electronics">S</option>
-              <option value="Gear">M</option>
-              <option value="Apparel">L</option>
-              <option value="Accessories">XL</option>
+              <option value="S">S</option>
+              <option value="M">M</option>
+              <option value="L">L</option>
+              <option value="XL">XL</option>
             </select>
             <label
               htmlFor="collab"
