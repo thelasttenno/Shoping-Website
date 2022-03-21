@@ -40,16 +40,9 @@ const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY, {
 checkEnv();
 const PORT = process.env.PORT || 5000;
 
-//cache
-var levelup = require("levelup");
-var leveldown = require("leveldown");
-
 const fs = require("fs");
-// app.use(express.static("files"));
-// app.use(express.static(path.join(__dirname, "public")));
-// parse application/x-www-form-urlencoded
-
-app.use(express.static(process.env.STATIC_DIR));
+// app.use(express.static(process.env.STATIC_DIR));
+app.use(express.static(path.resolve(__dirname, '../react-ui/build')));
 console.log([PORT]);
 app.use(
   express.json(
