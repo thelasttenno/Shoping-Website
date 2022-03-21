@@ -38,7 +38,7 @@ const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY, {
   },
 });
 checkEnv();
-const PORT = process.env.DOMAIN || 5000;
+const PORT = process.env.PORT || 5000;
 
 //cache
 var levelup = require("levelup");
@@ -50,7 +50,7 @@ const fs = require("fs");
 // parse application/x-www-form-urlencoded
 
 app.use(express.static(process.env.STATIC_DIR));
-console.log([process.env.DOMAIN]);
+console.log([PORT]);
 app.use(
   express.json(
     {
