@@ -38,7 +38,7 @@ const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY, {
   },
 });
 checkEnv();
-const PORT = process.env.DOMAIN || 4242;
+const PORT = process.env.DOMAIN || 5000;
 
 //cache
 var levelup = require("levelup");

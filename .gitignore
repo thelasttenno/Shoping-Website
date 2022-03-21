@@ -13,7 +13,7 @@ server/node_modules
 /build
 
 # middleware
-# **.env
+**.env
 
 #caches
 **/sessionDb
@@ -23,7 +23,7 @@ node_modules
 npm-debug.log
 
 # Local development
-# *.env
+*.env
 *.dev
 .DS_Store
 
@@ -34,7 +34,7 @@ docker-compose.yml
 
 # misc
 .DS_Store
-# .env.local
+.env.local
 .env.development.local
 .env.test.local
 .env.production.local
