@@ -20,7 +20,7 @@ const auth = basicAuth({
 const cookieParser = require("cookie-parser");
 const UIDGenerator = require("uid-generator");
 const bcrypt = require("bcrypt");
-
+const path = require('path');
 user = {
   _id: "19234",
   Name: "admin",
@@ -42,7 +42,8 @@ const PORT = process.env.PORT || 5000;
 
 const fs = require("fs");
 // app.use(express.static(process.env.STATIC_DIR));
-app.use(express.static(path.resolve(__dirname, '../react-ui/build')));
+// app.use(express.static(__dirname + '/react-ui/build'));
+app.use(express.static(path.join(__dirname, '../react-ui/build')));
 console.log([PORT]);
 app.use(
   express.json(
