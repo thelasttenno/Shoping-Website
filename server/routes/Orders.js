@@ -4,27 +4,27 @@ const { v4: uuidv4 } = require("uuid");
 require("dotenv").config();
 
 function Readorders() {
-  const fileContent = fs.readFileSync("server/Data/orders.json");
-  // const fileContent = fs.readFileSync("Data/orders.json");
+  // const fileContent = fs.readFileSync("server/Data/orders.json");
+  const fileContent = fs.readFileSync("Data/orders.json");
   return JSON.parse(fileContent);
 }
 
 function ReadInventory() {
-  const fileContent = fs.readFileSync("server/Data/inventories.json");
-  // const fileContent = fs.readFileSync("Data/inventories.json");
+  // const fileContent = fs.readFileSync("server/Data/inventories.json");
+  const fileContent = fs.readFileSync("Data/inventories.json");
 
   return JSON.parse(fileContent);
 }
 
 function Writeorders(orders) {
-  fs.writeFileSync("server/Data/orders.json", JSON.stringify(orders));
-  // fs.writeFileSync("Data/orders.json", JSON.stringify(orders));
+  // fs.writeFileSync("server/Data/orders.json", JSON.stringify(orders));
+  fs.writeFileSync("Data/orders.json", JSON.stringify(orders));
 
 }
 
 function WriteInventory(inventory) {
-  fs.writeFileSync("server/Data/inventories.json", JSON.stringify(inventory));
-  // fs.writeFileSync("Data/inventories.json", JSON.stringify(inventory));
+  // fs.writeFileSync("server/Data/inventories.json", JSON.stringify(inventory));
+  fs.writeFileSync("Data/inventories.json", JSON.stringify(inventory));
 
 }
 
@@ -50,8 +50,8 @@ exports.postordersHandeler = (req, res) => {
   const orders = Readorders();
   const newObj = req.body;
   orders.unshift(newObj);
-  fs.writeFileSync("server/Data/orders.json", JSON.stringify(orders));
-  // fs.writeFileSync("Data/orders.json", JSON.stringify(orders));
+  // fs.writeFileSync("server/Data/orders.json", JSON.stringify(orders));
+  fs.writeFileSync("Data/orders.json", JSON.stringify(orders));
 
 
   res.send(orders);
@@ -95,8 +95,8 @@ exports.putordersHandeler = (req, res) => {
   let updatedFullorderData = orders.map((order) =>
     order.id === orderId ? updatedorder : order
   );
-  fs.writeFileSync("server/Data/orders.json", JSON.stringify(updatedFullorderData));
-  // fs.writeFileSync("Data/orders.json", JSON.stringify(updatedFullorderData));
+  // fs.writeFileSync("server/Data/orders.json", JSON.stringify(updatedFullorderData));
+  fs.writeFileSync("Data/orders.json", JSON.stringify(updatedFullorderData));
 
   res.send(updatedFullorderData);
 };
@@ -114,8 +114,8 @@ exports.deleteordersHandeler = (req, res) => {
   Writeorders(neworders);
   WriteInventory(newInventory);
 
-  fs.writeFileSync("server/Data/orders.json", JSON.stringify(updatedFullorderData));
-  // fs.writeFileSync("Data/orders.json", JSON.stringify(updatedFullorderData));
+  // fs.writeFileSync("server/Data/orders.json", JSON.stringify(updatedFullorderData));
+  fs.writeFileSync("Data/orders.json", JSON.stringify(updatedFullorderData));
 
   res.send(updatedFullorderData);
 };

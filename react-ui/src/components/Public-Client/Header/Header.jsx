@@ -12,7 +12,7 @@ import MenuItem from "@mui/material/MenuItem";
 import CardMedia from "@mui/material/CardMedia";
 import { Link, useLocation } from "react-router-dom";
 // import makeStyles from "@mui/styles/makeStyles";
-import Logo from "../../../assets/photos/logos/KL-Logos/$krilla-GangLogo3Website.png";
+import Logo from "../../../assets/photos/logos/SkrillaGangWordmarkLogo.png";
 // const useStyles = makeStyles({
 //   logo: {
 //     maxWidth: 160,
@@ -30,7 +30,7 @@ const Header = (props) => {
   };
 
   return (
-    <AppBar position="static">
+    <AppBar position="static" color="primary">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <Typography
@@ -105,17 +105,17 @@ const Header = (props) => {
                   component={Link}
                   to="/Collabs"
                 >
-                  Collabs
+                  Collabs & Custom Printing
                 </Button>
               </MenuItem>
-              <MenuItem key={"CustomPrintingD"} onClick={handleCloseNavMenu}>
+              <MenuItem key={"GalleryD"} onClick={handleCloseNavMenu}>
                 <Button
                   onClick={handleCloseNavMenu}
                   textAlign="center"
                   component={Link}
-                  to="/CustomPrinting"
+                  to="/Gallery"
                 >
-                  Custom Printing
+                  Gallery
                 </Button>
               </MenuItem>
               <MenuItem key={"ShopD"} onClick={handleCloseNavMenu}>
@@ -184,16 +184,16 @@ const Header = (props) => {
               component={Link}
               to="/Collabs"
             >
-              Collabs
+              Collabs & Custom Printing
             </Button>
             <Button
-              key={"CustomPrinting"}
+              key={"Gallery"}
               onClick={handleCloseNavMenu}
               sx={{ my: 2, color: "white", display: "block" }}
               component={Link}
-              to="/CustomPrinting"
+              to="/Gallery"
             >
-              Custom Printing
+              Gallery
             </Button>
             <Button
               key={"Shop"}

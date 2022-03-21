@@ -1,16 +1,17 @@
 import { useState, useEffect, useCallback } from "react";
-import "./App.css";
 // import { getNewSession, Event, verifySession } from "./lib/session";
 import { Provider } from "react-redux";
 
 import {
   Home,
   Header,
+  Footer,
   About,
   Shop,
   Collabs,
   Checkout,
   Cart,
+  Gallery,
 } from "./components/Public-Client";
 import {
   BrowserRouter as Router,
@@ -25,7 +26,8 @@ import store from "./store/index";
 import Signin from "./components/Admin-Client/Authentication/Signin";
 import Success from "./components/Public-Client/Success/Success";
 import Cancel from "./components/Public-Client/Cancel/Cancel";
-import CustomPrinting from "./components/Public-Client/CustomPrinting/CustomPrinting";
+import "./App.css";
+
 // import SingleCollabItem from "./components/Public-Client/SingleCollabItem/SingleCollabItem";
 // import SingleItem from "./components/Public-Client/SingleItem/SingleItem";
 // import { useWillMount } from "./lib/useWillMount";
@@ -53,12 +55,15 @@ function App() {
   let [megaState, setMegaState] = useState(null);
   const [isFetching, setIsFetching] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
-  const [url] = useState("http://localhost:4242/inventory");
+  // const [url] = useState("http://localhost:4242/inventory");
+  const [url] = useState("/inventory");
   const [token, setToken] = useState(undefined);
 
   const readCookie = useCallback(async () => {
     try {
-      const res = await axios.get("http://localhost:4242/read-cookie");
+      // const res = await axios.get("http://localhost:4242/read-cookie");
+      const res = await axios.get("/read-cookie");
+
 
       if (res.data.token !== undefined) {
         await setToken(res.data.token);
@@ -95,7 +100,8 @@ function App() {
 
   const deleteCookie = async () => {
     try {
-      await axios.get("http://localhost:4242/clear-cookie");
+      // await axios.get("http://localhost:4242/clear-cookie");
+      await axios.get("/clear-cookie");
       setToken(undefined);
     } catch (e) {
       console.log(e);
@@ -427,6 +433,16 @@ function App() {
                     </section>
                   )}
                 />
+                                <Route
+                  path="/Gallery"
+                  render={(props) => (
+                    <section>
+                      <Gallery
+                        {...props}
+                      />
+                    </section>
+                  )}
+                />
                 <Provider store={store}>
                   <Route
                     path="/admin"
@@ -475,24 +491,9 @@ function App() {
                       );
                     }}
                   />
-                   <Route
-                  path="/customprinting"
-                  render={(props) => (
-                    <section>
-                      <CustomPrinting
-                        {...props}
-                        orders={"orders"}
-                        Inventory={Inventory}
-                        removeFromCart={removeFromCart}
-                        addToCart={addToCart}
-                        // Collabitems={Collabitems}
-                      />
-                    </section>
-                  )}
-                />
                 </Provider>
               </Switch>
-              {/* <Footer /> */}
+              <Footer />
             </Router>
           </BrowserRouter>
         </div>

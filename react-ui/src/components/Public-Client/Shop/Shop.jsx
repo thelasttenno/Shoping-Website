@@ -10,8 +10,13 @@ import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
+import TheCrew from "../../../assets/photos/WebsiteGood/thecrew.JPG";
+import streetskate from "../../../assets/photos/WebsiteGood/streetskate1.JPG";
+import streetskate2 from "../../../assets/photos/WebsiteGood/streetskate2.JPG";
+import { ImageList, ImageListItem } from "@mui/material";
+let itemData = [{ img: TheCrew }, { img: streetskate }, { img: streetskate2 }];
 const Item = styled(Paper)(({ theme }) => ({
-  backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
+  // backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
   ...theme.typography.body2,
   padding: theme.spacing(1),
   textAlign: "center",
@@ -42,6 +47,23 @@ function Shop(props) {
             alignItems: "center",
           }}
         >
+          <ImageList
+            sx={{ width: 500, height: 450 }}
+            variant="woven"
+            cols={3}
+            gap={8}
+          >
+            {itemData.map((item) => (
+              <ImageListItem key={item.img}>
+                <img
+                  src={`${item.img}?w=161&fit=crop&auto=format`}
+                  srcSet={`${item.img}?w=161&fit=crop&auto=format&dpr=2 2x`}
+                  alt={item.title}
+                  loading="lazy"
+                />
+              </ImageListItem>
+            ))}
+          </ImageList>
           <Item>
             <Box item xs={"auto"} sx={{ marginY: 6 }}>
               <Container maxWidth="xs">

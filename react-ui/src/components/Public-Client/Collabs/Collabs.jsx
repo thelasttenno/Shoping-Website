@@ -8,7 +8,7 @@ import Grid from "@mui/material/Grid";
 import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
 const Item = styled(Paper)(({ theme }) => ({
-  backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
+  // backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
   ...theme.typography.body2,
   padding: theme.spacing(1),
   textAlign: "center",
@@ -26,6 +26,28 @@ function Collabs() {
           </div>
           <Item sx={{ paddingY: 6 }}>
             <h2 className="ContentCTA__Title">Want to Collab With us?</h2>
+            <Button
+              variant="contained"
+              size="large"
+              color="primary"
+              target="_top"
+              rel="noopener noreferrer"
+              href={`mailto:sales@skrillagang.co`}
+            >
+              <h3>Get In Touch!</h3>
+            </Button>
+          </Item>
+        </Container>
+      </Box>
+      <Box item xs={"auto"} sx={{ marginY: 6 }}>
+        <Container>
+          <div className="Aboutimg">
+            {/* <img src={KaiPic}  alt="" /> */}
+            {/* <img src={KaiPic}  alt="" /> */}
+          </div>
+          <Item sx={{ paddingY: 6 }}>
+            <h2 className="ContentCTA__Title">Want to Custom Print With us?</h2>
+            <h3 className="ContentCTA__Title">We do buisness and small projects!</h3>
             <Button
               variant="contained"
               size="large"

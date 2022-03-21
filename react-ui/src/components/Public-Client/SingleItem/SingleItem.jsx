@@ -1,6 +1,5 @@
 import React, {useState} from "react";
 
-// import "./Home.scss";
 // class SingleItem extends Component {
 
 //   render() {

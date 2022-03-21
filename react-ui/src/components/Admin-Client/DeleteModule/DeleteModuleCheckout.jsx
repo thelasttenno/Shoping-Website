@@ -1,5 +1,4 @@
 import React from 'react';
-import "./deleteModule.scss"
 
 
 function DeleteModuleInventory(props) {

@@ -10,7 +10,7 @@ import Button from "@mui/material/Button";
 import { useWillMount } from "../../../lib/useWillMount";
 import { Link } from "react-router-dom";
 const Item = styled(Paper)(({ theme }) => ({
-  backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
+  // backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
   ...theme.typography.body2,
   padding: theme.spacing(1),
   textAlign: "center",
@@ -31,7 +31,8 @@ export default function Cart(props) {
       });
       axios({
         method: "post",
-        url: "http://localhost:4242/payments/createSession",
+        // url: "http://localhost:4242/payments/createSession",
+        url: "/payments/createSession",
         headers: {
           // "Content-Type": "application/json; charset=UTF-8",
         },

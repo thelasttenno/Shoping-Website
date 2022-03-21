@@ -243,8 +243,8 @@ if (!isDev && cluster.isMaster) {
 
     //////Update Order//////
     function Readorders() {
-      const fileContent = fs.readFileSync("server/Data/orders.json");
-      // const fileContent = fs.readFileSync("Data/orders.json");
+      // const fileContent = fs.readFileSync("server/Data/orders.json");
+      const fileContent = fs.readFileSync("Data/orders.json");
       return JSON.parse(fileContent);
     }
     const orders = Readorders();
@@ -292,11 +292,8 @@ if (!isDev && cluster.isMaster) {
     let updatedFullorderData = orders.map((order) =>
       order.id === orderId ? updatedorder : order
     );
-    fs.writeFileSync(
-      "server/Data/orders.json",
-      JSON.stringify(updatedFullorderData)
-    );
-    // fs.writeFileSync("Data/orders.json", JSON.stringify(updatedFullorderData));
+    // fs.writeFileSync("server/Data/orders.json",JSON.stringify(updatedFullorderData));
+    fs.writeFileSync("Data/orders.json", JSON.stringify(updatedFullorderData));
 
     // Saving a copy of the order in your own database.
     // Sending the customer a receipt email.
@@ -313,35 +310,36 @@ if (!isDev && cluster.isMaster) {
       "sk_test_51IMkDmCVRuCafbBMzwq0EeKVw2tOLZHTmyLIGnMFUIR5knk7ayyZN046wNF2VeZdec3K1NZLPCg4l4GtX2c3M63300jGZGnGR1"
     );
     const lineItems = await stripe.checkout.sessions.listLineItems(
-      session.id,
+      // session.id,
+      'cs_test_a1vhsXHyhjOQ9N5O1AuHBfchw6KfOypAzlN19QJQFCkS0zJXjC2sPzR5iw',
       { limit: 100 },
       function (err, lineItems) {
         return lineItems || err;
       }
     );
     function Readorders() {
-      const fileContent = fs.readFileSync("server/Data/orders.json");
-      // const fileContent = fs.readFileSync("Data/orders.json");
+      // const fileContent = fs.readFileSync("server/Data/orders.json");
+      const fileContent = fs.readFileSync("Data/orders.json");
       return JSON.parse(fileContent);
     }
     const orders = Readorders();
     console.log("lineItems", await lineItems);
-    const newOrder = {
-      id: session.id,
-      dateOrdered: new Date(),
-      status: "un-fulfilled",
-      lineItems: await lineItems,
-      customer_details: {
-        email: session.customer_details.email,
-        phone: session.customer_details.phone,
-        tax_exempt: session.customer_details.tax_exempt,
-        tax_ids: session.customer_details.tax_ids,
-      },
-      customer_email: null,
-      session: session,
-    };
-    orders.unshift(newOrder);
-    fs.writeFileSync("server/Data/orders.json", JSON.stringify(orders));
+    // const newOrder = {
+    //   id: session.id,
+    //   dateOrdered: new Date(),
+    //   status: "un-fulfilled",
+    //   lineItems: await lineItems,
+    //   customer_details: {
+    //     email: session.customer_details.email,
+    //     phone: session.customer_details.phone,
+    //     tax_exempt: session.customer_details.tax_exempt,
+    //     tax_ids: session.customer_details.tax_ids,
+    //   },
+    //   customer_email: null,
+    //   session: session,
+    // };
+    // orders.unshift(newOrder);
+    // fs.writeFileSync("server/Data/orders.json", JSON.stringify(orders));
   };
 
   const emailCustomerAboutFailedPayment = (session) => {
@@ -383,23 +381,23 @@ if (!isDev && cluster.isMaster) {
 
       // Handle the event
       switch (eventType) {
-        // case "checkout.session.completed": {
-        //   // console.log(data);
-        //   const session = data.object;
-        //   // Save an order in your database, marked as 'awaiting payment'
-        //   createOrder(session);
+        case "checkout.session.completed": {
+          // console.log(data);
+          const session = data.object;
+          // Save an order in your database, marked as 'awaiting payment'
+          createOrder(session);
 
-        //   // Check if the order is paid (for example, from a card payment)
-        //   //
-        //   // A delayed notification payment will have an `unpaid` status, as
-        //   // you're still waiting for funds to be transferred from the customer's
-        //   // account.
-        //   if (session.payment_status === "paid") {
-        //     fulfillOrder(session);
-        //   }
+          // Check if the order is paid (for example, from a card payment)
+          //
+          // A delayed notification payment will have an `unpaid` status, as
+          // you're still waiting for funds to be transferred from the customer's
+          // account.
+          if (session.payment_status === "paid") {
+            // fulfillOrder(session);
+          }
 
-        //   break;
-        // }
+          break;
+        }
 
         case "checkout.session.async_payment_succeeded": {
           const session = data.object;
@@ -407,7 +405,7 @@ if (!isDev && cluster.isMaster) {
 
           // Fulfill the purchase...
           if (session.payment_status === "paid") {
-            fulfillOrder(session);
+            // fulfillOrder(session);
           }
 
           break;
@@ -421,16 +419,21 @@ if (!isDev && cluster.isMaster) {
 
           break;
         }
-        case "payment_intent.created": {
-          const session = data.object;
-          createOrder(session);
-          break;
-        }
-        case "payment_intent.succeeded": {
-          const session = data.object;
-          fulfillOrder(session);
-          break;
-        }
+        // case "payment_intent.created": {
+        //   const session = data.object;
+        //   createOrder(session);
+        //   break;
+        // }
+         // case "payment_intent.succeeded": {
+        //   const session = data.object;
+        //   createOrder(session);
+        //   break;
+        // }
+        // case "payment_intent.succeeded": {
+        //   const session = data.object;
+        //   fulfillOrder(session);
+        //   break;
+        // }
         default:
           console.log(`Unhandled event type ${eventType}`);
       }

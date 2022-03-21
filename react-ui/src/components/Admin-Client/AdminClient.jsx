@@ -48,7 +48,8 @@ function AdminClient (props) {
   const [inventory, setInventory] = React.useState(null);
 
   function handleEditorder (id, neworderData) {
-    let putURL = `http://localhost:4242/orders/${id}`;
+    // let putURL = `http://localhost:4242/orders/${id}`;
+    let putURL = `/orders/${id}`;
     axios
       .put(putURL, { data: neworderData })
       .then((response) => {
@@ -58,7 +59,8 @@ function AdminClient (props) {
   };
 
   function handleEditInventory (id, newInventoryData) {
-    let putURL = `http://localhost:4242/orders/inventory/${id}`;
+    // let putURL = `http://localhost:4242/orders/inventory/${id}`;
+    let putURL = `/orders/inventory/${id}`;
     axios
       .put(putURL, { data: newInventoryData })
       .then((response) => {
@@ -68,8 +70,10 @@ function AdminClient (props) {
   };
 
   useEffect(() => {
-    let one = axios.get(`http://localhost:4242/orders`);
-    let two = axios.get(`http://localhost:4242/inventory`);
+    // let one = axios.get(`http://localhost:4242/orders`);
+    let one = axios.get(`/orders`);
+    // let two = axios.get(`http://localhost:4242/inventory`);
+    let two = axios.get(`/inventory`);
     axios
       .all([one, two])
       .then(

@@ -1,5 +1,4 @@
 import React from 'react';
-import './AddressCard.scss';
 
 const AddressCard = (props) => {
     const singleorder = props.orderData.data

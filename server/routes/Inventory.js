@@ -11,8 +11,8 @@ function LoadInventory() {
 let loadedInventory = LoadInventory();
 
 function WriteInventory(inventory) {
-  fs.writeFileSync("server/Data/inventories.json", JSON.stringify(inventory));
-  // fs.writeFileSync("Data/inventories.json", JSON.stringify(inventory));
+  // fs.writeFileSync("server/Data/inventories.json", JSON.stringify(inventory));
+  fs.writeFileSync("Data/inventories.json", JSON.stringify(inventory));
 
   //also update loaded inventory
   loadedInventory = LoadInventory();
@@ -59,8 +59,8 @@ exports.postInventoryHandeler = (request, res) => {
   };
   loadedInventory.unshift(newPost);
 
-  fs.writeFileSync("server/Data/inventories.json", JSON.stringify(loadedInventory))
-  // fs.writeFileSync("Data/inventories.json", JSON.stringify(loadedInventory));
+  // fs.writeFileSync("server/Data/inventories.json", JSON.stringify(loadedInventory))
+  fs.writeFileSync("Data/inventories.json", JSON.stringify(loadedInventory));
 
   res.send(loadedInventory);
 };
@@ -86,8 +86,8 @@ exports.putInventoryHandeler = (req, res) => {
   let updatedInventoriesData = inventories.map((inventory) =>
     inventory.id === inventoryId ? updatedInventory : inventory
   );
-  fs.writeFileSync("server/Data/inventories.json", JSON.stringify(updatedInventoriesData));
-  // fs.writeFileSync("Data/inventories.json", JSON.stringify(updatedInventoriesData));
+  // fs.writeFileSync("server/Data/inventories.json", JSON.stringify(updatedInventoriesData));
+  fs.writeFileSync("Data/inventories.json", JSON.stringify(updatedInventoriesData));
   LoadInventory();
   res.send(updatedInventoriesData);
 };
@@ -101,11 +101,5 @@ exports.deleteInventoryHandeler = (req, res) => {
   );
 
   WriteInventory(newInventory);
-
-  // fs.writeFileSync("server/Data/inventories.json", JSON.stringify(updatedFullInventoryData));
-  // fs.writeFileSync(
-  //   "Data/inventories.json",
-  //   JSON.stringify(updatedFullInventoryData)
-  // );
   res.send(updatedFullInventoryData);
 };

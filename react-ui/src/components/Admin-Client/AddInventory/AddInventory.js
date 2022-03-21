@@ -131,7 +131,9 @@ export default class AddInventory extends Component {
       /// Expanded post Version photo Upload works but not form data ///
 
       axios
-        .post("http://localhost:4242/inventory", {
+        // .post("http://localhost:4242/inventory", {
+        .post("/inventory", {
+
           id: ItemId,
           name: name,
           description: description,
