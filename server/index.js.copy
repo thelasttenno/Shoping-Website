@@ -235,8 +235,7 @@ if (!isDev && cluster.isMaster) {
 
     //////Update Order//////
     function Readorders() {
-      // const fileContent = fs.readFileSync("server/Data/orders.json");
-      const fileContent = fs.readFileSync("Data/orders.json");
+      const fileContent = fs.readFileSync("server/Data/orders.json");
       return JSON.parse(fileContent);
     }
     const orders = Readorders();
@@ -284,8 +283,7 @@ if (!isDev && cluster.isMaster) {
     let updatedFullorderData = orders.map((order) =>
       order.id === orderId ? updatedorder : order
     );
-    // fs.writeFileSync("server/Data/orders.json",JSON.stringify(updatedFullorderData));
-    fs.writeFileSync("Data/orders.json", JSON.stringify(updatedFullorderData));
+    fs.writeFileSync("server/Data/orders.json",JSON.stringify(updatedFullorderData));
 
     // Saving a copy of the order in your own database.
     // Sending the customer a receipt email.
@@ -310,8 +308,7 @@ if (!isDev && cluster.isMaster) {
       }
     );
     function Readorders() {
-      // const fileContent = fs.readFileSync("server/Data/orders.json");
-      const fileContent = fs.readFileSync("Data/orders.json");
+      const fileContent = fs.readFileSync("server/Data/orders.json");
       return JSON.parse(fileContent);
     }
     const orders = Readorders();

@@ -243,6 +243,7 @@ function App() {
       .get(url)
       .then((response) => {
         // handle success
+        console.log(response);
         setInventory(response);
       })
       .catch(function (error) {

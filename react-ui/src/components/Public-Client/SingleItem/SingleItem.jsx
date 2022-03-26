@@ -1,33 +1,15 @@
 import React, {useState} from "react";
 
-// class SingleItem extends Component {
-
-//   render() {
-//   return (
-//     <div className="card">
-//       <div id="product-component-1613869961817">
-//         {" "}
-//         <img src={pic} alt="" width="360" />
-//         <h1>{this.props.Item.itemName}</h1>
-//         <p>{this.props.Item.description}</p>
-//         <p>{this.props.Item.price}</p>
-//         <p>{this.props.Item.category}</p>
-//         <button>Add to cart</button>
-//       </div>
-//     </div>
-//   );
-// }}
-// export default SingleItem;
-
 export default function SingleItem(props) {
-  const [quantity, setQuantity] = useState(props.Item.quantity || 1);
-  const [data, setData] = useState(props.Item.ImgaeBase64.data)
+  console.log(props);
+  const [quantity, setQuantity] = useState(1);
 
   return (
     <div className="card">
       <div id="product-component-1613869961817">
         {" "}
-        <img src={`data:image/jpeg;base64,${data}`} alt="" width="360" />
+        {/* <img src={`data:image/jpeg;base64,${data}`} alt="" width="360" /> */}
+        <img src={props.Item.images[0]} alt="" width="360" />
         <h1>{props.Item.itemName}</h1>
         <p>{props.Item.description}</p>
         <p>{props.Item.price}</p>

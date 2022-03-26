@@ -2,11 +2,10 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 export default function SingleCollabItem(props) {
   const [quantity, setQuantity] = useState(props.Item.quantity || 1);
-  const [data, setData] = useState(props.Item.ImgaeBase64.data)
   return (
     <div className="card">
       <div id={props.Item.id}>
-        <img src={`data:image/jpeg;base64,${data}`} alt="" width="360" />
+        <img src={props.Item.images[0]} alt="" width="360" />
         <h1>{props.Item.itemName}</h1>
         <p>{props.Item.description}</p>
         <p>{props.Item.price}</p>

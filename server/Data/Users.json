@@ -1,0 +1,11 @@
+[{
+    "_id": 19234,
+    "Name": "JeremiahFabas1919@gmail.com",
+    "Password": "custompassword",
+    "isAdmin": true
+}, {
+    "_id": 61334,
+    "Name": "thelasttenno@gmail.com",
+    "Password": "custompassword",
+    "isAdmin": true
+}]

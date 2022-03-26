@@ -1,21 +1,67 @@
 const fs = require("fs");
-function LoadInventory() {
-  const fileContent = fs.readFileSync("server/Data/inventories.json");
-  // const fileContent = fs.readFileSync("Data/inventories.json");
+var CronJob = require('cron').CronJob;
+async function LoadInventory() {
+  const stripe = require("stripe")(
+    "sk_test_51IMkDmCVRuCafbBMzwq0EeKVw2tOLZHTmyLIGnMFUIR5knk7ayyZN046wNF2VeZdec3K1NZLPCg4l4GtX2c3M63300jGZGnGR1"
+  );
 
-  console.log("inventory loaded to memory!");
-  return JSON.parse(fileContent);
+  const prices = await stripe.prices.list({
+    active: true,
+  });
+  const products = await stripe.products.list({
+    active: true,
+  });
+
+  let Products = [];
+  prices.data.forEach((price) => {
+    products.data.forEach((product) => {
+      if (product.id === price.product) {
+        Products.push({
+          id: product.id,
+          priceId: price.id,
+          color: product.metadata.Color,
+          size: product.metadata.Size,
+          category: product.metadata.Category,
+          price: Number(price.unit_amount / 100),
+          collab: product.metadata.Collab,
+          images: product.images,
+          quantity: 0,
+          priceInfo: price,
+          productInfo: product,
+        });
+      }
+    });
+  });
+  WriteInventory(Products);
+  return;
 }
 
 //Read once, reference multiple. Happy memory :)
-let loadedInventory = LoadInventory();
+var job1 = new CronJob('* 1/3 * * * *', function() {
+let Read = LoadInventory();
+}, null, true, 'America/Los_Angeles');
+
+var job2 = new CronJob('* 1/5 * * * *', function() {
+let loadedInventory = ReadInventory();
+}, null, true, 'America/Los_Angeles');
+
+
+job1.start();
+job2.start();
+let loadedInventory = ReadInventory();
+console.log(loadedInventory);
+
+function ReadInventory(){
+  const fileContent = fs.readFileSync("server/Data/inventories.json");
+  console.log("inventory loaded to memory!");
+  return JSON.parse(fileContent);
+};
 
 function WriteInventory(inventory) {
-  // fs.writeFileSync("server/Data/inventories.json", JSON.stringify(inventory));
-  fs.writeFileSync("Data/inventories.json", JSON.stringify(inventory));
+  fs.writeFileSync("server/Data/inventories.json", JSON.stringify(inventory));
 
   //also update loaded inventory
-  loadedInventory = LoadInventory();
+  // loadedInventory = LoadInventory();
 }
 
 function GetInventoryById(inventoryId) {
@@ -40,9 +86,9 @@ exports.getSingleItemHandeler = (req, res) => {
   res.json(GetInventoryById(req.params.inventoryId));
 };
 exports.postInventoryHandeler = (request, res) => {
-  const payload =JSON.parse(request.body);
+  const payload = JSON.parse(request.body);
   var myValue = payload.collab;
-  var isTrueSet = myValue === 'true';
+  var isTrueSet = myValue === "true";
   const newPost = {
     id: payload.id,
     itemName: payload.name,
@@ -50,17 +96,19 @@ exports.postInventoryHandeler = (request, res) => {
     category: payload.category,
     status: payload.status,
     quantity: Number(payload.quantity),
-    price: Number(payload.price) ,
+    price: Number(payload.price),
     collab: isTrueSet,
     ImgaeBase64: {
-       mime : "image/jpeg",
-       data : payload.data.split("base64,")[1],
-    }
+      mime: "image/jpeg",
+      data: payload.data.split("base64,")[1],
+    },
   };
   loadedInventory.unshift(newPost);
 
-  // fs.writeFileSync("server/Data/inventories.json", JSON.stringify(loadedInventory))
-  fs.writeFileSync("Data/inventories.json", JSON.stringify(loadedInventory));
+  fs.writeFileSync(
+    "server/Data/inventories.json",
+    JSON.stringify(loadedInventory)
+  );
 
   res.send(loadedInventory);
 };
@@ -86,8 +134,10 @@ exports.putInventoryHandeler = (req, res) => {
   let updatedInventoriesData = inventories.map((inventory) =>
     inventory.id === inventoryId ? updatedInventory : inventory
   );
-  // fs.writeFileSync("server/Data/inventories.json", JSON.stringify(updatedInventoriesData));
-  fs.writeFileSync("Data/inventories.json", JSON.stringify(updatedInventoriesData));
+  fs.writeFileSync(
+    "server/Data/inventories.json",
+    JSON.stringify(updatedInventoriesData)
+  );
   LoadInventory();
   res.send(updatedInventoriesData);
 };

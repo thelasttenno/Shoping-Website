@@ -20,6 +20,18 @@ function Collabs() {
     <section className="Collabs">
       <Box item xs={"auto"} sx={{ marginY: 6 }}>
         <Container>
+          <Item sx={{ paddingY: 6 }}>
+            <h2 className="CollabInfo__Title">Contact</h2>
+            <p className="CollabInfo__Info">
+              {" "}
+              Feel free to email us and we will help in any way we can! You can
+              also contact us directly through our @$krilla__gang on Instagram.
+            </p>
+          </Item>
+        </Container>
+      </Box>
+      <Box item xs={"auto"} sx={{ marginY: 6 }}>
+        <Container>
           <div className="Aboutimg">
             {/* <img src={KaiPic}  alt="" /> */}
             {/* <img src={KaiPic}  alt="" /> */}
@@ -47,7 +59,9 @@ function Collabs() {
           </div>
           <Item sx={{ paddingY: 6 }}>
             <h2 className="ContentCTA__Title">Want to Custom Print With us?</h2>
-            <h3 className="ContentCTA__Title">We do buisness and small projects!</h3>
+            <h3 className="ContentCTA__Title">
+              We do buisness and small projects!
+            </h3>
             <Button
               variant="contained"
               size="large"
@@ -67,10 +81,9 @@ function Collabs() {
             <h2 className="CollabInfo__Title">Contact</h2>
             <p className="ContentCTA__Info">
               {" "}
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta
-              quis magnam velit. Voluptate iste iusto praesentium rem
-              dignissimos amet laudantium accusantium veniam quis, velit enim
-              esse repellendus nisi ipsam commodi!
+              $krilla-gang is all about motivating the population! We pride
+              ourselves on all of our clothing, specializing in T-shirts, and
+              love that we have the opportunity to share them with you!
             </p>
           </Item>
         </Container>
@@ -81,10 +94,10 @@ function Collabs() {
             <h2 className="CollabInfo__Title">Contact</h2>
             <p className="CollabInfo__Info">
               {" "}
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta
-              quis magnam velit. Voluptate iste iusto praesentium rem
-              dignissimos amet laudantium accusantium veniam quis, velit enim
-              esse repellendus nisi ipsam commodi!
+              Jeremiah founded the company with the vision of encouraging
+              anyone, and everyone, to be their best selves. Never stop working
+              towards your dreams. A big thing $krilla-gang focuses on, is
+              making sure everyone knows just how powerful determination can be.
             </p>
           </Item>
         </Container>

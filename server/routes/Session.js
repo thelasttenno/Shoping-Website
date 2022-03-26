@@ -10,11 +10,9 @@ var jwt = require("jsonwebtoken");
 // worker process for recording session data to file,
 //  sleeps for 1hr between saves this is slightly shorter than the session expiry
 //  timeframe to ensure no data loss on cache gc.
-// const indexFilePath = "server/Data/session/session-index.json";
-const indexFilePath = "Data/session/session-index.json";
+const indexFilePath = "server/Data/session/session-index.json";
 
-// const historyFilePath = "server/Data/session/session-history.json";
-const historyFilePath = "Data/session/session-history.json";
+const historyFilePath = "server/Data/session/session-history.json";
 
 
 //API Endpoints

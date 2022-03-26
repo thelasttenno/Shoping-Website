@@ -28,7 +28,9 @@ exports.stripeSesssionCreate = async (req, res) => {
           unit_amount: elem.price * 100,
           tax_behavior: "exclusive",
         },
-        quantity: elem.quantity,
+        // quantity: elem.quantity,
+        adjustable_quantity: elem.quantity,
+        dynamic_tax_rates: true,
       });
     });
   }
@@ -65,7 +67,7 @@ exports.stripeSesssionCreate = async (req, res) => {
               },
               maximum: {
                 unit: "business_day",
-                value: 7,
+                value: 24,
               },
             },
           },
@@ -77,7 +79,59 @@ exports.stripeSesssionCreate = async (req, res) => {
               amount: 1500,
               currency: "cad",
             },
-            display_name: "Next day air",
+            display_name: "ground shipping",
+            tax_behavior: "exclusive",
+            // # From https://stripe.com/docs/tax/tax-codes
+            // #
+            // #   "A shipping charge for delivery by a common carrier."
+            // tax_code: "txcd_92010001",
+            // Delivers in exactly 1 business day
+            delivery_estimate: {
+              minimum: {
+                unit: "business_day",
+                value: 1,
+              },
+              maximum: {
+                unit: "business_day",
+                value: 12,
+              },
+            },
+          },
+        },
+        {
+          shipping_rate_data: {
+            type: "fixed_amount",
+            fixed_amount: {
+              amount: 2000,
+              currency: "cad",
+            },
+            display_name: "Air shipping",
+            tax_behavior: "exclusive",
+            // # From https://stripe.com/docs/tax/tax-codes
+            // #
+            // #   "A shipping charge for delivery by a common carrier."
+            // tax_code: "txcd_92010001",
+            // Delivers in exactly 1 business day
+            delivery_estimate: {
+              minimum: {
+                unit: "business_day",
+                value: 1,
+              },
+              maximum: {
+                unit: "business_day",
+                value: 7,
+              },
+            },
+          },
+        },
+        {
+          shipping_rate_data: {
+            type: "fixed_amount",
+            fixed_amount: {
+              amount: 3000,
+              currency: "cad",
+            },
+            display_name: "Next Day Air shipping",
             tax_behavior: "exclusive",
             // # From https://stripe.com/docs/tax/tax-codes
             // #

@@ -8,7 +8,6 @@ const PORT = process.env.PORT || 5000;
 //
 checkEnv();
 const fs = require("fs");
-const ordersRoutes = require("./routes/Orders");
 const InventoryRoutes = require("./routes/Inventory");
 const PaymentsRoutes = require("./routes/Payments");
 const basicAuth = require("express-basic-auth");
@@ -19,31 +18,40 @@ const auth = basicAuth({
 const cookieParser = require("cookie-parser");
 const UIDGenerator = require("uid-generator");
 const bcrypt = require("bcrypt");
-user = {
-  _id: "19234",
-  Name: "admin",
-  PasswordHashed: "",
-  isAdmin: "true",
-};
+function LoadUsers() {
+  const Users = fs.readFileSync("server/Data/Users.json");
+
+  console.log("Users loaded to memory!");
+  return JSON.parse(Users);
+}
+
+//Read once, reference multiple. Happy memory :)
+let Users = LoadUsers();
+let user = {}
 //////////////////////////////////////////////////////////////////////////////////
 ///Auth Function//
-function myAuthorizer(username, password) {
+function myAuthorizer(username, password, user) {
   // console.log(username);
   // console.log(password);
   // await findOne(username)
   // console.log(user);
 
-  const userMatches = basicAuth.safeCompare(username, "customuser" || "admin");
+  const userMatches = basicAuth.safeCompare(username, Users[0].Name || Users[1].Name);
   const passwordMatches = basicAuth.safeCompare(
     password,
-    "custompassword" || "adminpassword"
+    Users[0].Password ||Users[1].Password
   );
 
   // const hashedPassword = await hashIt(password);
   // const hashedCheck = await compareIt(password, hashedPassword);
   console.log(userMatches);
   console.log(passwordMatches, "wtf");
+  if (userMatches && passwordMatches) {
+  user = Users[0] || Users[1];
   return userMatches & passwordMatches;
+  } else {
+    return userMatches & passwordMatches;
+  }
   // & hashedCheck
 }
 
@@ -90,8 +98,7 @@ const fulfillOrder = async (session) => {
 
   //////Update Order//////
   function Readorders() {
-    // const fileContent = fs.readFileSync("server/Data/orders.json");
-    const fileContent = fs.readFileSync("Data/orders.json");
+    const fileContent = fs.readFileSync("server/Data/orders.json");
     return JSON.parse(fileContent);
   }
   const orders = Readorders();
@@ -139,8 +146,7 @@ const fulfillOrder = async (session) => {
   let updatedFullorderData = orders.map((order) =>
     order.id === orderId ? updatedorder : order
   );
-  // fs.writeFileSync("server/Data/orders.json",JSON.stringify(updatedFullorderData));
-  fs.writeFileSync("Data/orders.json", JSON.stringify(updatedFullorderData));
+  fs.writeFileSync("server/Data/orders.json",JSON.stringify(updatedFullorderData));
 
   // Saving a copy of the order in your own database.
   // Sending the customer a receipt email.
@@ -165,8 +171,7 @@ const createOrder = async (session) => {
     }
   );
   function Readorders() {
-    // const fileContent = fs.readFileSync("server/Data/orders.json");
-    const fileContent = fs.readFileSync("Data/orders.json");
+    const fileContent = fs.readFileSync("server/Data/orders.json");
     return JSON.parse(fileContent);
   }
   const orders = Readorders();
@@ -243,15 +248,11 @@ if (!isDev && cluster.isMaster) {
   });
 
   // Answer API requests.
-  app.get("/orders", ordersRoutes.getordersHandeler);
-  app.get("/orders/:orderId", ordersRoutes.getSingleorderHandeler);
 
   //////////////////////InventoryRoutes examples////////////////////////////////////////
   app.get("/inventory", InventoryRoutes.getInventoryHandeler);
   app.get("/inventory/:inventoryId", InventoryRoutes.getSingleItemHandeler);
 
-  app.put("/orders/:orderId", ordersRoutes.putordersHandeler);
-  app.delete("/orders/:orderId", ordersRoutes.deleteordersHandeler);
   app.post(
     "/inventory",
     express.raw({ type: "application/json", limit: "200mb" }),
