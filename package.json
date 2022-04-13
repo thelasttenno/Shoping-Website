@@ -9,7 +9,7 @@
     "start": "node server",
     "build": "cd react-ui/ && npm install && npm run build",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon app.js",
+    "dev": "nodemon index.js",
     "seed": "node seeds/seeds.js"
   },
   "cacheDirectories": [
